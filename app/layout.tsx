@@ -1,8 +1,17 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Bebas_Neue, Rubik } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const rubik = Rubik({
+  subsets: ["latin"],
+});
+
+const bebas = Bebas_Neue ({
+    subsets: ["latin"],
+    variable: "--font-bebas_neue",
+    display: "swap",
+    weight: "400",
+});
 
 export const metadata: Metadata = {
   title: "Store",
@@ -16,7 +25,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} antialiased`}>{children}</body>
+      <body className={`${rubik.className} ${bebas.variable} antialiased`}>{children}</body>
     </html>
   );
 }
