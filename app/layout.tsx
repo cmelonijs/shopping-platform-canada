@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Bebas_Neue, Karla, Rubik } from "next/font/google";
+import { Bebas_Neue, Rubik } from "next/font/google";
 import "./globals.css";
 
 const rubik = Rubik({
