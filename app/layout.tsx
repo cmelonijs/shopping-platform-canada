@@ -15,7 +15,7 @@ const bebas = Bebas_Neue ({
 });
 
 export const metadata: Metadata = {
-  title: "Store",
+  title: "SimpleShop",
   description: "CarlomJs E-commerce",
 };
 
