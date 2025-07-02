@@ -1,8 +1,9 @@
 import { Button } from "@/components/ui/button";
-import { FaRegUser } from "react-icons/fa";
-import { FaShoppingCart } from "react-icons/fa";
-import { RxHamburgerMenu } from "react-icons/rx";
-
+import { AlignLeft, EllipsisVertical} from "lucide-react";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import Cart  from "@/components/share/cart";
+import Login from "@/components/share/login";
+import Home from "@/components/share/home";
 
 export default function RootLayout({
   children,
@@ -16,22 +17,33 @@ export default function RootLayout({
         <div className="container mx-auto px-4 flex justify-between items-center py-4">
           <div className="flex items-center space-x-4">
             <Button variant="outline" size ="sm" className="p-4">
-              <RxHamburgerMenu className="text-2xl text-black" />
+              <AlignLeft className="text-2xl text-black" />
             </Button>
             <span className="text-3xl font-bold text-">SimpleShop</span>
           </div>
 
           {/* Button */}
-          <div className="flex items-center space-x-4">
-            <Button variant="outline" size="sm" className="p-4">
-              <FaShoppingCart className="mr-2" />
-              Cart
-            </Button>
+          <div className="items-center space-x-4 hidden md:flex">
+            <Cart/>
 
-            <Button variant="outline" size="sm" className="p-4">
-              <FaRegUser className="mr-2" />
-                Login
-            </Button>
+            <Login/>
+          </div>
+
+          {/* Mobile Dropdown menu */}
+          <div className="md:hidden">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" className="p-4 bg-transparent shadow-none hover:bg-transparent">
+                  <EllipsisVertical className="text-2xl text-black" />
+                </Button>
+              </DropdownMenuTrigger>
+
+              <DropdownMenuContent className="p-2 flex flex-col space-y-2" align="end">
+                  <Home/>
+                  <Cart/>
+                  <Login/>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </div>
       </div>
