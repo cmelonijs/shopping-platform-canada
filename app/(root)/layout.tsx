@@ -1,4 +1,3 @@
-import "./globals.css";
 import { Button } from "@/components/ui/button";
 import { FaRegUser } from "react-icons/fa";
 import { FaShoppingCart } from "react-icons/fa";
@@ -37,10 +36,7 @@ export default function RootLayout({
         </div>
       </div>
 
-      {/* Main Content */}
-      <main className="flex-grow container mx-auto px-4 py-8">
-        Application content
-      </main>
+      {children}
 
       {/* Footer */}
       <footer className="w-full border-t py-4 text-center text-sm">
