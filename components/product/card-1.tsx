@@ -2,7 +2,7 @@ import Image from "next/image";
 import product1 from "@/assets/images/sample-products/p1-1.jpg";
 import { Star } from "lucide-react";
 
-export default function Card1() {
+export default function ProductCard() {
   return (
     <div className="rounded-lg border-gray-200 border shadow-md p-4 max-w-sm flex flex-col">
         <Image
