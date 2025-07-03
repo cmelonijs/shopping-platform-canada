@@ -2,17 +2,27 @@ import { Button } from "@/components/ui/button";
 import { AlignLeft, EllipsisVertical, ShoppingCart, House, UserRound} from "lucide-react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger, DropdownMenuItem } from "@/components/ui/dropdown-menu"
 import { ModeToggle } from "./theme";
+import Link from "next/link";
+import Image from "next/image";
+import logo from "@/assets//images/logo.png";
 
 export default function Header() {
 
   return (
     <div className="w-full border-b">
-        <div className="container mx-auto px-4 flex justify-between items-center py-4">
+        <div className="container mx-auto px-4 flex justify-between items-center py-3">
           <div className="flex items-center space-x-4">
             <Button variant="outline" size ="sm" className="p-4">
               <AlignLeft className="text-2xl" />
             </Button>
-            <span className="text-3xl font-bold text-">SimpleShop</span>
+            <Image
+              src={logo}
+              alt="Logo"
+              width={50}
+              height={50}
+              className="mr-1"
+            />
+            <Link href="/" className="text-3xl font-bold">SimpleShop</Link>
           </div>
 
           {/* Button */}
