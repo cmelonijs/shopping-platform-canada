@@ -24,7 +24,7 @@ export default function Header() {
                 className="scale-110 object-contain"
               />
             </Link>
-            <Link href="/" className="text-4xl font-bold font-bebas">S i m p l e S h o p</Link>
+            <Link href="/" className="text-4xl font-bold font-bebas tracking-logo">SimpleShop</Link>
           </div>
 
           {/* Button */}
