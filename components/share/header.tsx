@@ -10,19 +10,21 @@ export default function Header() {
 
   return (
     <div className="w-full border-b">
-        <div className="container mx-auto px-4 flex justify-between items-center py-3">
-          <div className="flex items-center space-x-4">
-            <Button variant="outline" size ="sm" className="p-4">
-              <AlignLeft className="text-2xl" />
+        <div className="container mx-auto px-3 flex justify-between items-center py-3">
+          <div className="flex items-center">
+            <Button variant="ghost" size ="lg" className="p-3 shadow-none">
+              <AlignLeft className="text-2xl scale-150" />
             </Button>
-            <Image
-              src={logo}
-              alt="Logo"
-              width={50}
-              height={50}
-              className="mr-1"
-            />
-            <Link href="/" className="text-3xl font-bold">SimpleShop</Link>
+            <Link href="/" className="shirnk-0">
+              <Image
+                src={logo}
+                alt="Logo"
+                width={50}
+                height={50}
+                className="scale-110 object-contain"
+              />
+            </Link>
+            <Link href="/" className="text-4xl font-bold font-bebas">S i m p l e S h o p</Link>
           </div>
 
           {/* Button */}
