@@ -1,8 +1,8 @@
 import Image from "next/image";
 import { Star } from "lucide-react";
+import { Product } from "@/app/types";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-type Product = any;
 
 export default function ProductCard({ product }: { product: Product }) {
   return (
