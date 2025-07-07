@@ -1,9 +1,9 @@
 import Image from "next/image";
 import { Star } from "lucide-react";
+import ProductPrice from "./ProductPrice";
+import { Product } from "@/types";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-type Product = any;
-
 export default function ProductCard({ product }: { product: Product }) {
   return (
     <div className="rounded-lg border-gray-200 border shadow-md p-4 max-w-sm flex flex-col items-start">
@@ -16,9 +16,17 @@ export default function ProductCard({ product }: { product: Product }) {
       />
       <div className="flex flex-col justify-between flex-1 mt-4">
         <h2 className="text-lg font-semibold">{product.name}</h2>
-        <p className="text-gray-600">€{product.price}</p>
+        <div className="flex-between gap-4">
+          {product.stock > 0 ? (
+            <ProductPrice value={product.price} />
+          ) : (
+            <p className="text-destructive">Out of stock</p>
+          )}
+        </div>
         <p className="text-gray-500">{product.description}</p>
       </div>
+
+      {/* HARDCODED VALUE */}
       <div className="flex items-center mt-2">
         <Star className="text-yellow-500 w-4 h-4 fill-yellow-500" />
         <Star className="text-yellow-500 w-4 h-4 fill-yellow-500" />
