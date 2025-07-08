@@ -3,10 +3,9 @@ import { Star } from "lucide-react";
 import ProductPrice from "./ProductPrice";
 import { Product } from "@/types";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default function ProductCard({ product }: { product: Product }) {
   return (
-    <div className="rounded-lg border-gray-200 border shadow-md p-4 max-w-sm flex flex-col items-start">
+    <div className="rounded-lg border shadow-md p-4 max-w-sm flex flex-col items-start h-full">
       <Image
         src={product.images[0]}
         alt="product image"
@@ -26,7 +25,6 @@ export default function ProductCard({ product }: { product: Product }) {
         <p className="text-gray-500">{product.description}</p>
       </div>
 
-      {/* HARDCODED VALUE */}
       <div className="flex items-center mt-2">
         <Star className="text-yellow-500 w-4 h-4 fill-yellow-500" />
         <Star className="text-yellow-500 w-4 h-4 fill-yellow-500" />
