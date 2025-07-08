@@ -6,6 +6,8 @@ import Link from "next/link";
 import Image from "next/image";
 import logo from "@/assets//images/logo.png";
 
+
+
 export default function Header() {
 
   return (
@@ -33,14 +35,18 @@ export default function Header() {
             <ModeToggle />
 
             <div className="hidden md:flex space-x-4">
-            <Button variant="outline" size="sm" className="p-4 shadow-none">
-                <ShoppingCart className="mr-2" />
-                Cart
-            </Button>
-            <Button variant="default" size="sm" className="p-4 shadow-none">
-                <UserRound className="mr-2" />
-                Login
-            </Button>
+            <Link href="/">
+               <Button variant="outline" size="sm" className="p-4 shadow-none">
+                  <ShoppingCart className="mr-2" />
+                  Cart
+              </Button>
+            </Link>
+            <Link href="/signIn">
+              <Button variant="default" size="sm" className="p-4 shadow-none">
+                  <UserRound className="mr-2" />
+                  Login
+              </Button>
+            </Link>
             </div>
           </div>
 
@@ -54,16 +60,19 @@ export default function Header() {
               </DropdownMenuTrigger>
               <DropdownMenuContent className="p-2 flex flex-col space-y-2" align="end">
                 <DropdownMenuItem>
-                    <House className="mr-2" />
-                    Home
+                    <Link href="/" className="inline-flex items-center space-x-2">
+                    <House className="mr-2" />Home
+                    </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
-                    <ShoppingCart className="mr-2" />
-                    Cart
+                    <Link href="/" className="flex items-center space-x-2">
+                      <ShoppingCart className="mr-2" />Cart
+                    </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
-                    <UserRound className="mr-2" />
-                    Login
+                    <Link href="/signIn" className="inline-flex items-center space-x-2">
+                      <UserRound className="mr-2" />Login
+                    </Link>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
