@@ -28,7 +28,7 @@ export default function ProductCard({ product }: { product: Product }) {
 
       <div className="flex items-center mt-2 w-4 h-4">
         <StarRating rating={rating}/>
-        <div className="ml-2">5.0</div>
+        <div className="ml-2">{product.rating}</div>
       </div>
     </div>
   );
