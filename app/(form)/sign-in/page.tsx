@@ -1,4 +1,3 @@
-// app/sign-in/page.tsx
 import { signIn } from "@/auth";
 import { redirect } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -6,6 +5,7 @@ import Link from "next/link";
 import { Input } from "@/components/ui/input";
 import Image from "next/image";
 import { MoveLeft } from 'lucide-react';
+import { signInAction } from "@/lib/actions/users.actions";
 
 export default async function SignInPage({
   searchParams,
@@ -13,17 +13,7 @@ export default async function SignInPage({
   searchParams: { error?: string } | Promise<{ error?: string }>;
 }) {
   const { error } = await searchParams;
-
-  async function handleSignIn(formData: FormData) {
-    "use server";
-
-    const email = formData.get("email") as string;
-    const password = formData.get("password") as string;
-    await signIn("credentials", { redirect: false, email, password });
-
-    redirect("/");
-    
-  }
+  const handleSignIn = signInAction;
 
   return (
     <div className="bg-background h-screen">
