@@ -1,3 +1,4 @@
+import { StarRating } from "@/components/share/stars";
 import { Button } from "@/components/ui/button";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { getProductBySlug } from "@/lib/actions/products.actions";
@@ -7,25 +8,7 @@ import { Star, StarHalf } from 'lucide-react';
 export default async function DetailsPage({ params }: { params: { slug: string } }) {
     const { slug } = await params;
     const test: Product = await getProductBySlug(slug);
-    const renderStars = () => {
-        const rating = parseFloat(test.rating);
-        const stars = [];
-        
-        for (let i = 1; i <= 5; i++) {
-            if (i <= rating) {
-                stars.push(<Star key={i} className="text-yellow-500 fill-yellow-500" />);
-            }
-            else if (i - 0.5 <= rating) {
-                stars.push(<StarHalf key={i} className="text-yellow-500 fill-yellow-500" />);
-            }
-            else {
-                stars.push(<Star key={i} className="text-yellow-500" />);
-            }
-        }
-        
-        return stars;
-    };
-
+    const rating = parseFloat(test.rating);
     const checkStock = (stock: number) => {
         if (stock > 0) {
             return <span >{stock}</span>;
@@ -61,9 +44,9 @@ export default async function DetailsPage({ params }: { params: { slug: string }
                 <div className="flex flex-col p-4 space-y-2 md:w-1/2 md:pl-10">
                     <div className="text-xl font-semibold">{test.brand}</div>
                     <div className="text-3xl font-bold">{test.name}</div>
-                    {/* Render the star rating */}
+
                     <div className="flex space-x-1">
-                        {renderStars()}
+                        <StarRating rating={rating} />
                     </div>
                     <div className="text-xl font-semibold">€{test.price}</div>
                     <div className="text-sm">{test.category}</div>

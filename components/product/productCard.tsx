@@ -1,9 +1,10 @@
 import Image from "next/image";
-import { Star } from "lucide-react";
 import ProductPrice from "./ProductPrice";
 import { Product } from "@/types";
+import { StarRating } from "../share/stars";
 
 export default function ProductCard({ product }: { product: Product }) {
+  const rating = parseFloat(product.rating);
   return (
     <div className="rounded-lg border shadow-md p-4 max-w-sm flex flex-col items-start h-full">
       <Image
@@ -15,7 +16,7 @@ export default function ProductCard({ product }: { product: Product }) {
       />
       <div className="flex flex-col justify-between flex-1 mt-4">
         <h2 className="text-lg font-semibold">{product.name}</h2>
-        <div className="flex-between gap-4">
+        <div className="flex-between gap-4"> 
           {product.stock > 0 ? (
             <ProductPrice value={product.price} />
           ) : (
@@ -25,13 +26,9 @@ export default function ProductCard({ product }: { product: Product }) {
         <p className="text-gray-500">{product.description}</p>
       </div>
 
-      <div className="flex items-center mt-2">
-        <Star className="text-yellow-500 w-4 h-4 fill-yellow-500" />
-        <Star className="text-yellow-500 w-4 h-4 fill-yellow-500" />
-        <Star className="text-yellow-500 w-4 h-4 fill-yellow-500" />
-        <Star className="text-yellow-500 w-4 h-4 fill-yellow-500" />
-        <Star className="text-yellow-500 w-4 h-4 fill-yellow-500" />
-        <div className="ml-2 text-gray-500">5.0</div>
+      <div className="flex items-center mt-2 w-4 h-4">
+        <StarRating rating={rating}/>
+        <div className="ml-2">5.0</div>
       </div>
     </div>
   );
