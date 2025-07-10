@@ -1,57 +1,56 @@
-import Link from "next/link";
+import {
+  CardHeader,
+  Card,
+  CardTitle,
+  CardDescription,
+  CardContent,
+} from "@/components/ui/card";
+import { APP_NAME } from "@/lib/constants";
+import { Metadata } from "next";
 import Image from "next/image";
-import { MoveLeft } from 'lucide-react';
+import Link from "next/link";
+import { auth } from "@/auth";
+import { redirect } from "next/navigation";
 import SignInForm from "./SignInForm";
 
+export const metadata: Metadata = {
+  title: "Sign in",
+};
 
-export default async function SignInPage({
- searchParams,
-}: {
- searchParams: { error?: string } | Promise<{ error?: string }>;
-}) {
- const { error } = await searchParams;
+const SignInPage = async (props: {
+  searchParams: Promise<{ callbackUrl: string }>;
+}) => {
+  const { callbackUrl } = await props.searchParams;
 
- return (
-   <div className="bg-background h-screen">
-     <Link href="/">
-         <MoveLeft className="absolute top-4 left-4 " size={36}>
-         </MoveLeft>
-     </Link>
+  const session = await auth();
 
-     {error && (
-       <div className="mb-4 text-red-600">
-         {error === "CredentialsSignin"
-           ? "Invalid email or password."
-           : "Unexpected error."}
-       </div>
-     )}
-     
-     <div className="flex h-full items-center justify-center">
-         <div className="border-muted bg-background flex w-full max-w-sm flex-col items-center gap-y-8 rounded-md border px-6 py-12 shadow-md">
-             <div className="flex items-center gap-y-2">
-                 <Image
-                     src="/ss_logo.png"
-                     alt="Logo"
-                     width={100}
-                     height={100}
-                     className="h-16 w-16 rounded-full items-center"
-                 />
-                 <span className="font-bebas text-3xl">SimpleShop</span>
-             </div>
+  if (session) {
+    return redirect(callbackUrl || "/");
+  }
+  return (
+    <div className="w-full max-w-md mx-auto">
+      <Card>
+        <CardHeader className="space-y-4">
+          <Link href="/" className="flex-center">
+            <Image
+              src="/images/logo.png"
+              width={100}
+              height={100}
+              alt={`${APP_NAME} LOGO`}
+              priority={true}
+            />
+          </Link>
+          <CardTitle className="text-center">Sign in</CardTitle>
+          <CardDescription className="text-center">
+            Sign in to your account
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="my-4">
+          <SignInForm />
+        </CardContent>
+      </Card>
+    </div>
+  );
+};
 
-             <SignInForm />
-
-             <div className="text-muted-foreground flex justify-center gap-1 text-sm">
-                 Don't have an account?
-                 <Link href="/sign-up" className="text-primary font-medium hover:underline">
-                     Sign Up
-                 </Link>
-             </div>
-         </div>
-     </div>
-   </div>
- );
-}
-
-
-
+export default SignInPage;

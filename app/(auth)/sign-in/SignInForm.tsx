@@ -1,32 +1,80 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { signInWithCredentials } from "@/lib/actions/auth.actions";
+import { signInDefaultValues } from "@/lib/constants";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 import { useActionState } from "react";
+import { useFormStatus } from "react-dom";
+import { useSearchParams } from "next/navigation";
+import { signInWithCredentials } from "@/lib/actions/auth.actions";
 
-export default function SignInForm() {
-    const [state, action, pending] = useActionState(signInWithCredentials, undefined);
+const SignInForm = () => {
+  const [data, action] = useActionState(signInWithCredentials, {
+    success: false,
+    message: "",
+  });
+
+  const searchParams = useSearchParams();
+
+  const callbackUrl = searchParams.get("callbackUrl") || "/";
+
+  const SignInButton = () => {
+    const { pending } = useFormStatus();
 
     return (
-        <form className="flex w-full flex-col gap-8" action={action}>
-            {state?.message && !state.success && (
-                <div className="text-sm text-red-500">{state.message}</div>
-            )}
-            
-            <div className="flex flex-col gap-4">
-                <div className="flex flex-col gap-2">
-                    <Input type="email" placeholder="Email" name="email" required />
-                </div>
-                <div className="flex flex-col gap-2">
-                    <Input type="password" placeholder="Password" name="password" required />
-                </div>
-                <div className="flex flex-col gap-4">
-                    <Button type="submit" className="mt-2 w-full" disabled={pending}>
-                        {pending ? "Signing In..." : "Sign In"}
-                    </Button>
-                </div>
-            </div>
-        </form>
+      <Button disabled={pending} className="w-full" variant="default">
+        {pending ? "Signing in..." : "sign In"}
+      </Button>
     );
-}
+  };
+
+  return (
+    <form action={action}>
+      <input type="hidden" name="callbackUrl" value={callbackUrl} />
+      <div className="space-y-6">
+        <div>
+          <Label className="mb-2" htmlFor="email">
+            Email
+          </Label>
+          <Input
+            id="email"
+            name="email"
+            type="email"
+            required
+            autoComplete="email"
+            defaultValue={signInDefaultValues.email}
+          />
+        </div>
+        <div>
+          <Label className="mb-2" htmlFor="password">
+            Password
+          </Label>
+          <Input
+            id="password"
+            name="password"
+            type="password"
+            required
+            autoComplete="password"
+            defaultValue={signInDefaultValues.password}
+          />
+        </div>
+        <div>
+          <SignInButton />
+        </div>
+        {data && !data.success && (
+          <div className="text-center text-destructive">{data.message}</div>
+        )}
+        <div className="text-sm text-center text-muted-foreground">
+          Dont have an account?{" "}
+          <Link href="/sign-up" target="_self" className="link">
+            Sign Up
+          </Link>
+        </div>
+      </div>
+    </form>
+  );
+};
+
+export default SignInForm;
