@@ -3,6 +3,7 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import { getProductBySlug } from "@/lib/actions/products.actions";
 import { Product } from "@/types";
 import { Star, StarHalf } from 'lucide-react';
+import Image from "next/image";
 
 export default async function DetailsPage({ params }: { params: { slug: string } }) {
     const { slug } = await params;
@@ -45,9 +46,11 @@ export default async function DetailsPage({ params }: { params: { slug: string }
                         <CarouselContent>
                             {Array.from({ length: 2 }).map((_, index) => (
                             <CarouselItem key={index}>
-                                <img 
+                                <Image 
                                 src={test.images[index]} 
-                                alt="Product Image" 
+                                width={500}
+                                height={500}
+                                alt="Product Image"
                                 className="w-full h-full object-cover p-7"
                                 />
                             </CarouselItem>
@@ -61,11 +64,11 @@ export default async function DetailsPage({ params }: { params: { slug: string }
                 <div className="flex flex-col p-4 space-y-2 md:w-1/2 md:pl-10">
                     <div className="text-xl font-semibold">{test.brand}</div>
                     <div className="text-3xl font-bold">{test.name}</div>
-                    {/* Render the star rating */}
+
                     <div className="flex space-x-1">
                         {renderStars()}
                     </div>
-                    <div className="text-xl font-semibold">€{test.price}</div>
+                    <div className="text-xl font-semibold">${test.price}</div>
                     <div className="text-sm">{test.category}</div>
                     <div className="text-md">Quantity: {checkStock(test.stock)}</div>
 

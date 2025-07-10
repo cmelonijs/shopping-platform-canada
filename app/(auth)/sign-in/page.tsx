@@ -1,10 +1,4 @@
-import {
-  CardHeader,
-  Card,
-  CardTitle,
-  CardDescription,
-  CardContent,
-} from "@/components/ui/card";
+import { CardHeader, Card, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { APP_NAME } from "@/lib/constants";
 import { Metadata } from "next";
 import Image from "next/image";
@@ -12,6 +6,7 @@ import Link from "next/link";
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 import SignInForm from "./SignInForm";
+import { MoveLeft } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Sign in",
@@ -29,6 +24,10 @@ const SignInPage = async (props: {
   }
   return (
     <div className="w-full max-w-md mx-auto">
+      <Link href="/">
+        <MoveLeft className="absolute top-4 left-4" size={36}>
+        </MoveLeft>
+      </Link>
       <Card>
         <CardHeader className="space-y-4">
           <Link href="/" className="flex-center">

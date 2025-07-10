@@ -68,7 +68,7 @@ const SignInForm = () => {
         )}
         <div className="text-sm text-center text-muted-foreground">
           Dont have an account?{" "}
-          <Link href="/sign-up" target="_self" className="link">
+          <Link href="/sign-up" target="_self" className="link text-bold">
             Sign Up
           </Link>
         </div>

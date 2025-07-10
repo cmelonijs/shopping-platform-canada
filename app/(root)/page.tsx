@@ -6,6 +6,5 @@ export default function Homepage() {
     <div className="flex flex-col h-full p-4 container w-full mx-auto">
       <ProductList />
     </div>
-
   );
 };
