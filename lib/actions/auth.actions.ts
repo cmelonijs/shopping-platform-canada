@@ -1,4 +1,4 @@
-"user server";
+"use server";
 import { signIn, signOut } from "@/auth";
 import { isRedirectError } from "next/dist/client/components/redirect-error";
 import { signInFormSchema } from "../validator";
@@ -16,10 +16,12 @@ export async function signInWithCredentials(
 
     await signIn("credentials", user);
 
+
     return {
       success: true,
       message: "Signed in successfully!",
     };
+
   } catch (err) {
     if (isRedirectError(err)) {
       throw err;
