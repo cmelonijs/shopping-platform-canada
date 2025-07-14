@@ -163,7 +163,7 @@ export default function Header() {
 
                  <DropdownMenuItem
                    className="cursor-pointer"
-                   onSelect={() => signOut({ callbackUrl: "/" })}
+                   onClick={() => signOut()}
                  >
                    <div className="inline-flex items-center space-x-2">
                      <LogOut className="mr-2" /> Sign Out
