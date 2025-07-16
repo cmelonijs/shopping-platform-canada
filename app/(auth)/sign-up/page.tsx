@@ -6,7 +6,7 @@ import Link from "next/link";
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 import { MoveLeft } from "lucide-react";
-import SignUpForm from "./SignupForm";
+import SignUpForm from "./SignUpForm";
 
 
 export const metadata: Metadata = {
