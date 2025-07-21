@@ -4,6 +4,7 @@ import { isRedirectError } from "next/dist/client/components/redirect-error";
 import { signInFormSchema, signUpFormSchema } from "../validator";
 import { hash } from "bcrypt-ts-edge";
 import { prisma } from "@/db/prisma";
+import { formatError } from "../utils";
 
 // sign in the user with credentials
 export async function signInWithCredentials(
@@ -18,12 +19,10 @@ export async function signInWithCredentials(
 
     await signIn("credentials", user);
 
-
     return {
       success: true,
       message: "Signed in successfully!",
     };
-
   } catch (err) {
     if (isRedirectError(err)) {
       throw err;
@@ -41,12 +40,8 @@ export async function signOutUser() {
   await signOut();
 }
 
-
 // sign up the user
-export async function signUpUser(
-  prevState: unknown,
-  formData: FormData
-) {
+export async function signUpUser(prevState: unknown, formData: FormData) {
   try {
     // validate the form data
     const { name, email, password } = signUpFormSchema.parse({
@@ -71,22 +66,14 @@ export async function signUpUser(
       success: true,
       message: "Signed up successfully!",
     };
-    
-  } catch (err: any) {
+  } catch (err) {
     if (isRedirectError(err)) {
       throw err;
     }
 
-    if (err.code === "P2002" && err.meta?.target?.includes("email")) {
-      return {
-        success: false,
-        message: "Email already exists",
-      };
-    }
-
     return {
       success: false,
-      message: "Failed to sign up",
+      message: formatError(err),
     };
   }
 }
