@@ -1,8 +1,5 @@
-import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import { clsx, type ClassValue } from "clsx";
-import { isRedirectError } from "next/dist/client/components/redirect-error";
 import { twMerge } from "tailwind-merge";
-import { ZodError } from "zod";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -20,63 +17,29 @@ export function formatNumberWithDecimal(num: number): string {
   return decimal ? `${int}.${decimal.padEnd(2, "0")}` : `${int}.00`;
 }
 
-export function formatError(error: unknown): { success: false; message: string } {
-  // Handle redirect errors
-  if (isRedirectError(error)) {
-    throw error;
+// FORMAT ERRORS
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function formatError(error: any) {
+  if (error.name === "ZodError") {
+    // handle zod error
+    const fieldErrors = Object.keys(error.errors).map(
+      (field) => error.errors[field].message
+    );
+
+    return fieldErrors.join(". ");
+  } else if (
+    error.name === "PrismaClientKnownRequestError" &&
+    error.code === "P2002"
+  ) {
+    // handle prisma error
+    const field = error.meta?.target ? error.meta.target[0] : "Field";
+
+    return `${field.charAt(0).toUpperCase() + field.slice(1)} already exists.`;
+  } else {
+    // handle other error
+
+    return typeof error.message === "string"
+      ? error.message
+      : JSON.stringify(error.message);
   }
-
-  // Zod error handling
-  if (error instanceof ZodError) {
-    return {
-      success: false,
-      message: error.errors.map((err) => err.message).join(", "),
-    }
-  }
-
-  // Prisma error handling
-  if (error instanceof PrismaClientKnownRequestError) {
-    if (error.code === "P2002") {
-      // Check which field caused the unique constraint violation
-      const target = error.meta?.target as string[] | undefined;
-      
-      if (target?.includes("email")) {
-        return {
-          success: false,
-          message: "Email already exists",
-        };
-      }
-      
-      if (target?.includes("username")) {
-        return {
-          success: false,
-          message: "Username already taken",
-        };
-      }
-
-      // Generic error handling for other unique constraints
-      return {
-        success: false,
-        message: "This value already exists",
-      };
-    }
-    
-    if (error.code === "P2025") {
-      return {
-        success: false,
-        message: "Record not found",
-      };
-    }
-
-    return {
-      success: false,
-      message: "A database error occurred",
-    };
-  }
-  
-  // Generic error handling
-  return {
-    success: false,
-    message: "Something went wrong",
-  };
 }

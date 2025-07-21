@@ -19,12 +19,10 @@ export async function signInWithCredentials(
 
     await signIn("credentials", user);
 
-
     return {
       success: true,
       message: "Signed in successfully!",
     };
-
   } catch (err) {
     if (isRedirectError(err)) {
       throw err;
@@ -42,12 +40,8 @@ export async function signOutUser() {
   await signOut();
 }
 
-
 // sign up the user
-export async function signUpUser(
-  prevState: unknown,
-  formData: FormData
-) {
+export async function signUpUser(prevState: unknown, formData: FormData) {
   try {
     // validate the form data
     const { name, email, password } = signUpFormSchema.parse({
@@ -72,8 +66,14 @@ export async function signUpUser(
       success: true,
       message: "Signed up successfully!",
     };
-    
-  } catch (error) {
-    return formatError(error);
+  } catch (err) {
+    if (isRedirectError(err)) {
+      throw err;
+    }
+
+    return {
+      success: false,
+      message: formatError(err),
+    };
   }
 }
