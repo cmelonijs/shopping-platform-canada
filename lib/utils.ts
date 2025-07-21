@@ -37,11 +37,30 @@ export function formatError(error: unknown): { success: false; message: string }
   // Prisma error handling
   if (error instanceof PrismaClientKnownRequestError) {
     if (error.code === "P2002") {
+      // Check which field caused the unique constraint violation
+      const target = error.meta?.target as string[] | undefined;
+      
+      if (target?.includes("email")) {
+        return {
+          success: false,
+          message: "Email already exists",
+        };
+      }
+      
+      if (target?.includes("username")) {
+        return {
+          success: false,
+          message: "Username already taken",
+        };
+      }
+
+      // Generic error handling for other unique constraints
       return {
         success: false,
-        message: "Unique constraint failed. This value already exists.",
+        message: "This value already exists",
       };
     }
+    
     if (error.code === "P2025") {
       return {
         success: false,
