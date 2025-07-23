@@ -2,14 +2,16 @@ import { Button } from "@/components/ui/button";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { getProductBySlug } from "@/lib/actions/products.actions";
 import { Product } from "@/types";
-import { Star, StarHalf } from 'lucide-react';
+import { Star, StarHalf, Minus, Plus } from 'lucide-react';
 import Image from "next/image";
+import AddToCartButton from "@/components/cart/addCart";
+import QuanityDisplay from "@/components/cart/quanityDisplay";
 
 export default async function DetailsPage({ params }: { params: { slug: string } }) {
     const { slug } = await params;
-    const test: Product = await getProductBySlug(slug);
+    const product: Product = await getProductBySlug(slug);
     const renderStars = () => {
-        const rating = parseFloat(test.rating);
+        const rating = parseFloat(product.rating);
         const stars = [];
         
         for (let i = 1; i <= 5; i++) {
@@ -35,19 +37,17 @@ export default async function DetailsPage({ params }: { params: { slug: string }
         }
     };
 
-    const isOutOfStock = test.stock === 0;
-
     return (
         <div className="container flex flex-col max-w-screen-xl mx-auto p-6 space-y-8">
             <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-10">
-                
+                {/* Product Images */}
                 <div className="relative h-full w-full md:w-1/2 px-8 md:px-0">
                     <Carousel className="h-full w-full">
                         <CarouselContent>
                             {Array.from({ length: 2 }).map((_, index) => (
                             <CarouselItem key={index}>
                                 <Image 
-                                src={test.images[index]} 
+                                src={product.images[index]} 
                                 width={500}
                                 height={500}
                                 alt="Product Image"
@@ -61,28 +61,34 @@ export default async function DetailsPage({ params }: { params: { slug: string }
                     </Carousel>
                 </div>
                 
+                {/* Info  */}
                 <div className="flex flex-col p-4 space-y-2 md:w-1/2 md:pl-10">
-                    <div className="text-xl font-semibold">{test.brand}</div>
-                    <div className="text-3xl font-bold">{test.name}</div>
+                    <div className="text-xl font-semibold">{product.brand}</div>
+                    <div className="text-3xl font-bold">{product.name}</div>
 
+                    {/* Render product rating stars */}
                     <div className="flex space-x-1">
                         {renderStars()}
                     </div>
-                    <div className="text-xl font-semibold">${test.price}</div>
-                    <div className="text-sm">{test.category}</div>
-                    <div className="text-md">Quantity: {checkStock(test.stock)}</div>
 
-                    <div className="flex flex-col space-y-4">
-                        <Button 
-                            variant="default" 
-                            className="w-full" 
-                            disabled={isOutOfStock}
-                        >
-                            {isOutOfStock ? "Unavailable" : "Add to Cart"}
-                        </Button>
+                    {/* Display product rating */}
+                    <div className="text-xl font-semibold">${product.price}</div>
+                    <div className="text-sm">{product.category}</div>
+
+                    {/* Quantity display template */}
+                    <div className="text-md justify-between flex items-center">
+                        Quantity:
+                        <div className="ml-2 bg-gray-200 rounded-xl">
+                            <QuanityDisplay product={product} />
+                        </div>
                     </div>
 
-                    <p className="text-md pt-6">{test.description}</p>
+                    {/* Add to Cart button */}
+                    <div className="flex flex-col space-y-4">
+                        <AddToCartButton product={product} />
+                    </div>
+
+                    <p className="text-md pt-6">{product.description}</p>
                 </div>
             </div>
 

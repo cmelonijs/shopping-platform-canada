@@ -1,6 +1,7 @@
 import Header from "@/components/share/header";
 import Footer from "@/components/share/footer";
 import { SessionProvider } from "next-auth/react";
+import { Toaster } from "@/components/ui/sonner";
 
 export default function RootLayout({
   children,
@@ -12,6 +13,7 @@ export default function RootLayout({
       <SessionProvider>
         <Header />
         {children}
+        <Toaster />
         <Footer />
       </SessionProvider>
     </div>
