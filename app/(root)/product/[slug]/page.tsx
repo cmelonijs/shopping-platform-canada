@@ -1,15 +1,23 @@
 import { Button } from "@/components/ui/button";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { getProductBySlug } from "@/lib/actions/products.actions";
-import { Product } from "@/types";
+import { getMyCart } from "@/lib/actions/cart.actions";
+import { Product, CartItem } from "@/types";
 import { Star, StarHalf, Minus, Plus } from 'lucide-react';
 import Image from "next/image";
-import AddToCartButton from "@/components/cart/addCart";
-import QuanityDisplay from "@/components/cart/quanityDisplay";
+import AddToCartButton from "@/components/cart/addToCart";
 
 export default async function DetailsPage({ params }: { params: { slug: string } }) {
     const { slug } = await params;
     const product: Product = await getProductBySlug(slug);
+    
+    // Get current cart to check if item exists
+    const cart = await getMyCart();
+    const cartItem = cart?.items?.find(
+        (item: CartItem) => item.productId === product.id
+    );
+    const currentQuantity = cartItem?.qty || 0;
+    
     const renderStars = () => {
         const rating = parseFloat(product.rating);
         const stars = [];
@@ -27,14 +35,6 @@ export default async function DetailsPage({ params }: { params: { slug: string }
         }
         
         return stars;
-    };
-
-    const checkStock = (stock: number) => {
-        if (stock > 0) {
-            return <span >{stock}</span>;
-        } else {
-            return <span className="text-red-400">Out of Stock</span>;
-        }
     };
 
     return (
@@ -71,21 +71,23 @@ export default async function DetailsPage({ params }: { params: { slug: string }
                         {renderStars()}
                     </div>
 
-                    {/* Display product rating */}
+                    {/* Display product price and category */}
                     <div className="text-xl font-semibold">${product.price}</div>
                     <div className="text-sm">{product.category}</div>
 
-                    {/* Quantity display template */}
-                    <div className="text-md justify-between flex items-center">
-                        Quantity:
-                        <div className="ml-2 bg-gray-200 rounded-xl">
-                            <QuanityDisplay product={product} />
-                        </div>
-                    </div>
-
-                    {/* Add to Cart button */}
-                    <div className="flex flex-col space-y-4">
-                        <AddToCartButton product={product} />
+                    {/* Add to Cart button with current quantity */}
+                    <div className="flex flex-col space-y-4 pt-4">
+                        <AddToCartButton 
+                            cartItem={{
+                                productId: product.id,
+                                name: product.name,
+                                slug: product.slug,
+                                qty: 1,
+                                image: product.images[0],
+                                price: product.price
+                            }} 
+                            currentQuantity={currentQuantity}
+                        />
                     </div>
 
                     <p className="text-md pt-6">{product.description}</p>
