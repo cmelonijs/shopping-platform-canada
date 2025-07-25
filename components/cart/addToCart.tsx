@@ -1,103 +1,77 @@
 "use client";
 
-import { Loader2Icon, Minus, Plus } from "lucide-react";
-import { Button } from "../ui/button";
-import { CartItem } from "@/types";
-import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
+import { Plus, Minus, Loader } from "lucide-react";
+import { Cart, CartItem } from "@/types";
 import { addItemToCart, removeItemFormCart } from "@/lib/actions/cart.actions";
+import { toast } from "sonner";
 import { useTransition } from "react";
 
-interface AddToCartButtonProps {
-  cartItem: CartItem;
-  currentQuantity?: number;
-}
-
-export default function AddToCartButton({ cartItem, currentQuantity = 0 }: AddToCartButtonProps) {
+const AddToCart = ({ cart, item }: { cart?: Cart; item: CartItem }) => {
   const router = useRouter();
+
   const [isPending, startTransition] = useTransition();
 
-  // Handle add to cart
   const handleAddToCart = async () => {
     startTransition(async () => {
-      const result = await addItemToCart(cartItem);
-      
-      if (result.success) {
-        toast.success("Product added to cart", {
-          description: result.message,
-          action: {
-            label: "View Cart",
-            onClick: () => router.push("/cart")
-          }
-        });
+      const res = await addItemToCart(item);
+
+      if (!res.success) {
+        toast.error(res.message);
+
+        return;
       }
-      else {
-        toast.error("Error", {
-          description: result.message
-        });
-      }
+
+      toast.success(res.message, {
+        action: {
+          label: "Go to Cart",
+
+          onClick: () => router.push("/cart"),
+        },
+      });
     });
   };
 
-  // Handle remove from cart
   const handleRemoveFromCart = async () => {
     startTransition(async () => {
-      const result = await removeItemFormCart(cartItem.productId);
-      
-      if (result.success) {
-        toast.success("Item updated", {
-          description: result.message
-        });
-      }
-      else {
-        toast.error("Error", {
-          description: result.message
-        });
-      }
+      const res = await removeItemFormCart(item.productId);
+
+      toast.success(res.message, {});
     });
   };
 
-  // If no items in cart, show Add to Cart button
-  if (currentQuantity === 0) {
-    return (
-      <div className="w-full">
-        <Button 
-          variant="default" 
-          className="w-1/2" 
-          onClick={handleAddToCart}
-          disabled={isPending}
-        >
-          {isPending ? <Loader2Icon className="animate-spin" /> : "Add to Cart"}
-        </Button>
-      </div>
-    );
-  }
+  const existItem =
+    cart && cart.items.find((prod) => prod.productId === item.productId);
 
-  // If items in cart, show quantity controls
-  return (
-    <div className="flex items-center space-x-3">
-      {/* Decrease quantity button */}
-      <Button
-        onClick={handleRemoveFromCart}
-        disabled={isPending || currentQuantity <= 0}
-        className="text-sm bg-gray-200 hover:bg-gray-300 disabled:opacity-50 w-10 h-10"
-      >
-        <Minus className="text-gray-700 w-4 h-4" />
+  return existItem ? (
+    <div>
+      <Button type="button" variant="outline" onClick={handleRemoveFromCart}>
+        {isPending ? (
+          <Loader className="w-4 h-4 animate-spin" />
+        ) : (
+          <Minus className="h-4 w-4" />
+        )}
       </Button>
-
-      {/* Current quantity display */}
-      <span className="px-4 text-black font-medium min-w-[2rem] text-center">
-        {currentQuantity}
-      </span>
-
-      {/* Increase quantity button */}
-      <Button
-        onClick={handleAddToCart}
-        disabled={isPending}
-        className="text-sm bg-gray-200 hover:bg-gray-300 disabled:opacity-50 w-10 h-10"
-      >
-        <Plus className="text-gray-700 w-4 h-4" />
+      <span className="px-2">{existItem.qty}</span>
+      <Button type="button" variant="outline" onClick={handleAddToCart}>
+        {isPending ? (
+          <Loader className="w-4 h-4 animate-spin" />
+        ) : (
+          <Plus className="h-4 w-4" />
+        )}
       </Button>
     </div>
+  ) : (
+    <Button className="w-full" type="button" onClick={handleAddToCart}>
+      {isPending ? (
+        <Loader className="w-4 h-4 animate-spin" />
+      ) : (
+        <Plus className="h-4 w-4" />
+      )}{" "}
+      Add to Cart
+    </Button>
   );
-}
+};
+
+export default AddToCart;
