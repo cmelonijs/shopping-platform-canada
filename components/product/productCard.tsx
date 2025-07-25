@@ -1,7 +1,7 @@
 import Image from "next/image";
-import { Star } from "lucide-react";
 import ProductPrice from "./ProductPrice";
 import { Product } from "@/types";
+import { RenderStars } from "../share/stars";
 
 export default function ProductCard({ product }: { product: Product }) {
   return (
@@ -26,12 +26,8 @@ export default function ProductCard({ product }: { product: Product }) {
       </div>
 
       <div className="flex items-center mt-2">
-        <Star className="text-yellow-500 w-4 h-4 fill-yellow-500" />
-        <Star className="text-yellow-500 w-4 h-4 fill-yellow-500" />
-        <Star className="text-yellow-500 w-4 h-4 fill-yellow-500" />
-        <Star className="text-yellow-500 w-4 h-4 fill-yellow-500" />
-        <Star className="text-yellow-500 w-4 h-4 fill-yellow-500" />
-        <div className="ml-2 text-gray-500">5.0</div>
+      <RenderStars rating={product.rating} />
+        <div className="ml-2 text-gray-500">{product.rating}</div>
       </div>
     </div>
   );

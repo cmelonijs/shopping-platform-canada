@@ -8,9 +8,9 @@ import {
 import { getProductBySlug } from "@/lib/actions/products.actions";
 import { getMyCart } from "@/lib/actions/cart.actions";
 import { Product } from "@/types";
-import { Star, StarHalf } from "lucide-react";
 import Image from "next/image";
 import AddToCart from "@/components/cart/addToCart";
+import { RenderStars } from "@/components/share/stars";
 
 export default async function DetailsPage({
   params,
@@ -22,27 +22,6 @@ export default async function DetailsPage({
 
   // Get current cart to check if item exists
   const cart = await getMyCart();
-
-  const renderStars = () => {
-    const rating = parseFloat(product.rating);
-    const stars = [];
-
-    for (let i = 1; i <= 5; i++) {
-      if (i <= rating) {
-        stars.push(
-          <Star key={i} className="text-yellow-500 fill-yellow-500" />
-        );
-      } else if (i - 0.5 <= rating) {
-        stars.push(
-          <StarHalf key={i} className="text-yellow-500 fill-yellow-500" />
-        );
-      } else {
-        stars.push(<Star key={i} className="text-yellow-500" />);
-      }
-    }
-
-    return stars;
-  };
 
   return (
     <div className="container flex flex-col max-w-screen-xl mx-auto p-6 space-y-8">
@@ -74,7 +53,9 @@ export default async function DetailsPage({
           <div className="text-3xl font-bold">{product.name}</div>
 
           {/* Render product rating stars */}
-          <div className="flex space-x-1">{renderStars()}</div>
+          <div className="flex space-x-1">
+            <RenderStars rating={product.rating} />
+          </div>
 
           {/* Display product price and category */}
           <div className="text-xl font-semibold">${product.price}</div>
