@@ -49,7 +49,7 @@ export default function Header() {
           {/* Mode Toggle Button */}
           <ModeToggle />
 
-            <Link href="/">
+            <Link href="/cart">
               <Button variant="outline" size="sm" className="p-4 shadow-none">
                 <ShoppingCart className="mr-2" />
                 Cart
@@ -126,7 +126,7 @@ export default function Header() {
 
              {/* Always show Cart */}
              <DropdownMenuItem>
-               <Link href="/" className="inline-flex items-center space-x-2">
+               <Link href="/cart" className="inline-flex items-center space-x-2">
                  <ShoppingCart className="mr-2" /> Cart
                </Link>
              </DropdownMenuItem>
