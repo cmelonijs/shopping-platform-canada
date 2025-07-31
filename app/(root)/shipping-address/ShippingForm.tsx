@@ -8,17 +8,20 @@ import { ShippingAddress } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { insertShippingAddressSchema } from "@/lib/validator";
 import { useRouter } from "next/navigation";
-import { shippingAddressDefaultValue } from "@/lib/constants";
+import {
+  Form,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormControl,
+  FormDescription,
+  FormMessage,
+} from "@/components/ui/form"
 
 export default function ShippingForm() {
   const router = useRouter();
   
-  const { 
-    register, 
-    handleSubmit, 
-    setError,
-    formState: { errors, isSubmitting }, 
-  } = useForm<ShippingAddress>({
+  const form = useForm<ShippingAddress>({
     resolver: zodResolver(insertShippingAddressSchema),
     defaultValues: {
       fullName: "",
@@ -36,13 +39,13 @@ export default function ShippingForm() {
         // Redirect or show success message
         router.push("/payment-method");
       } else {
-        setError("root", {
+        form.setError("root", {
           type: "server",
           message: result.message || "Failed to update shipping address"
         });
       }
     } catch (err) {
-      setError("root", {
+      form.setError("root", {
         type: "server",
         message: "An unexpected error occurred. Please try again."
       });
@@ -50,102 +53,110 @@ export default function ShippingForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-      {/* Display root error if exists */}
-      {errors.root && (
-        <div className="p-3 bg-red-100 border border-red-400 text-red-700 rounded">
-          {errors.root.message}
-        </div>
-      )}
-
-      <div>
-        <label htmlFor="fullName" className="block text-sm font-medium mb-2">
-          Full Name
-        </label>
-        <Input
-          {...register('fullName')}
-          type="text"
-          id="fullName"
-          placeholder="Enter your full name"
-        />
-        {errors.fullName && (
-          <p className="mt-1 text-sm text-red-600">{errors.fullName.message}</p>
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+        {/* Display root error if exists */}
+        {form.formState.errors.root && (
+          <div className="p-3 bg-red-100 border border-red-400 text-red-700 rounded">
+            {form.formState.errors.root.message}
+          </div>
         )}
-      </div>
 
-      <div>
-        <label htmlFor="address" className="block text-sm font-medium mb-2">
-          Address
-        </label>
-        <Input
-          {...register('address')}
-          type="text"
-          id="address"
-          placeholder="Enter your address"
-          defaultValue={shippingAddressDefaultValue.streetAddress}
-        />
-        {errors.address && (
-          <p className="mt-1 text-sm text-red-600">{errors.address.message}</p>
-        )}
-      </div>
-
-      <div className="grid grid-cols-2 gap-4">
-        <div>
-          <label htmlFor="city" className="block text-sm font-medium mb-2">
-            City
-          </label>
-          <Input
-            {...register('city')}
-            type="text"
-            id="city"
-            placeholder="Enter your city"
-            defaultValue={shippingAddressDefaultValue.city}
-          />
-          {errors.city && (
-            <p className="mt-1 text-sm text-red-600">{errors.city.message}</p>
+        <FormField
+          control={form.control}
+          name="fullName"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Full Name</FormLabel>
+              <FormControl>
+                <Input
+                  placeholder="Enter your full name"
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
           )}
-        </div>
-
-        <div>
-          <label htmlFor="postalCode" className="block text-sm font-medium mb-2">
-            Postal Code
-          </label>
-          <Input
-            {...register('postalCode')}
-            type="text"
-            id="postalCode"
-            placeholder="Enter postal code"
-            defaultValue={shippingAddressDefaultValue.postalCode}
-          />
-          {errors.postalCode && (
-            <p className="mt-1 text-sm text-red-600">{errors.postalCode.message}</p>
-          )}
-        </div>
-      </div>
-
-      <div>
-        <label htmlFor="country" className="block text-sm font-medium mb-2">
-          Country
-        </label>
-        <Input
-          {...register('country')}
-          type="text"
-          id="country"
-          placeholder="Enter your country"
-          defaultValue={shippingAddressDefaultValue.country}
         />
-        {errors.country && (
-          <p className="mt-1 text-sm text-red-600">{errors.country.message}</p>
-        )}
-      </div>
 
-      <Button
-        type="submit"
-        disabled={isSubmitting}
-        className="w-1/2"
-      >
-        {isSubmitting ? 'Updating...' : 'Update Shipping Information'}
-      </Button>
-    </form>
+        <FormField
+          control={form.control}
+          name="address"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Address</FormLabel>
+              <FormControl>
+                <Input
+                  placeholder="Enter your address"
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <div className="grid grid-cols-2 gap-4">
+          <FormField
+            control={form.control}
+            name="city"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>City</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="Enter your city"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="postalCode"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Postal Code</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="Enter postal code"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
+
+        <FormField
+          control={form.control}
+          name="country"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Country</FormLabel>
+              <FormControl>
+                <Input
+                  placeholder="Enter your country"
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <Button
+          type="submit"
+          disabled={form.formState.isSubmitting}
+          className="w-1/2"
+        >
+          {form.formState.isSubmitting ? 'Updating...' : 'Update Shipping Information'}
+        </Button>
+      </form>
+    </Form>
   );
 }
