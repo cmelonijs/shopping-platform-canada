@@ -115,7 +115,7 @@ export async function addItemToCart(data: CartItem) {
         success: true,
         message: `${product.name} ${
           existsItem ? "updated in" : "added to"
-        } cart`,
+        } cart` ,
       };
     }
   } catch (err) {
