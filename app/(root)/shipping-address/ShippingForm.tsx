@@ -35,13 +35,9 @@ export default function ShippingForm() {
 
   useEffect(() => {
     const loadExistingAddress = async () => {
-      try {
-        const existingAddress = await getAddress();
-        if (existingAddress) {
-          form.reset(existingAddress as ShippingAddress);
-        }
-      } catch (error) {
-        console.error("Failed to load existing address:", error);
+      const existingAddress = await getAddress();
+      if (existingAddress) {
+        form.reset(existingAddress);
       }
     };
 

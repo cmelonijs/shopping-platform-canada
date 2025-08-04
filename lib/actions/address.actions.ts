@@ -48,7 +48,7 @@ export async function updateAddress(data: ShippingAddress) {
     }
 }
 
-export async function getAddress() {
+export async function getAddress(): Promise<ShippingAddress | null> {
     try {
         const session = await auth();
         const userId = session?.user?.id as string;
@@ -66,7 +66,11 @@ export async function getAddress() {
             },
         });
 
-        return user?.address || null;
+        const address = user?.address;
+        if (!address) return null;
+        
+        const validatedAddress = insertShippingAddressSchema.safeParse(address);
+        return validatedAddress.success ? validatedAddress.data : null;
     } catch (err) {
         if (isRedirectError(err)) {
             throw err;
