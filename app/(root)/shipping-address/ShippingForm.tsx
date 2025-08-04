@@ -8,19 +8,20 @@ import { ShippingAddress } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { insertShippingAddressSchema } from "@/lib/validator";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import {
   Form,
   FormField,
   FormItem,
   FormLabel,
   FormControl,
-  FormDescription,
   FormMessage,
 } from "@/components/ui/form"
+import { getAddress } from "@/lib/actions/address.actions";
 
 export default function ShippingForm() {
   const router = useRouter();
-  
+
   const form = useForm<ShippingAddress>({
     resolver: zodResolver(insertShippingAddressSchema),
     defaultValues: {
@@ -32,16 +33,30 @@ export default function ShippingForm() {
     }
   });
 
+  useEffect(() => {
+    const loadExistingAddress = async () => {
+      try {
+        const existingAddress = await getAddress();
+        if (existingAddress) {
+          form.reset(existingAddress as ShippingAddress);
+        }
+      } catch (error) {
+        console.error("Failed to load existing address:", error);
+      }
+    };
+
+    loadExistingAddress();
+  }, [form]);
+
   const onSubmit = async (data: ShippingAddress) => {
     try {
       const result = await updateAddress(data);
       if (result.success) {
-        // Redirect or show success message
         router.push("/payment-method");
       } else {
         form.setError("root", {
           type: "server",
-          message: result.message || "Failed to update shipping address"
+          message: result.message
         });
       }
     } catch (err) {
@@ -55,7 +70,6 @@ export default function ShippingForm() {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-        {/* Display root error if exists */}
         {form.formState.errors.root && (
           <div className="p-3 bg-red-100 border border-red-400 text-red-700 rounded">
             {form.formState.errors.root.message}

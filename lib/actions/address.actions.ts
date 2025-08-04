@@ -5,14 +5,13 @@ import { insertShippingAddressSchema } from "../validator";
 import { prisma } from "@/db/prisma";
 import { auth } from "@/auth";
 import { ShippingAddress } from "@/types";
+import { formatError } from "../utils";
 
 
-export async function updateAddress(data: ShippingAddress
-) {
+export async function updateAddress(data: ShippingAddress) {
     try {
-        // check if the user is authenticated
         const session = await auth();
-        const userId = session?.user?.id ? (session.user.id as string) : undefined;
+        const userId = session?.user?.id as string;
 
         if (!userId) {
             return {
@@ -21,7 +20,6 @@ export async function updateAddress(data: ShippingAddress
             };
         }
 
-        // validate the form data
         const userAddress = insertShippingAddressSchema.parse(data);
 
         await prisma.user.update({
@@ -29,9 +27,7 @@ export async function updateAddress(data: ShippingAddress
                 id: userId,
             },
             data: {
-                address: {
-                    update: userAddress,
-                },
+                address: userAddress,
             },
         });
 
@@ -47,7 +43,34 @@ export async function updateAddress(data: ShippingAddress
 
         return {
             success: false,
-            message: "Failed to update address",
+            message: formatError(err),
         };
+    }
+}
+
+export async function getAddress() {
+    try {
+        const session = await auth();
+        const userId = session?.user?.id as string;
+
+        if (!userId) {
+            return null;
+        }
+
+        const user = await prisma.user.findUnique({
+            where: { 
+                id: userId 
+            },
+            select: { 
+                address: true 
+            },
+        });
+
+        return user?.address || null;
+    } catch (err) {
+        if (isRedirectError(err)) {
+            throw err;
+        }
+        throw new Error(formatError(err));
     }
 }

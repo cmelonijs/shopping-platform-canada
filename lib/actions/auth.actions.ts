@@ -1,4 +1,5 @@
 "use server";
+
 import { signIn, signOut } from "@/auth";
 import { isRedirectError } from "next/dist/client/components/redirect-error";
 import { signInFormSchema, signUpFormSchema } from "../validator";
@@ -30,7 +31,7 @@ export async function signInWithCredentials(
 
     return {
       success: false,
-      message: "Invalid email or password",
+      message: formatError(err),
     };
   }
 }
