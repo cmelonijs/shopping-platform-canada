@@ -21,9 +21,18 @@ export default async function CartPage() {
   const cart = await getMyCart();
 
   if (!cart) {
-    return <div>Your cart is empty</div>;
-  }
-
+    // return <div>Your cart is empty</div>;
+   return (
+    <div className="mx-auto w-full max-w-7xl p-6 h-screen">
+        <div>
+          <h1 className="text-2xl font-semibold">Shopping Cart</h1>
+            <p className="text-muted-foreground">
+              0 items in your cart
+            </p>
+        </div>
+      </div>
+   )}
+  
   return (
     <div className="mx-auto w-full max-w-7xl p-6 h-screen">
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
@@ -55,9 +64,9 @@ export default async function CartPage() {
 
                     <div className="flex-1 p-6 pb-3">
                       <div className="flex justify-between">
-                        <div>
-                          <Link href={`/product/${item.slug}`} className="font-medium hover:underline">{item.name}</Link>
-                        </div>
+                          <Link href={`/product/${item.slug}`} className="font-medium hover:underline">
+                            {item.name}
+                          </Link>
                       </div>
 
                       <div className="mt-4 flex items-center justify-between">
@@ -74,7 +83,7 @@ export default async function CartPage() {
             ))}
           </div>
         </div>
-
+            
         {/* Order Summary */}
         <div className="space-y-6">
           <Card>
@@ -88,8 +97,8 @@ export default async function CartPage() {
               {/* Order Totals */}
               <div className="space-y-2">
                 <div className="flex justify-between text-sm">
-                  <span>Subtotal</span>
-                  <span>${cart.totalPrice}</span>
+                  <span>Subtotal</span>                            {/*changed shipping/items from Paolo*/}
+                  <span>${cart.itemsPrice}</span>
                 </div>
                 <div className="flex justify-between text-sm">
                   <span>Shipping</span>
@@ -133,3 +142,4 @@ export default async function CartPage() {
     </div>
   );
 }
+

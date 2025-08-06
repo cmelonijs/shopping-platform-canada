@@ -6,31 +6,47 @@ import { addItemToCart, removeItemFormCart } from "@/lib/actions/cart.actions";
 import { toast } from "sonner";
 import { useTransition } from "react";
 import { CartItem } from "@/types";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 
+// Show 'Go to Cart' only when not already on the cart page
 
 export default function CartItemControls({ item }: { item: CartItem }) {
   const [isPending, startTransition] = useTransition();
-  const router = useRouter(); //  add here
+  const router = useRouter();         //  add here
+  const pathName = usePathname();
 
   const handleIncreaseQuantity = () => {
     startTransition(async () => {
       const res = await addItemToCart(item);
 
-      if (!res.success) {
-        toast.error(res.message);
-        return;
+      if (pathName !== "/cart") {       
+        toast.success(res.message, {
+          action: {
+            label: "Go to Cart",
+            onClick: () => router.push("/cart"),
+          },
+        });
+      } else {        
+        toast.success(res.message);
       }
-
-      toast.success(res.message, {
-        action: {
-          label: "Go to Cart",
-          onClick: () => router.push("/cart"),
-        },
-      });
     });
   };
+
+
+  //     if (!res.success) {
+  //       toast.error(res.message);
+  //       return;
+  //     }
+
+  //     toast.success(res.message, {
+  //       action: {
+  //         label: "Go to Cart",
+  //         onClick: () => router.push("/cart"),
+  //       },
+  //     });
+  //   });
+  // };
 
   const handleDecreaseQuantity = () => {
     startTransition(async () => {
