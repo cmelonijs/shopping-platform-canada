@@ -26,9 +26,9 @@ export default async function CartPage() {
 
   return (
     <div className="mx-auto w-full max-w-7xl p-6 h-screen">
-      <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
+      <div className={`grid grid-cols-1 gap-8 ${cart.items.length > 0 ? 'lg:grid-cols-3' : ''}`}>
         {/* Main Cart Section */}
-        <div className="space-y-6 lg:col-span-2">
+        <div className={`space-y-6 ${cart.items.length > 0 ? 'lg:col-span-2' : ''}`}>
           <div>
             <h1 className="text-2xl font-semibold">Shopping Cart</h1>
             <p className="text-muted-foreground">
@@ -76,59 +76,63 @@ export default async function CartPage() {
         </div>
 
         {/* Order Summary */}
-        <div className="space-y-6">
-          <Card>
-            <CardHeader>
-              <CardTitle>Order Summary</CardTitle>
-              <CardDescription>
-                Review your order details and shipping information
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              {/* Order Totals */}
-              <div className="space-y-2">
-                <div className="flex justify-between text-sm">
-                  <span>Subtotal</span>
-                  <span>${cart.totalPrice}</span>
+        {cart.items.length > 0 && (
+          <div className="space-y-6">
+            <Card>
+              <CardHeader>
+                <CardTitle>Order Summary</CardTitle>
+                <CardDescription>
+                  Review your order details and shipping information
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                {/* Order Totals */}
+                <div className="space-y-2">
+                  <div className="flex justify-between text-sm">
+                    <span>Subtotal</span>
+                    <span>${cart.totalPrice}</span>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <span>Shipping</span>
+                    <span>${cart.shippingPrice}</span>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <span>Tax</span>
+                    <span>${cart.taxPrice}</span>
+                  </div>
+                  <div className="flex justify-between font-medium">
+                    <span>Total</span>
+                    <span>${cart.totalPrice}</span>
+                  </div>
                 </div>
-                <div className="flex justify-between text-sm">
-                  <span>Shipping</span>
-                  <span>${cart.shippingPrice}</span>
-                </div>
-                <div className="flex justify-between text-sm">
-                  <span>Tax</span>
-                  <span>${cart.taxPrice}</span>
-                </div>
-                <div className="flex justify-between font-medium">
-                  <span>Total</span>
-                  <span>${cart.totalPrice}</span>
-                </div>
-              </div>
 
-              {/* Features */}
-              <div className="space-y-4 border-t pt-4">
-                <div className="flex items-center gap-2 text-sm">
-                  <Package className="text-primary h-4 w-4" />
-                  <span>Free returns within 30 days</span>
+                {/* Features */}
+                <div className="space-y-4 border-t pt-4">
+                  <div className="flex items-center gap-2 text-sm">
+                    <Package className="text-primary h-4 w-4" />
+                    <span>Free returns within 30 days</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-sm">
+                    <Shield className="text-primary h-4 w-4" />
+                    <span>Secure payment</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-sm">
+                    <Truck className="text-primary h-4 w-4" />
+                    <span>Fast delivery</span>
+                  </div>
                 </div>
-                <div className="flex items-center gap-2 text-sm">
-                  <Shield className="text-primary h-4 w-4" />
-                  <span>Secure payment</span>
-                </div>
-                <div className="flex items-center gap-2 text-sm">
-                  <Truck className="text-primary h-4 w-4" />
-                  <span>Fast delivery</span>
-                </div>
-              </div>
 
-              {/* Checkout Button */}
-              <Button className="w-full">
-                <CreditCard className="mr-2 h-4 w-4" />
-                Proceed to Checkout
-              </Button>
-            </CardContent>
-          </Card>
-        </div>
+                {/* Checkout Button */}
+                <Link href="/shipping-address">
+                  <Button className="w-full">
+                    <CreditCard className="mr-2 h-4 w-4" />
+                    Proceed to Checkout
+                  </Button>
+                </Link>
+              </CardContent>
+            </Card>
+          </div>
+        )}
       </div>
     </div>
   );
