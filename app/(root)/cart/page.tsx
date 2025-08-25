@@ -89,7 +89,7 @@ export default async function CartPage() {
               <div className="space-y-2">
                 <div className="flex justify-between text-sm">
                   <span>Subtotal</span>
-                  <span>${cart.totalPrice}</span>
+                  <span>${cart.itemsPrice}</span>
                 </div>
                 <div className="flex justify-between text-sm">
                   <span>Shipping</span>
