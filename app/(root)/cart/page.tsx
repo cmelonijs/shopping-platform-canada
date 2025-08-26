@@ -6,12 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import {
-  Package,
-  CreditCard,
-  Truck,
-  Shield,
-} from "lucide-react";
+import { Package, CreditCard, Truck, Shield } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { getMyCart } from "@/lib/actions/cart.actions";
@@ -21,18 +16,31 @@ export default async function CartPage() {
   const cart = await getMyCart();
 
   if (!cart) {
-    return <div>Your cart is empty</div>;
+    // return <div>Your cart is empty</div>;
+    return (
+      <div className="mx-auto w-full max-w-7xl p-6 h-screen">
+        <div>
+          <h1 className="text-2xl font-semibold">Shopping Cart</h1>
+          <p className="text-muted-foreground">0 items in your cart</p>
+        </div>
+      </div>
+    );
   }
 
   return (
     <div className="mx-auto w-full max-w-7xl p-6 h-screen">
-      <div className={`grid grid-cols-1 gap-8 ${cart.items.length > 0 ? 'lg:grid-cols-3' : ''}`}>
+      <div
+        className={`grid grid-cols-1 gap-8 ${cart.items.length > 0 ? "lg:grid-cols-3" : ""}`}
+      >
         {/* Main Cart Section */}
-        <div className={`space-y-6 ${cart.items.length > 0 ? 'lg:col-span-2' : ''}`}>
+        <div
+          className={`space-y-6 ${cart.items.length > 0 ? "lg:col-span-2" : ""}`}
+        >
           <div>
             <h1 className="text-2xl font-semibold">Shopping Cart</h1>
             <p className="text-muted-foreground">
-              {cart.items.reduce((total, item) => total + item.qty, 0)} items in your cart
+              {cart.items.reduce((total, item) => total + item.qty, 0)} items in
+              your cart
             </p>
           </div>
 
@@ -55,9 +63,12 @@ export default async function CartPage() {
 
                     <div className="flex-1 p-6 pb-3">
                       <div className="flex justify-between">
-                        <div>
-                          <Link href={`/product/${item.slug}`} className="font-medium hover:underline">{item.name}</Link>
-                        </div>
+                        <Link
+                          href={`/product/${item.slug}`}
+                          className="font-medium hover:underline"
+                        >
+                          {item.name}
+                        </Link>
                       </div>
 
                       <div className="mt-4 flex items-center justify-between">
