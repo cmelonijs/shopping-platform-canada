@@ -8,6 +8,7 @@ import { redirect } from "next/navigation";
 import SignInForm from "./SignInForm";
 import { MoveLeft } from "lucide-react";
 
+// Sets the title for the browser tab
 export const metadata: Metadata = {
   title: "Sign in",
 };
@@ -17,12 +18,16 @@ const SignInPage = async (props: {
 }) => {
   const { callbackUrl } = await props.searchParams;
 
+  // Check if the user is already authenticated
   const session = await auth();
 
+  // After authentication, redirect to home page or specified callback URL
   if (session) {
     return redirect(callbackUrl || "/");
   }
   return (
+    // Sign-in page layout (design)
+    // We are using Shadcn UI components for the card layout here
     <div className="w-full max-w-md mx-auto">
       <Link href="/">
         <MoveLeft className="absolute top-4 left-4" size={36}>

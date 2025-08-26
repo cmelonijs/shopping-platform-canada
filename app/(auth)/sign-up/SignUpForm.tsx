@@ -9,6 +9,7 @@ import { useSearchParams } from "next/navigation";
 import { signUpUser } from "@/lib/actions/auth.actions";
 
 
+// Simlar way to SignInForm
 const SignUpForm = () => {
  const [data, action] = useActionState(signUpUser, { success: false, message: "" });
  const searchParams = useSearchParams();
