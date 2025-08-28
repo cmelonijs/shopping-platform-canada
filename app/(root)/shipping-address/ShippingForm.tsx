@@ -8,7 +8,6 @@ import { ShippingAddress } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { insertShippingAddressSchema } from "@/lib/validator";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
 import {
   Form,
   FormField,
@@ -16,15 +15,14 @@ import {
   FormLabel,
   FormControl,
   FormMessage,
-} from "@/components/ui/form"
-import { getAddress } from "@/lib/actions/address.actions";
+} from "@/components/ui/form";
 
-export default function ShippingForm() {
+export default function ShippingForm({defaultValues}: { defaultValues?:ShippingAddress}){
   const router = useRouter();
 
   const form = useForm<ShippingAddress>({
     resolver: zodResolver(insertShippingAddressSchema),
-    defaultValues: {
+    defaultValues: defaultValues || {
       fullName: "",
       address: "",
       city: "",
@@ -33,17 +31,7 @@ export default function ShippingForm() {
     }
   });
 
-  useEffect(() => {
-    const loadExistingAddress = async () => {
-      const existingAddress = await getAddress();
-      if (existingAddress) {
-        form.reset(existingAddress);
-      }
-    };
-
-    loadExistingAddress();
-  }, [form]);
-
+ 
   const onSubmit = async (data: ShippingAddress) => {
     try {
       const result = await updateAddress(data);

@@ -1,9 +1,8 @@
+// components/share/breadcrumbBoard.tsx
+
 import { Breadcrumb, BreadcrumbItem, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb"
 function BreadcrumbBoard({ step }: { step: string }) {
 
-  console.log("BreadcrumbBoard step:", step);
-
-// flex flex-col items-start mx-auto mb-4 text-lg
   return ( 
     <Breadcrumb className= "mx-auto my-4 text-lg">
       <BreadcrumbList className="flex flex-col  md:flex-row items-center gap-4 md:gap-3 ">
