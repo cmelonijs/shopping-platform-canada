@@ -35,6 +35,10 @@ export function formatError(error: any) {
     const field = error.meta?.target ? error.meta.target[0] : "Field";
 
     return `${field.charAt(0).toUpperCase() + field.slice(1)} already exists.`;
+  } else if (error.type === "CredentialsSignin" || error.name === "CredentialsSignin") {
+    // handle nextauth credentials signin error
+    return "Invalid email or password. Please try again.";
+    
   } else {
     // handle other error
 
