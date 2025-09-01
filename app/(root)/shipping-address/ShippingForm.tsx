@@ -150,7 +150,6 @@ export default function ShippingForm({defaultValues}: { defaultValues?:ShippingA
         <Button
           type="submit"
           disabled={form.formState.isSubmitting}
-          className="w-1/2"
         >
           {form.formState.isSubmitting ? 'Updating...' : 'Update Shipping Information'}
         </Button>
