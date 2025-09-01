@@ -70,3 +70,11 @@ export const insertShippingAddressSchema = z.object({
   postalCode: z.string().min(1, "Postal code is required"),
   country: z.string().min(1, "Country is required"),
 });
+
+export const paymentMethodSchema = z.object({
+  paymentMethod: z.enum([
+    "payPal",
+    "Stripe",
+    "cashOnDelivery",
+  ]),
+});
