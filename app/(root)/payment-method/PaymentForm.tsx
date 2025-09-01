@@ -7,6 +7,7 @@ import { paymentMethodSchema } from "@/lib/validator";
 import { PaymentMethod } from "@/types";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 import {
   Form,
   FormField,
@@ -28,8 +29,14 @@ export default function PaymentForm({ defaultValues }: { defaultValues?: Payment
   });
 
   const onSubmit = async (data: PaymentMethod) => {
-    await updatePaymentMethod(data);
-    router.push('/place-order');
+
+    const res = await updatePaymentMethod(data);
+    if (res.success) {
+      toast.success(res.message);
+      
+    } else {
+      toast.error(res.message);
+    }
   };
 
   return (
