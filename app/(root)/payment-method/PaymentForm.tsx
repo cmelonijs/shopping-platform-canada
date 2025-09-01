@@ -1,7 +1,7 @@
 "use client";
 
 import { useForm } from "react-hook-form";
-import { updatePaymentMethod } from "@/lib/actions/payment.ations";
+import { updatePaymentMethod } from "@/lib/actions/payment.actions";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { paymentMethodSchema } from "@/lib/validator";
 import { PaymentMethod } from "@/types";
@@ -28,15 +28,8 @@ export default function PaymentForm({ defaultValues }: { defaultValues?: Payment
   });
 
   const onSubmit = async (data: PaymentMethod) => {
-    try {
-      console.log("Selected payment method:", data);
-      // Trying to figure out how to handle payment method submission
-    } catch {
-      form.setError("root", {
-        type: "server",
-        message: "An unexpected error occurred. Please try again."
-      });
-    }
+    await updatePaymentMethod(data);
+    router.push('/place-order');
   };
 
   return (

@@ -1,3 +1,5 @@
+"use server"
+
 import { PaymentMethod } from "@/types";
 import { auth } from "@/auth";
 import { paymentMethodSchema } from "../validator";
@@ -42,4 +44,36 @@ export async function updatePaymentMethod(data: PaymentMethod) {
       message: formatError(err),
     };
   }
-}   
+} 
+
+export async function getPaymentMethod(): Promise<PaymentMethod | null> { 
+  try {
+    const session = await auth();
+    const userId = session?.user?.id as string;
+
+    if (!userId) {
+      return null;
+    }
+
+    const user = await prisma.user.findUnique({
+      where: {
+        id: userId,
+      },
+      select: {
+        paymentMethod: true,
+      },
+    });
+
+   const paymentMethod = user?.paymentMethod || null;
+   if (!paymentMethod) return null;
+
+   const validatedPaymentMethod = paymentMethodSchema.parse({ paymentMethod });
+   return validatedPaymentMethod;
+  } catch (err) {
+    if (isRedirectError(err)) {
+      throw err;
+    }
+
+    return null;
+  }
+}
