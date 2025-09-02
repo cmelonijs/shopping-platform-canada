@@ -33,7 +33,7 @@ export default function PaymentForm({ defaultValues }: { defaultValues?: Payment
     const res = await updatePaymentMethod(data);
     if (res.success) {
       toast.success(res.message);
-      
+      router.push('/place-order');
     } else {
       toast.error(res.message);
     }
