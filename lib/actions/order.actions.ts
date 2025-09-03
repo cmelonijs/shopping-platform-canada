@@ -6,7 +6,7 @@ import { getMyCart } from "./cart.actions";
 import { prisma } from "@/db/prisma";
 import { CartItem } from "@/types";
 import { getUserById } from "./auth.actions";
-import { insertOrderSchema } from "../validator";
+import { insertOrderSchema, insertShippingAddressSchema } from "../validator";
 
 // create order and create the order items
 export async function createOrder() {
@@ -97,5 +97,50 @@ export async function createOrder() {
   } catch (err) {
     if (isRedirectError(err)) throw err;
     return { success: false, message: formatError(err) };
+  }
+}
+
+export async function getOrderById(orderId: string) {
+  try {
+    const session = await auth();
+    if (!session) throw new Error("User is not authenticated");
+
+    const order = await prisma.order.findUnique({
+      where: { 
+        id: orderId, 
+      },
+      include: { 
+        orderItems: {
+          include: {
+            product: true
+          }
+        },
+        user: true
+      },
+    });
+
+    if (!order) throw new Error("Order not found");
+
+    const userAddress = insertShippingAddressSchema.parse(
+      typeof order.shippingAddress === "string" 
+        ? JSON.parse(order.shippingAddress) 
+        : order.shippingAddress
+    );
+
+    // Verify the order belongs to the authenticated user
+    if (order.userId !== session.user?.id) {
+      throw new Error("Access denied");
+    }
+
+    return {
+      success: true,
+      order,
+      userAddress,
+    };
+  } catch (err) {
+    return { 
+      success: false, 
+      message: formatError(err) 
+    };
   }
 }
