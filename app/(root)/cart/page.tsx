@@ -85,11 +85,12 @@ export default async function CartPage() {
         </div>
             
         {/* Order Summary */}
-        <div className="space-y-6">
-          <Card>
-            <CardHeader>
-              <CardTitle>Order Summary</CardTitle>
-              <CardDescription>
+        {cart.items.length > 0 && (
+          <div className="space-y-6">
+            <Card>
+              <CardHeader>
+                <CardTitle>Order Summary</CardTitle>
+                <CardDescription>
                 Review your order details and shipping information
               </CardDescription>
             </CardHeader>
@@ -140,6 +141,7 @@ export default async function CartPage() {
             </CardContent>
           </Card>
         </div>
+        )}
       </div>
     </div>
   );
