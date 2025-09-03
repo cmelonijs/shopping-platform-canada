@@ -16,7 +16,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Table, TableBody, TableCell, TableRow, TableHead, TableHeader } from "@/components/ui/table";
 import Image from "next/image";
-import { ArrowRight } from "lucide-react";
+import PlaceOrderButton from "@/components/share/placeOrderButton";
 
 
 export default async function placeOrderpage() {
@@ -27,9 +27,8 @@ export default async function placeOrderpage() {
     return (
         <>
             <BreadcrumbBoard step='order' />
-            <body className="flex flex-col min-h-screen">
-
-                <main className="flex-grow">
+            <div className="flex flex-col min-h-screen">
+                <div className="flex-grow">
                     <div className="flex flex-col">
                         <div className='w-full max-w-max mx-auto p-6s min-h-screen'>
                             <h1 className="text-3xl font-bold mb-3">Place Order</h1>
@@ -127,19 +126,16 @@ export default async function placeOrderpage() {
                                             ) : (
                                                 <p>Cart empty.</p>
                                             )}
-                                            <Button className="w-max item-center"> Place order
-                                                 <ArrowRight className="text-white h-4 w-4 animate-bounce" />
-                                                 
-                                            </Button>
+                                            <PlaceOrderButton />
                                         </CardContent>
                                     </Card>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </main>
+                </div>
 
-            </body >
+            </div >
 
         </>
     );
