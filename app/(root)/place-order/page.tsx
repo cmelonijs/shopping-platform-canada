@@ -29,17 +29,15 @@ export default async function placeOrderpage() {
             <body className="flex flex-col min-h-screen">
 
                 <main className="flex-grow">
-
-
                     <div className="flex flex-col">
-                        <div className='w-full max-w-max mx-auto p-6 min-h-screen'>
-                            <h1 className="text-3xl font-bold mb-6">Place Order</h1>
-                            <p className="text-sm text-muted-foreground">Review your order and confirm</p>
-                            <div className="grid grid-1 md:grid-cols-3 gap-5 ">
-                                <div className="col-span-1 md:col-span-2 overflow-x-auto space-y-4">
+                        <div className='w-full max-w-max mx-auto p-6s min-h-screen'>
+                            <h1 className="text-3xl font-bold mb-3">Place Order</h1>
+                            <p className="text-sm text-muted-foreground mb-2">Review your order and confirm</p>
+                            <div className="grid grid-1 md:grid-cols-3 gap-4 ">
+                                <div className="col-span-1 md:col-span-2 overflow-x-auto space-y-6">
                                     <Card className="p-6 mt-3">
                                         <h2 className="text-2xl font-semibold mb-4">Shipping Address</h2>
-                                        <CardContent className="space-y-4 grid grid-cols-2 gap-x-4 ">
+                                        <CardContent className="space-y-3 grid grid-cols-2 gap-x-4 ">
                                             {address ? (
                                                 <>
                                                     <CardTitle >Name:</CardTitle>
@@ -77,19 +75,20 @@ export default async function placeOrderpage() {
                                             </Link>
                                         </CardContent>
                                     </Card>
-                                    <div className="overflow-x-auto text-center">
-                                        <Table className=" col-span-1 md:col-span-2  p-4 ">
+                                    <div className="overflow-x-auto ">
+                                        <Table className="col-span-1 md:col-span-2 text-center">
                                             <TableHeader >
-                                                <TableRow>
+                                                <TableRow >
                                                     <TableHead>Product</TableHead>
-                                                    <TableHead>Quantity</TableHead>
-                                                    <TableHead>Price</TableHead>
+                                                    <TableHead></TableHead>
+                                                    <TableHead className="text-center">Quantity</TableHead>
+                                                    <TableHead className="text-center">Price</TableHead>
                                                 </TableRow>
                                             </TableHeader>
                                             <TableBody>
                                                 {mycart?.items.map((item) => (
                                                     <TableRow key={item.productId}>
-                                                        <TableCell className="flex items-center gap-2">
+                                                        <TableCell>
                                                             <Link href={`/product/${item.slug}`}>
                                                                 <Image
                                                                     src={item.image}
@@ -98,8 +97,10 @@ export default async function placeOrderpage() {
                                                                     height={100}
                                                                     className="flex-block h-full w-full object-cover md:w-32 cursor-pointer hover:opacity-95 transition-opacity"
                                                                 />
-                                                            </Link>{item.name}</TableCell>
-                                                        <TableCell  >{item.qty}</TableCell>
+                                                            </Link>
+                                                        </TableCell>
+                                                        <TableCell className="text-left">{item.name}</TableCell>
+                                                        <TableCell >{item.qty}</TableCell>
                                                         <TableCell>${item.price}</TableCell>
                                                     </TableRow>
                                                 ))}
