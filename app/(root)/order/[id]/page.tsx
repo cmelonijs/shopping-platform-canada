@@ -1,4 +1,4 @@
-import { getOrder } from "@/lib/actions/order.actions";
+import { getOrderById } from "@/lib/actions/order.actions";
 import {
     Card,
     CardContent,
@@ -8,11 +8,10 @@ import {
 import Link from "next/link";
 import { Table, TableBody, TableCell, TableRow, TableHead, TableHeader } from "@/components/ui/table";
 import Image from "next/image";
-import { getAddress } from "@/lib/actions/address.actions";
 
-export default async function OrderPage({ params }: { params: { slug: string } }) {
-    const { slug } = await params;
-    const orderData = await getOrder(slug);
+export default async function OrderPage({ params }: { params: { id: string } }) {
+    const { id } = await params;
+    const orderData = await getOrderById(id);
 
     if (!orderData.success || !orderData.order) {
         return (
@@ -22,8 +21,7 @@ export default async function OrderPage({ params }: { params: { slug: string } }
         );
     }
 
-    const { order } = orderData;
-    const { userAddress } = orderData;
+    const { order, userAddress } = orderData;
 
     return (
         <>  

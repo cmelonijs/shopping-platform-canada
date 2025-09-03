@@ -100,7 +100,7 @@ export async function createOrder() {
   }
 }
 
-export async function getOrder(orderId: string) {
+export async function getOrderById(orderId: string) {
   try {
     const session = await auth();
     if (!session) throw new Error("User is not authenticated");

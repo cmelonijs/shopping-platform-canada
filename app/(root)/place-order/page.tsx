@@ -8,9 +8,7 @@ import {
     CardTitle,
 } from "@/components/ui/card";
 import { getAddress } from '@/lib/actions/address.actions';
-import { ShippingAddress } from "@/types";
 import { getPaymentMethod } from "@/lib/actions/payment.actions";
-import { PaymentMethod } from "@/types";
 import { getMyCart } from "@/lib/actions/cart.actions";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
