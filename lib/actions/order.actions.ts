@@ -99,3 +99,41 @@ export async function createOrder() {
     return { success: false, message: formatError(err) };
   }
 }
+
+export async function getOrder(orderId: string) {
+  try {
+    const session = await auth();
+    if (!session) throw new Error("User is not authenticated");
+
+    const order = await prisma.order.findUnique({
+      where: { 
+        id: orderId, 
+      },
+      include: { 
+        orderItems: {
+          include: {
+            product: true
+          }
+        },
+        user: true
+      },
+    });
+
+    if (!order) throw new Error("Order not found");
+
+    // Verify the order belongs to the authenticated user
+    if (order.userId !== session.user?.id) {
+      throw new Error("Access denied");
+    }
+
+    return {
+      success: true,
+      order,
+    };
+  } catch (err) {
+    return { 
+      success: false, 
+      message: formatError(err) 
+    };
+  }
+}
