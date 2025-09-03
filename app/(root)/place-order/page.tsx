@@ -16,6 +16,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Table, TableBody, TableCell, TableRow, TableHead, TableHeader } from "@/components/ui/table";
 import Image from "next/image";
+import { ArrowRight } from "lucide-react";
 
 
 export default async function placeOrderpage() {
@@ -110,7 +111,7 @@ export default async function placeOrderpage() {
                                 </div>
                                 <div>
                                     <Card className="p-6 mt-4 h-auto">
-                                        <h2 className="text-2xl font-semibold mb-4">My cart</h2>
+                                        <h2 className="text-2xl font-semibold mb-4">Total</h2>
                                         <CardContent className="space-y-4 grid grid-cols-2 gap-x-4">
                                             {mycart ? (
                                                 <>
@@ -127,7 +128,8 @@ export default async function placeOrderpage() {
                                                 <p>Cart empty.</p>
                                             )}
                                             <Button className="w-max item-center"> Place order
-                                                <span className="animate-bounce">➡️</span>
+                                                 <ArrowRight className="text-white h-4 w-4 animate-bounce" />
+                                                 
                                             </Button>
                                         </CardContent>
                                     </Card>
