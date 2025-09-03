@@ -11,8 +11,8 @@ import Image from "next/image";
 import { getAddress } from "@/lib/actions/address.actions";
 
 export default async function OrderPage({ params }: { params: { slug: string } }) {
-    const orderData = await getOrder(params.slug);
-    const address = await getAddress();
+    const { slug } = await params;
+    const orderData = await getOrder(slug);
 
     if (!orderData.success || !orderData.order) {
         return (
@@ -23,6 +23,7 @@ export default async function OrderPage({ params }: { params: { slug: string } }
     }
 
     const { order } = orderData;
+    const { userAddress } = orderData;
 
     return (
         <>  
@@ -37,18 +38,18 @@ export default async function OrderPage({ params }: { params: { slug: string } }
                                     <Card className="p-6 mt-3">
                                         <h2 className="text-2xl font-semibold mb-4">Shipping Address</h2>
                                         <CardContent className="space-y-4 grid grid-cols-2 gap-x-4 ">
-                                            {address ? (
+                                            {userAddress ? (
                                                 <>
                                                     <CardTitle >Name:</CardTitle>
-                                                    <CardDescription > {address.fullName}</CardDescription >
+                                                    <CardDescription > {userAddress.fullName}</CardDescription >
                                                     <CardTitle >Address: </CardTitle>
-                                                    <CardDescription >{address.address}</CardDescription >
+                                                    <CardDescription >{userAddress.address}</CardDescription >
                                                     <CardTitle >City: </CardTitle>
-                                                    <CardDescription >{address.city}</CardDescription >
+                                                    <CardDescription >{userAddress.city}</CardDescription >
                                                     <CardTitle >Postal:</CardTitle>
-                                                    <CardDescription >{address.postalCode}</CardDescription >
+                                                    <CardDescription >{userAddress.postalCode}</CardDescription >
                                                     <CardTitle >Country:</CardTitle>
-                                                    <CardDescription >{address.country}</CardDescription >
+                                                    <CardDescription >{userAddress.country}</CardDescription >
 
                                                     <CardTitle>Delivery Status:</CardTitle>
                                                     <CardDescription>
