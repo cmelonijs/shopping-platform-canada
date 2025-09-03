@@ -51,7 +51,7 @@ export async function createOrder() {
       paymentMethod: user.paymentMethod,
       shippingAddress: user.address,
       itemsPrice: cart.itemsPrice,
-      shippingPrice: cart.shippingPrice,
+      shippingPrice: cart.ShippingPrice,
       taxPrice: cart.taxPrice,
       totalPrice: cart.totalPrice,
     });
