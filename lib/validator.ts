@@ -95,3 +95,8 @@ export const insertOrderItemSchema = z.object({
   price: currency,
   qty: z.number(),
 });
+
+// SCHEMA FOR UPDATING PROFILE NAME
+export const updateProfileNameSchema = z.object({
+  name: z.string().min(3, "Name must be at least 3 characters"),
+});
