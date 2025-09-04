@@ -68,7 +68,7 @@ export default function Header() {
              </DropdownMenuTrigger>
              <DropdownMenuContent align="end" className="p-2">
                <DropdownMenuItem>
-                 <Link href="/" className="flex items-center">
+                 <Link href="/user/profile" className="flex items-center">
                    <UserRound className="mr-2" />
                    Profile
                  </Link>
