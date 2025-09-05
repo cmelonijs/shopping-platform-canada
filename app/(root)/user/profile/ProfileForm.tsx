@@ -16,37 +16,29 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
 
 
 export default function ProfileForm({ defaultValues }: { defaultValues?: Profile }) {
     const router = useRouter();
+
     const form = useForm<Profile>({
         resolver: zodResolver(updateProfileNameSchema),
         defaultValues: defaultValues || {
-            name: ""
+            name: "",
+            email: "",
         }
     });
+
     const onSubmit = async (data: Profile) => {
-        console.log("Submitting:", data);
+        const res = await updateProfile(data);
 
-        try {
-            const result = await updateProfile(data);
-            console.log("Result:", result);
-
-            if (result?.success) {
-                router.refresh();
-            }
-            else {
-                form.setError("root", {
-                    type: "server",
-                    message: result?.message || "Failed to update profile"
-                });
-            }
-        } catch (err) {
-            form.setError("root", {
-                type: "server",
-                message: "An unexpected error occurred. Please try again."
-            });
+        if (res.success) {
+            toast.success(res.message);
+            router.refresh();
+        }
+        else {
+            toast.error(res.message);
         }
     };
     return (
@@ -57,16 +49,16 @@ export default function ProfileForm({ defaultValues }: { defaultValues?: Profile
                         {form.formState.errors.root.message}
                     </div>
                 )}
-
                 <FormField
                     control={form.control}
-                    name="name"
+                    name="email"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Full Name</FormLabel>
+                            <FormLabel>Email</FormLabel>
                             <FormControl>
                                 <Input
-                                    placeholder="Enter your full name"
+                                    placeholder="Email address"
+                                    disabled
                                     {...field}
                                 />
                             </FormControl>
@@ -75,11 +67,28 @@ export default function ProfileForm({ defaultValues }: { defaultValues?: Profile
                     )}
                 />
 
+                <FormField
+                    control={form.control}
+                    name="name"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>Name</FormLabel>
+                            <FormControl>
+                                <Input
+                                    placeholder="Enter your name"
+                                    {...field}
+                                />
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
+        
                 <Button
                     type="submit"
                     disabled={form.formState.isSubmitting}
                 >
-                    {form.formState.isSubmitting ? 'Updating...' : 'Update name Information'}
+                    {form.formState.isSubmitting ? 'Updating...' : 'Update Profile'}
                 </Button>
             </form>
         </Form>

@@ -8,6 +8,7 @@ import { ShippingAddress } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { insertShippingAddressSchema } from "@/lib/validator";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 import {
   Form,
   FormField,
@@ -40,7 +41,7 @@ export default function ShippingForm({defaultValues, context = "profile"}: { def
         if (context === "checkout") {
         router.push("/payment-method");
         } else {
-        alert("address updated");
+          toast.success("Shipping address updated successfully");
         }
       } else {
         form.setError("root", {

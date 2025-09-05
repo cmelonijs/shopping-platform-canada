@@ -48,7 +48,7 @@ export async function updateProfile(data: Profile) {
     }
 }
 
-export async function getName(): Promise<string | null> {
+export async function getName(): Promise<{ name: string; email?: string } | null> {
     try {
         const session = await auth();
         const userId = session?.user?.id as string;
@@ -62,12 +62,13 @@ export async function getName(): Promise<string | null> {
                 id: userId
             },
             select: {
-                name: true
+                name: true,
+                email: true
             },
         });
 
-        const validatedProfile = updateProfileNameSchema.safeParse(user?.name);
-        return validatedProfile.success ? validatedProfile.data.name : null;
+        const validatedProfile = updateProfileNameSchema.safeParse(user);
+        return validatedProfile.success ? validatedProfile.data : null;
 
     } catch (err) {
         if (isRedirectError(err)) {
