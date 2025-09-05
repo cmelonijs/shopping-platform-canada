@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Loader2 from "@/assets/Loader2.gif";
+import Loader2 from "@/assets/Loader3.gif";
 
 export default function Loading() {
   return (
@@ -7,8 +7,8 @@ export default function Loading() {
         <Image
           src={Loader2}
           alt="Loading"
-          width={200}
-          height={200}
+          width={150}
+          height={150}
         />
     </div>
   );
