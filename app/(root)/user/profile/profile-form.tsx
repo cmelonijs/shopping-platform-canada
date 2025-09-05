@@ -74,16 +74,16 @@ export default function ProfileForm({ defaultValues }: { defaultValues?: Profile
                         </FormItem>
                     )}
                 />
-                
+
                 <Button
-          type="submit"
-          disabled={form.formState.isSubmitting}
-        >
-          {form.formState.isSubmitting ? 'Updating...' : 'Update name Information'}
-        </Button>
-      </form>
-    </Form>
-  );
+                    type="submit"
+                    disabled={form.formState.isSubmitting}
+                >
+                    {form.formState.isSubmitting ? 'Updating...' : 'Update name Information'}
+                </Button>
+            </form>
+        </Form>
+    );
 }
 
 

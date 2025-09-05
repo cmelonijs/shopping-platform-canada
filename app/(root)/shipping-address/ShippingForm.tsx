@@ -17,7 +17,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
-export default function ShippingForm({defaultValues}: { defaultValues?:ShippingAddress}){
+export default function ShippingForm({defaultValues, context = "profile"}: { defaultValues?:ShippingAddress;context?: "profile" | "checkout";
+}){
   const router = useRouter();
 
   const form = useForm<ShippingAddress>({
@@ -36,7 +37,11 @@ export default function ShippingForm({defaultValues}: { defaultValues?:ShippingA
     try {
       const result = await updateAddress(data);
       if (result.success) {
+        if (context === "checkout") {
         router.push("/payment-method");
+        } else {
+        alert("address updated");
+        }
       } else {
         form.setError("root", {
           type: "server",

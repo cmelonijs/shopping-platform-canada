@@ -30,6 +30,11 @@ export async function updateProfile(data: Profile) {
             },
         });
 
+        return {
+            success: true,
+            message: "Profile updated successfully",
+        };
+
 
     } catch (err) {
         if (isRedirectError(err)) {
@@ -40,7 +45,7 @@ export async function updateProfile(data: Profile) {
             success: false,
             message: formatError(err),
         };
-    } 
+    }
 }
 
 export async function getName(): Promise<string | null> {
@@ -53,15 +58,17 @@ export async function getName(): Promise<string | null> {
         }
 
         const user = await prisma.user.findUnique({
-            where: { 
-                id: userId 
+            where: {
+                id: userId
             },
-            select: { 
-                name: true 
+            select: {
+                name: true
             },
         });
 
-        return user?.name || null;
+        const validatedProfile = updateProfileNameSchema.safeParse(user?.name);
+        return validatedProfile.success ? validatedProfile.data.name : null;
+
     } catch (err) {
         if (isRedirectError(err)) {
             throw err;

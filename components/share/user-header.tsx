@@ -43,7 +43,7 @@ export default function UserHeader() {
                         Profile
                     </Link>
                     <Link
-                        href="/"
+                        href="/user/orders"
                         className="text-l hover:bg-gray-200 py-2 px-3 rounded-md transition-colors"
                     >
                         Order
