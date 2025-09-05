@@ -23,7 +23,9 @@ const ShippingAddressPage = async (props: {
       <BreadcrumbBoard step='shipping' />
       <div className='max-w-2xl mx-auto p-6 h-screen'>
         <h1 className="text-3xl font-bold mb-6 ">Shipping Address</h1>
-        <ShippingForm defaultValues={existingAddress as ShippingAddress} />
+        <ShippingForm defaultValues={existingAddress as ShippingAddress} 
+      context="checkout"
+/>
       </div>
     </>
   );

@@ -8,6 +8,7 @@ import { ShippingAddress } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { insertShippingAddressSchema } from "@/lib/validator";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 import {
   Form,
   FormField,
@@ -17,7 +18,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
-export default function ShippingForm({defaultValues}: { defaultValues?:ShippingAddress}){
+export default function ShippingForm({defaultValues, context = "profile"}: { defaultValues?:ShippingAddress;context?: "profile" | "checkout";
+}){
   const router = useRouter();
 
   const form = useForm<ShippingAddress>({
@@ -36,7 +38,11 @@ export default function ShippingForm({defaultValues}: { defaultValues?:ShippingA
     try {
       const result = await updateAddress(data);
       if (result.success) {
+        if (context === "checkout") {
         router.push("/payment-method");
+        } else {
+          toast.success("Shipping address updated successfully");
+        }
       } else {
         form.setError("root", {
           type: "server",
