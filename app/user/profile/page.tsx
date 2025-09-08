@@ -1,12 +1,10 @@
 //userProfilePage
 
-import { Label } from "@/components/ui/label";
 import { Card, CardContent } from "@/components/ui/card";
 import { auth } from "@/auth";
 import { getName } from "@/lib/actions/profile.actions";
 import ProfileForm from "./ProfileForm";
 import ShippingForm from "@/app/(root)/shipping-address/ShippingForm";
-import { Profile, ShippingAddress } from "@/types";
 import { getAddress } from "@/lib/actions/address.actions";
 import UserLayout from "../userLayout";
 
