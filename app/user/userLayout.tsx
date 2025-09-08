@@ -1,11 +1,10 @@
 
-import Header from "@/components/share/header";
-import Footer from "@/components/share/footer";
+import UserHeader from "./userHeader";
 import { SessionProvider } from "next-auth/react";
 import { Toaster } from "@/components/ui/sonner";
 
 
-export default function RootLayout({
+export default function UserLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -14,10 +13,9 @@ export default function RootLayout({
   return (
     <div className="flex flex-col min-h-screen">
       <SessionProvider>
-        <Header />
+        <UserHeader />
         {children}
         <Toaster />
-        <Footer />
       </SessionProvider>
     </div>
   );

@@ -5,9 +5,11 @@ import { Card, CardContent } from "@/components/ui/card";
 import { auth } from "@/auth";
 import { getName } from "@/lib/actions/profile.actions";
 import ProfileForm from "./ProfileForm";
-import ShippingForm from "../../shipping-address/ShippingForm";
+import ShippingForm from "@/app/(root)/shipping-address/ShippingForm";
 import { Profile, ShippingAddress } from "@/types";
 import { getAddress } from "@/lib/actions/address.actions";
+import UserLayout from "../userLayout";
+
 
 const UserProfilePage = async (props: {
   searchParams: Promise<{ callbackUrl?: string }>;
@@ -16,9 +18,10 @@ const UserProfilePage = async (props: {
 
   const existingName = await getName();
   const existingAddress = await getAddress();
-
   return (
+    
     <>
+      <UserLayout> 
       <div className="mx-auto p-6 h-screen ">
         <h1 className="text-2xl font-bold mb-4"> Profile </h1>
         <div className="flex gap-4 items-stretch">
@@ -35,6 +38,7 @@ const UserProfilePage = async (props: {
           </Card>
         </div>
       </div>
+      </UserLayout>
     </>
   );
 };
