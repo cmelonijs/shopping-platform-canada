@@ -12,11 +12,11 @@ export default function UserLayout({
 
   return (
     <div className="flex flex-col min-h-screen">
-      <SessionProvider>
+
         <UserHeader />
         {children}
-        <Toaster />
-      </SessionProvider>
+        
+     
     </div>
   );
 }
