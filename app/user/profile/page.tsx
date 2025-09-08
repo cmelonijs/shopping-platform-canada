@@ -6,7 +6,7 @@ import { getName } from "@/lib/actions/profile.actions";
 import ProfileForm from "./ProfileForm";
 import ShippingForm from "@/app/(root)/shipping-address/ShippingForm";
 import { getAddress } from "@/lib/actions/address.actions";
-import UserLayout from "../userLayout";
+import UserLayout from "../layout";
 
 
 const UserProfilePage = async (props: {
@@ -19,7 +19,7 @@ const UserProfilePage = async (props: {
   return (
     
     <>
-      <UserLayout> 
+     
       <div className="mx-auto p-6 h-screen ">
         <h1 className="text-2xl font-bold mb-4"> Profile </h1>
         <div className="flex gap-4 items-stretch">
@@ -36,7 +36,7 @@ const UserProfilePage = async (props: {
           </Card>
         </div>
       </div>
-      </UserLayout>
+      
     </>
   );
 };
