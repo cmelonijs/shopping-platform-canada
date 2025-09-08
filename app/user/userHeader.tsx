@@ -7,7 +7,7 @@ import {
     DropdownMenuTrigger,
     DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu"
-import { ModeToggle } from "./theme";
+import { ModeToggle } from "@/components/share/theme";
 import { Button } from "@/components/ui/button";
 import { AlignLeft, EllipsisVertical, ShoppingCart, House, UserRound, History, LogOut } from "lucide-react";
 import Link from "next/link";

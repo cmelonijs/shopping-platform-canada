@@ -3,7 +3,7 @@ import Header from "@/components/share/header";
 import Footer from "@/components/share/footer";
 import { SessionProvider } from "next-auth/react";
 import { Toaster } from "@/components/ui/sonner";
-import DynamicHeader from "@/components/share/dynamicHeader";
+
 
 export default function RootLayout({
   children,
@@ -14,7 +14,7 @@ export default function RootLayout({
   return (
     <div className="flex flex-col min-h-screen">
       <SessionProvider>
-        <DynamicHeader />
+        <Header />
         {children}
         <Toaster />
         <Footer />
