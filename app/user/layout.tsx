@@ -1,4 +1,5 @@
 
+import { SessionProvider } from "next-auth/react";
 import UserHeader from "./userHeader";
 
 export default function UserLayout({
@@ -9,8 +10,10 @@ export default function UserLayout({
 
   return (
     <div className="flex flex-col min-h-screen">
-      <UserHeader />
-      {children}
+      <SessionProvider>
+        <UserHeader />
+        {children}
+      </SessionProvider>
     </div>
   );
 }
