@@ -6,9 +6,7 @@ import { ShippingAddress } from '@/types';
 import { getAddress } from '@/lib/actions/address.actions';
 
 
-const ShippingAddressPage = async (props: {
-  searchParams: Promise<{ callbackUrl?: string }>;
-}) => {
+const ShippingAddressPage = async () => {
   const session = await auth();
 
   // If user is NOT authenticated, redirect to login

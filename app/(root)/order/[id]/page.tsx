@@ -9,8 +9,13 @@ import Link from "next/link";
 import { Table, TableBody, TableCell, TableRow, TableHead, TableHeader } from "@/components/ui/table";
 import Image from "next/image";
 
-export default async function OrderPage({ params }: { params: { id: string } }) {
+const OrderPage = async ({
+    params,
+}: {
+    params: Promise<{ id: string }>;
+}) => {
     const { id } = await params;
+
     const orderData = await getOrderById(id);
 
     if (!orderData.success || !orderData.order) {
@@ -23,8 +28,9 @@ export default async function OrderPage({ params }: { params: { id: string } }) 
 
     const { order, userAddress } = orderData;
 
+
     return (
-        <>  
+        <>
             <div className="flex flex-col min-h-screen">
                 <div className="flex-grow">
 
@@ -51,11 +57,10 @@ export default async function OrderPage({ params }: { params: { id: string } }) 
 
                                                     <CardTitle>Delivery Status:</CardTitle>
                                                     <CardDescription>
-                                                        <span className={`px-3 py-1 rounded-full text-sm font-medium ${
-                                                            order.isDelivered 
-                                                                ? 'bg-green-100 text-green-800' 
+                                                        <span className={`px-3 py-1 rounded-full text-sm font-medium ${order.isDelivered
+                                                                ? 'bg-green-100 text-green-800'
                                                                 : 'bg-red-100 text-red-800'
-                                                        }`}>
+                                                            }`}>
                                                             {order.isDelivered ? 'Delivered' : 'Not Delivered'}
                                                         </span>
                                                     </CardDescription>
@@ -72,11 +77,10 @@ export default async function OrderPage({ params }: { params: { id: string } }) 
                                             <CardDescription>{order.paymentMethod}</CardDescription>
                                             <CardTitle>Payment Status:</CardTitle>
                                             <CardDescription>
-                                                <span className={`px-3 py-1 rounded-full text-sm font-medium ${
-                                                    order.isPaid 
-                                                        ? 'bg-green-100 text-green-800' 
+                                                <span className={`px-3 py-1 rounded-full text-sm font-medium ${order.isPaid
+                                                        ? 'bg-green-100 text-green-800'
                                                         : 'bg-red-100 text-red-800'
-                                                }`}>
+                                                    }`}>
                                                     {order.isPaid ? 'Paid' : 'Not Paid'}
                                                 </span>
                                             </CardDescription>
@@ -111,28 +115,29 @@ export default async function OrderPage({ params }: { params: { id: string } }) 
                                     </Table>
                                 </div>
                                 <div>
-                                <Card className="p-6 mt-4 h-auto">
-                                    <h2 className="text-2xl font-semibold mb-4">My cart</h2>
-                                    <CardContent className="space-y-4 grid grid-cols-2 gap-x-4">
-                                        <CardTitle >Items:</CardTitle>
-                                                <CardDescription > {order.itemsPrice}</CardDescription >
-                                                <CardTitle >Tax price: </CardTitle>
-                                                <CardDescription >{order.taxPrice}</CardDescription >
-                                                <CardTitle >Shipping: </CardTitle>
-                                                <CardDescription >{order.shippingPrice}</CardDescription >
-                                                <CardTitle >Total price:</CardTitle>
-                                                <CardDescription >{order.totalPrice}</CardDescription >
-                                    </CardContent>
-                                </Card>
+                                    <Card className="p-6 mt-4 h-auto">
+                                        <h2 className="text-2xl font-semibold mb-4">My cart</h2>
+                                        <CardContent className="space-y-4 grid grid-cols-2 gap-x-4">
+                                            <CardTitle >Items:</CardTitle>
+                                            <CardDescription > {order.itemsPrice}</CardDescription >
+                                            <CardTitle >Tax price: </CardTitle>
+                                            <CardDescription >{order.taxPrice}</CardDescription >
+                                            <CardTitle >Shipping: </CardTitle>
+                                            <CardDescription >{order.shippingPrice}</CardDescription >
+                                            <CardTitle >Total price:</CardTitle>
+                                            <CardDescription >{order.totalPrice}</CardDescription >
+                                        </CardContent>
+                                    </Card>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
 
-        </div >
+            </div >
 
         </>
     );
 }
+export default OrderPage;
