@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Trash2, Plus, Minus, Loader } from "lucide-react";
+import { Plus, Minus, Loader } from "lucide-react";
 import { addItemToCart, removeItemFormCart } from "@/lib/actions/cart.actions";
 import { toast } from "sonner";
 import { useTransition } from "react";

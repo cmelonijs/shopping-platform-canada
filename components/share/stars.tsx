@@ -1,4 +1,4 @@
-import { Star, StarHalf } from "lucide-react";
+import { Star } from "lucide-react";
 
 
 export const RenderStars = ({ rating } : { rating: string }) => {

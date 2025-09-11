@@ -49,7 +49,7 @@ export default function ShippingForm({defaultValues, context = "profile"}: { def
           message: result.message
         });
       }
-    } catch (err) {
+    } catch {
       form.setError("root", {
         type: "server",
         message: "An unexpected error occurred. Please try again."

@@ -1,16 +1,13 @@
 //userProfilePage
 
-import { Card, CardContent } from "@/components/ui/card";
-import { auth } from "@/auth";
+import { Card } from "@/components/ui/card";
 import { getName } from "@/lib/actions/profile.actions";
 import ProfileForm from "./ProfileForm";
 import ShippingForm from "@/app/(root)/shipping-address/ShippingForm";
 import { getAddress } from "@/lib/actions/address.actions";
-import UserLayout from "../layout";
 
-const UserProfilePage = async (props: {
-  searchParams: Promise<{ callbackUrl?: string }>;
-}) => {
+
+const UserProfilePage = async () => {
   const existingName = await getName();
   const existingAddress = await getAddress();
   return (
