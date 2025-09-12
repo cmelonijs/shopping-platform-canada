@@ -1,5 +1,6 @@
 // overview-page
 'use client'
+import { Button } from "@/components/ui/button";
 import {
     Card,
     CardAction,
@@ -32,9 +33,10 @@ const chartData = [
 
 export default function OverviewPage() {
     return (
-        <div className="w-full h-screen flex flex-col">
-  <div className="w-full h-full">
-    <h1 className="font-bold text-3xl px-3 py-3 text-center">Dashboard</h1>
+       <div className="container mx-auto px-3 py-3">
+            <div className="flex justify-between items-center mb-4 px-3">
+                <h1 className="font-bold text-xl">Overview</h1>
+            </div>
                 <div className="container mx-auto px-3 py-3 grid grid-cols-1 md:grid-cols-4 gap-4">
                     <Card>
                         <CardHeader>
@@ -71,11 +73,11 @@ export default function OverviewPage() {
                 </div>
 
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 px-8 pb-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-3  mx-auto ">
                     <Card >
                         <Table >
-                            <TableHeader>
-                                <TableRow>
+                            <TableHeader >
+                                <TableRow >
                                     <TableHead>BUYER</TableHead>
                                     <TableHead>DATE</TableHead>
                                     <TableHead>TOTAL</TableHead>
@@ -88,7 +90,7 @@ export default function OverviewPage() {
                                     <TableCell>11/09/2025</TableCell>
                                     <TableCell>€120</TableCell>
                                     <TableCell>
-                                        <button className="text-black-500 hover:underline">Details</button>
+                                        <Button  >Details</Button>
                                     </TableCell>
                                 </TableRow>
 
@@ -127,6 +129,6 @@ export default function OverviewPage() {
                     </Card>
                 </div>
             </div>
-        </div >
+    
     );
 }

@@ -59,16 +59,22 @@ export function round2(value: number | string) {
   }
 }
 
+// FORMAT CURRENCY IN CAD
 const CURRENCY_FORMATTER = new Intl.NumberFormat("en-CA", {
   style: "currency",
   currency: "CAD",
 });
+
 export function formatCurrency(amount: number | string | null) {
+  let formatted = "";
+
   if (typeof amount === "number") {
-    return CURRENCY_FORMATTER.format(amount);
+    formatted = CURRENCY_FORMATTER.format(amount);
   } else if (typeof amount === "string") {
-    return CURRENCY_FORMATTER.format(Number(amount));
+    formatted = CURRENCY_FORMATTER.format(Number(amount));
   } else {
     return "NaN";
   }
+  // It inserts a space after the currency symbol.
+  return formatted.replace(/^(\D+)/, "$1 ");
 }
