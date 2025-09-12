@@ -15,12 +15,15 @@ import Link from "next/link";
 import { Table, TableBody, TableCell, TableRow, TableHead, TableHeader } from "@/components/ui/table";
 import Image from "next/image";
 import PlaceOrderButton from "@/components/share/placeOrderButton";
+import { formatCurrency } from "@/lib/utils";
 
 
 export default async function placeOrderpage() {
     const address = await getAddress();
     const PaymentMethod = await getPaymentMethod();
     const mycart = await getMyCart();
+
+    
 
     return (
         <>
@@ -99,7 +102,7 @@ export default async function placeOrderpage() {
                                                         </TableCell>
                                                         <TableCell className="text-left">{item.name}</TableCell>
                                                         <TableCell >{item.qty}</TableCell>
-                                                        <TableCell>${item.price}</TableCell>
+                                                        <TableCell>{formatCurrency(item.price)}</TableCell>
                                                     </TableRow>
                                                 ))}
                                             </TableBody>
@@ -113,13 +116,13 @@ export default async function placeOrderpage() {
                                             {mycart ? (
                                                 <>
                                                     <CardTitle >Items:</CardTitle>
-                                                    <CardDescription > {mycart.itemsPrice}</CardDescription >
+                                                    <CardDescription >{formatCurrency(mycart.itemsPrice)}</CardDescription >
                                                     <CardTitle >Tax price: </CardTitle>
-                                                    <CardDescription >{mycart.taxPrice}</CardDescription >
+                                                    <CardDescription >{formatCurrency(mycart.taxPrice)}</CardDescription >
                                                     <CardTitle >Shipping: </CardTitle>
-                                                    <CardDescription >{mycart.ShippingPrice}</CardDescription >
+                                                    <CardDescription >{formatCurrency(mycart.ShippingPrice)}</CardDescription >
                                                     <CardTitle >Total price:</CardTitle>
-                                                    <CardDescription >{mycart.totalPrice}</CardDescription >
+                                                    <CardDescription >{formatCurrency(mycart.totalPrice)}</CardDescription >
                                                 </>
                                             ) : (
                                                 <p>Cart empty.</p>

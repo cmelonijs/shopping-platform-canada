@@ -8,6 +8,7 @@ import {
 import Link from "next/link";
 import { Table, TableBody, TableCell, TableRow, TableHead, TableHeader } from "@/components/ui/table";
 import Image from "next/image";
+import { formatCurrency } from "@/lib/utils";
 
 export default async function OrderPage({ params }: { params: { id: string } }) {
     const { id } = await params;
@@ -115,13 +116,13 @@ export default async function OrderPage({ params }: { params: { id: string } }) 
                                     <h2 className="text-2xl font-semibold mb-4">My cart</h2>
                                     <CardContent className="space-y-4 grid grid-cols-2 gap-x-4">
                                         <CardTitle >Items:</CardTitle>
-                                                <CardDescription > {order.itemsPrice}</CardDescription >
+                                                <CardDescription > {formatCurrency(order.itemsPrice)}</CardDescription >
                                                 <CardTitle >Tax price: </CardTitle>
-                                                <CardDescription >{order.taxPrice}</CardDescription >
+                                                <CardDescription >{formatCurrency(order.taxPrice)}</CardDescription >
                                                 <CardTitle >Shipping: </CardTitle>
-                                                <CardDescription >{order.shippingPrice}</CardDescription >
+                                                <CardDescription >{formatCurrency(order.shippingPrice)}</CardDescription >
                                                 <CardTitle >Total price:</CardTitle>
-                                                <CardDescription >{order.totalPrice}</CardDescription >
+                                                <CardDescription >{formatCurrency(order.totalPrice)}</CardDescription >
                                     </CardContent>
                                 </Card>
                             </div>

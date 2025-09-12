@@ -7,7 +7,7 @@ export default function Navbar() {
     const pathname = usePathname();
 
     return (
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4  ">
             <Link
                 href="/admin/overview"
                 className={`text-l py-2 px-3 rounded-md transition-colors ${pathname === "/admin/overview" ? "bg-black text-white" : "hover:bg-gray-200"

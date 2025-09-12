@@ -11,6 +11,7 @@ import { Product } from "@/types";
 import Image from "next/image";
 import AddToCart from "@/components/cart/addToCart";
 import { RenderStars } from "@/components/share/stars";
+import { formatCurrency } from "@/lib/utils";
 
 export default async function DetailsPage({
   params,
@@ -58,7 +59,7 @@ export default async function DetailsPage({
           </div>
 
           {/* Display product price and category */}
-          <div className="text-xl font-semibold">${product.price}</div>
+          <div className="text-xl font-semibold">{formatCurrency(product.price)}</div>
           <div className="text-sm">{product.category}</div>
 
           {/* Add to Cart button with current quantity */}
