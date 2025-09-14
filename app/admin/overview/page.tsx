@@ -73,7 +73,7 @@ export default function OverviewPage() {
 
                 <div >
                     <Card >
-                        <BarChartOverview />
+                        <BarChartOverview/>
                     </Card>          
                 </div>
             </div>
