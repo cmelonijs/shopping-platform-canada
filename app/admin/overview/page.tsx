@@ -64,7 +64,7 @@ export default function OverviewPage() {
             </div>
 
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4  mx-auto w-full h-screen ">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-3  mx-auto w-full h-screen ">
                 <div > 
                     <Card className=" p-6 text-center">
                        <TableOrdersOverview/>
@@ -72,7 +72,7 @@ export default function OverviewPage() {
                 </div>
 
                 <div >
-                    <Card >
+                    <Card  className=" p-6 ">
                         <BarChartOverview/>
                     </Card>          
                 </div>
