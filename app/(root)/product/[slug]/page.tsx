@@ -13,11 +13,12 @@ import AddToCart from "@/components/cart/addToCart";
 import { RenderStars } from "@/components/share/stars";
 import { formatCurrency } from "@/lib/utils";
 
-export default async function DetailsPage({
+const  DetailsPage =async ({
   params,
 }: {
-  params: { slug: string };
-}) {
+  params: Promise<{ slug : string }>;
+}) => {
+  
   const { slug } = await params;
   const product: Product = await getProductBySlug(slug);
 
@@ -87,3 +88,4 @@ export default async function DetailsPage({
     </div>
   );
 }
+export default DetailsPage

@@ -10,8 +10,13 @@ import { Table, TableBody, TableCell, TableRow, TableHead, TableHeader } from "@
 import Image from "next/image";
 import { formatCurrency } from "@/lib/utils";
 
-export default async function OrderPage({ params }: { params: { id: string } }) {
+const OrderPage = async ({
+    params,
+}: {
+    params: Promise<{ id: string }>;
+}) => {
     const { id } = await params;
+
     const orderData = await getOrderById(id);
 
     if (!orderData.success || !orderData.order) {
@@ -24,8 +29,9 @@ export default async function OrderPage({ params }: { params: { id: string } }) 
 
     const { order, userAddress } = orderData;
 
+
     return (
-        <>  
+        <>
             <div className="flex flex-col min-h-screen">
                 <div className="flex-grow">
 
@@ -52,11 +58,10 @@ export default async function OrderPage({ params }: { params: { id: string } }) 
 
                                                     <CardTitle>Delivery Status:</CardTitle>
                                                     <CardDescription>
-                                                        <span className={`px-3 py-1 rounded-full text-sm font-medium ${
-                                                            order.isDelivered 
-                                                                ? 'bg-green-100 text-green-800' 
+                                                        <span className={`px-3 py-1 rounded-full text-sm font-medium ${order.isDelivered
+                                                                ? 'bg-green-100 text-green-800'
                                                                 : 'bg-red-100 text-red-800'
-                                                        }`}>
+                                                            }`}>
                                                             {order.isDelivered ? 'Delivered' : 'Not Delivered'}
                                                         </span>
                                                     </CardDescription>
@@ -73,11 +78,10 @@ export default async function OrderPage({ params }: { params: { id: string } }) 
                                             <CardDescription>{order.paymentMethod}</CardDescription>
                                             <CardTitle>Payment Status:</CardTitle>
                                             <CardDescription>
-                                                <span className={`px-3 py-1 rounded-full text-sm font-medium ${
-                                                    order.isPaid 
-                                                        ? 'bg-green-100 text-green-800' 
+                                                <span className={`px-3 py-1 rounded-full text-sm font-medium ${order.isPaid
+                                                        ? 'bg-green-100 text-green-800'
                                                         : 'bg-red-100 text-red-800'
-                                                }`}>
+                                                    }`}>
                                                     {order.isPaid ? 'Paid' : 'Not Paid'}
                                                 </span>
                                             </CardDescription>
@@ -129,11 +133,11 @@ export default async function OrderPage({ params }: { params: { id: string } }) 
                         </div>
                     </div>
                 </div>
-            </div>
 
 
-        </div >
+            </div >
 
         </>
     );
 }
+export default OrderPage;

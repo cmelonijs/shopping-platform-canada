@@ -3,9 +3,7 @@ import { getPaymentMethod } from "@/lib/actions/payment.actions";
 import PaymentForm from "./PaymentForm";
 import { PaymentMethod } from "@/types";
 
-const PaymentMethodPage = async (props: {
-  searchParams: Promise<{ callbackUrl?: string }>;
-}) => {
+const PaymentMethodPage = async () => {
     const existingPaymentMethod = await getPaymentMethod();
 
   return (

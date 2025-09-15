@@ -1,6 +1,6 @@
 // components/share/breadcrumbBoard.tsx
 
-import { Breadcrumb, BreadcrumbItem, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb"
+import { Breadcrumb, BreadcrumbItem, BreadcrumbList, BreadcrumbSeparator } from "@/components/ui/breadcrumb"
 function BreadcrumbBoard({ step }: { step: string }) {
 
   return ( 
