@@ -16,6 +16,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { getMyCart } from "@/lib/actions/cart.actions";
 import CartItemControls from "@/components/cart/cartItemControls";
+import { formatCurrency } from "@/lib/utils";
 
 export default async function CartPage() {
   const cart = await getMyCart();
@@ -73,7 +74,7 @@ export default async function CartPage() {
                         <CartItemControls item={item} />
 
                         <div className="text-right">
-                          <div className="font-medium">${item.price}</div>
+                          <div className="font-medium">{formatCurrency(item.price)}</div>
                         </div>
                       </div>
                     </div>
@@ -99,19 +100,19 @@ export default async function CartPage() {
               <div className="space-y-2">
                 <div className="flex justify-between text-sm">
                   <span>Subtotal</span>                            {/*changed shipping/items from Paolo*/}
-                  <span>${cart.itemsPrice}</span>
+                  <span>{formatCurrency(cart.itemsPrice)}</span>
                 </div>
                 <div className="flex justify-between text-sm">
                   <span>Shipping</span>
-                  <span>${cart.ShippingPrice}</span>
+                  <span>{formatCurrency(cart.ShippingPrice)}</span>
                 </div>
                 <div className="flex justify-between text-sm">
                   <span>Tax</span>
-                  <span>${cart.taxPrice}</span>
+                  <span>{formatCurrency(cart.taxPrice)}</span>
                 </div>
                 <div className="flex justify-between font-medium">
                   <span>Total</span>
-                  <span>${cart.totalPrice}</span>
+                  <span>{formatCurrency(cart.totalPrice)}</span>
                 </div>
               </div>
 
