@@ -1,27 +1,15 @@
-// overview-page
 'use client'
 
 import {
     Card,
-    CardAction,
     CardContent,
-    CardDescription,
-    CardFooter,
     CardHeader,
     CardTitle,
 } from "@/components/ui/card";
-// import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
-import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
-} from "@/components/ui/table";
-import { BadgeDollarSign, CreditCard, Users, Barcode, TrendingUp } from "lucide-react";
-import BarChartOverview from "./barChartOverview";
-import TableOrdersOverview from "./TableOrdersOverviw";
+import { BadgeDollarSign, CreditCard, Users, Barcode } from "lucide-react";
+import BarChartOverview from "@/components/admin/BarChartOverview";
+import TableOrdersOverview from "@/components/admin/TableOrdersOverview";
+
 export default function OverviewPage() {
     return (
         <div className="container mx-auto px-3 py-3">

@@ -36,7 +36,7 @@ export default async function TotalOrdersPage() {
                 <CardHeader>
                   <div className="flex justify-between items-center">
                     <CardTitle className="text-sm">..{order.id.slice(-6)}</CardTitle>
-                    <span className="font-semibold">{formatCurrency(order.totalPrice)} $</span>
+                    <span className="font-semibold">{formatCurrency(order.totalPrice)}</span>
                   </div>
                 </CardHeader>
                 <CardContent>
@@ -91,7 +91,7 @@ export default async function TotalOrdersPage() {
                       {new Date(order.createdAt).toLocaleString()}
                     </TableCell>
                     <TableCell>
-                      {order.totalPrice} 
+                      {formatCurrency(order.totalPrice)}
                     </TableCell>
                     <TableCell>
                       {order.isPaid ? 'Paid' : 'Unpaid'}

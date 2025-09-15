@@ -1,6 +1,5 @@
-import Link from "next/link";
 import Menu from "@/components/share/menu";
-import Navbar from "@/components/share/navbar";
+import Navbar from "./navbar";
 
 
 

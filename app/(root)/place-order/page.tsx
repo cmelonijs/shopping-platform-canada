@@ -1,4 +1,3 @@
-//place-order/page.tsx
 import BreadcrumbBoard from "@/components/share/breadcrumbBoard";
 import {
     Card,
@@ -21,8 +20,6 @@ export default async function placeOrderpage() {
     const address = await getAddress();
     const PaymentMethod = await getPaymentMethod();
     const mycart = await getMyCart();
-
-    
 
     return (
         <>
