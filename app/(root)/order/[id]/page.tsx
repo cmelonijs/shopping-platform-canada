@@ -105,7 +105,7 @@ export default async function OrderPage({ params }: { params: { id: string } }) 
                                                             />
                                                         </Link>{item.name}</TableCell>
                                                     <TableCell>{item.qty}</TableCell>
-                                                    <TableCell>${item.price}</TableCell>
+                                                    <TableCell>{formatCurrency(item.price)}</TableCell>
                                                 </TableRow>
                                             ))}
                                         </TableBody>
