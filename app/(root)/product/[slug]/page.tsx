@@ -13,12 +13,11 @@ import AddToCart from "@/components/cart/addToCart";
 import { RenderStars } from "@/components/share/stars";
 import { formatCurrency } from "@/lib/utils";
 
-const  DetailsPage =async ({
+const DetailsPage = async ({
   params,
 }: {
-  params: Promise<{ slug : string }>;
+  params: Promise<{ slug: string }>;
 }) => {
-  
   const { slug } = await params;
   const product: Product = await getProductBySlug(slug);
 
@@ -60,7 +59,9 @@ const  DetailsPage =async ({
           </div>
 
           {/* Display product price and category */}
-          <div className="text-xl font-semibold">{formatCurrency(product.price)}</div>
+          <div className="text-xl font-semibold">
+            {formatCurrency(product.price)}
+          </div>
           <div className="text-sm">{product.category}</div>
 
           {/* Add to Cart button with current quantity */}
@@ -87,5 +88,5 @@ const  DetailsPage =async ({
       </div>
     </div>
   );
-}
-export default DetailsPage
+};
+export default DetailsPage;

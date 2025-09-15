@@ -7,11 +7,11 @@ const rubik = Rubik({
   subsets: ["latin"],
 });
 
-const bebas = Bebas_Neue ({
-    subsets: ["latin"],
-    variable: "--font-bebas_neue",
-    display: "swap",
-    weight: "400",
+const bebas = Bebas_Neue({
+  subsets: ["latin"],
+  variable: "--font-bebas_neue",
+  display: "swap",
+  weight: "400",
 });
 
 export const metadata: Metadata = {

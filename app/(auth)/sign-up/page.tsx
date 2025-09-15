@@ -1,4 +1,10 @@
-import { CardHeader, Card, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
+import {
+  CardHeader,
+  Card,
+  CardTitle,
+  CardDescription,
+  CardContent,
+} from "@/components/ui/card";
 import { APP_NAME } from "@/lib/constants";
 import { Metadata } from "next";
 import Image from "next/image";
@@ -10,12 +16,11 @@ import SignUpForm from "./SignUpForm";
 
 // Sets the title for the browser tab
 export const metadata: Metadata = {
- title: "Sign up",
+  title: "Sign up",
 };
 
-
 const SignUpPage = async (props: {
- searchParams: Promise<{ callbackUrl: string }>;
+  searchParams: Promise<{ callbackUrl: string }>;
 }) => {
   const { callbackUrl } = await props.searchParams;
 
@@ -31,8 +36,7 @@ const SignUpPage = async (props: {
     // We are using Shadcn UI components for the card layout here
     <div className="w-full max-w-md mx-auto">
       <Link href="/">
-        <MoveLeft className="absolute top-4 left-4" size={36}>
-        </MoveLeft>
+        <MoveLeft className="absolute top-4 left-4" size={36}></MoveLeft>
       </Link>
       <Card>
         <CardHeader className="space-y-4">
@@ -58,10 +62,4 @@ const SignUpPage = async (props: {
   );
 };
 
-
 export default SignUpPage;
-
-
-
-
-

@@ -44,7 +44,7 @@ const SignInForm = () => {
     <form action={action}>
       <input type="hidden" name="callbackUrl" value={callbackUrl} />
       <div className="space-y-6">
-        { /* Label for the form input field */ }
+        {/* Label for the form input field */}
         <div>
           <Label className="mb-2" htmlFor="email">
             Email

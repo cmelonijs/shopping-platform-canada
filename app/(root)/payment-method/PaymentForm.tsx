@@ -18,28 +18,29 @@ import {
 } from "@/components/ui/form";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
-export default function PaymentForm({ defaultValues }: { defaultValues?: PaymentMethod }) {
+export default function PaymentForm({
+  defaultValues,
+}: {
+  defaultValues?: PaymentMethod;
+}) {
   const router = useRouter();
 
   const form = useForm<PaymentMethod>({
     resolver: zodResolver(paymentMethodSchema),
     defaultValues: defaultValues || {
-      paymentMethod: "cashOnDelivery"
-    }
+      paymentMethod: "cashOnDelivery",
+    },
   });
 
   const onSubmit = async (data: PaymentMethod) => {
-
     const res = await updatePaymentMethod(data);
     if (res.success) {
       toast.success(res.message);
-      router.push('/place-order');
-      
+      router.push("/place-order");
     } else {
       toast.error(res.message);
     }
   };
-
 
   return (
     <Form {...form}>
@@ -55,7 +56,9 @@ export default function PaymentForm({ defaultValues }: { defaultValues?: Payment
           name="paymentMethod"
           render={({ field }) => (
             <FormItem className="space-y-3">
-              <FormLabel className="text-lg font-semibold">Select Payment Method</FormLabel>
+              <FormLabel className="text-lg font-semibold">
+                Select Payment Method
+              </FormLabel>
               <FormControl>
                 <RadioGroup
                   onValueChange={field.onChange}
@@ -63,7 +66,10 @@ export default function PaymentForm({ defaultValues }: { defaultValues?: Payment
                   className="flex flex-col space-y-2"
                 >
                   <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="cashOnDelivery" id="cashOnDelivery" />
+                    <RadioGroupItem
+                      value="cashOnDelivery"
+                      id="cashOnDelivery"
+                    />
                     <FormLabel htmlFor="cashOnDelivery" className="font-normal">
                       Cash on Delivery
                     </FormLabel>
@@ -87,11 +93,10 @@ export default function PaymentForm({ defaultValues }: { defaultValues?: Payment
           )}
         />
 
-        <Button
-          type="submit"
-          disabled={form.formState.isSubmitting}
-        >
-          {form.formState.isSubmitting ? 'Processing...' : 'Continue to Checkout'}
+        <Button type="submit" disabled={form.formState.isSubmitting}>
+          {form.formState.isSubmitting
+            ? "Processing..."
+            : "Continue to Checkout"}
         </Button>
       </form>
     </Form>

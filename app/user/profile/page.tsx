@@ -6,7 +6,6 @@ import ProfileForm from "./ProfileForm";
 import ShippingForm from "@/app/(root)/shipping-address/ShippingForm";
 import { getAddress } from "@/lib/actions/address.actions";
 
-
 const UserProfilePage = async () => {
   const existingName = await getName();
   const existingAddress = await getAddress();

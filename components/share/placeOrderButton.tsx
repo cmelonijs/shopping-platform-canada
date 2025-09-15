@@ -7,32 +7,32 @@ import { toast } from "sonner";
 import { ArrowRight } from "lucide-react";
 
 export default function PlaceOrderButton() {
-    const router = useRouter();
-    const [isPending, startTransition] = useTransition();
+  const router = useRouter();
+  const [isPending, startTransition] = useTransition();
 
-    const handleCreateOrder = () => {
-        startTransition(async () => {
-            const result = await createOrder();
-            if (result.success && result.redirectTo) {
-                toast.success(result.message);
-                router.push(result.redirectTo);
-            } else {
-                toast.error(result.message);
-                if (result.redirectTo) {
-                    router.push(result.redirectTo);
-                }
-            }
-        });
-    };
+  const handleCreateOrder = () => {
+    startTransition(async () => {
+      const result = await createOrder();
+      if (result.success && result.redirectTo) {
+        toast.success(result.message);
+        router.push(result.redirectTo);
+      } else {
+        toast.error(result.message);
+        if (result.redirectTo) {
+          router.push(result.redirectTo);
+        }
+      }
+    });
+  };
 
-    return (
-        <Button 
-            onClick={handleCreateOrder}
-            disabled={isPending}
-            className="item-center"
-        >
-            {isPending ? "Creating order..." : "Place order"}
-            <ArrowRight className="text-white h-4 w-4 animate-bounce" />
-        </Button>
-    );
+  return (
+    <Button
+      onClick={handleCreateOrder}
+      disabled={isPending}
+      className="item-center"
+    >
+      {isPending ? "Creating order..." : "Place order"}
+      <ArrowRight className="text-white h-4 w-4 animate-bounce" />
+    </Button>
+  );
 }

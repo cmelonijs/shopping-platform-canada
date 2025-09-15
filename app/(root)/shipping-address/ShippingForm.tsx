@@ -18,8 +18,13 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
-export default function ShippingForm({defaultValues, context = "profile"}: { defaultValues?:ShippingAddress;context?: "profile" | "checkout";
-}){
+export default function ShippingForm({
+  defaultValues,
+  context = "profile",
+}: {
+  defaultValues?: ShippingAddress;
+  context?: "profile" | "checkout";
+}) {
   const router = useRouter();
 
   const form = useForm<ShippingAddress>({
@@ -29,30 +34,29 @@ export default function ShippingForm({defaultValues, context = "profile"}: { def
       address: "",
       city: "",
       postalCode: "",
-      country: ""
-    }
+      country: "",
+    },
   });
 
- 
   const onSubmit = async (data: ShippingAddress) => {
     try {
       const result = await updateAddress(data);
       if (result.success) {
         if (context === "checkout") {
-        router.push("/payment-method");
+          router.push("/payment-method");
         } else {
           toast.success("Shipping address updated successfully");
         }
       } else {
         form.setError("root", {
           type: "server",
-          message: result.message
+          message: result.message,
         });
       }
     } catch {
       form.setError("root", {
         type: "server",
-        message: "An unexpected error occurred. Please try again."
+        message: "An unexpected error occurred. Please try again.",
       });
     }
   };
@@ -73,10 +77,7 @@ export default function ShippingForm({defaultValues, context = "profile"}: { def
             <FormItem>
               <FormLabel>Full Name</FormLabel>
               <FormControl>
-                <Input
-                  placeholder="Enter your full name"
-                  {...field}
-                />
+                <Input placeholder="Enter your full name" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -90,10 +91,7 @@ export default function ShippingForm({defaultValues, context = "profile"}: { def
             <FormItem>
               <FormLabel>Address</FormLabel>
               <FormControl>
-                <Input
-                  placeholder="Enter your address"
-                  {...field}
-                />
+                <Input placeholder="Enter your address" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -108,10 +106,7 @@ export default function ShippingForm({defaultValues, context = "profile"}: { def
               <FormItem>
                 <FormLabel>City</FormLabel>
                 <FormControl>
-                  <Input
-                    placeholder="Enter your city"
-                    {...field}
-                  />
+                  <Input placeholder="Enter your city" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -125,10 +120,7 @@ export default function ShippingForm({defaultValues, context = "profile"}: { def
               <FormItem>
                 <FormLabel>Postal Code</FormLabel>
                 <FormControl>
-                  <Input
-                    placeholder="Enter postal code"
-                    {...field}
-                  />
+                  <Input placeholder="Enter postal code" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -143,21 +135,17 @@ export default function ShippingForm({defaultValues, context = "profile"}: { def
             <FormItem>
               <FormLabel>Country</FormLabel>
               <FormControl>
-                <Input
-                  placeholder="Enter your country"
-                  {...field}
-                />
+                <Input placeholder="Enter your country" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
 
-        <Button
-          type="submit"
-          disabled={form.formState.isSubmitting}
-        >
-          {form.formState.isSubmitting ? 'Updating...' : 'Update Shipping Information'}
+        <Button type="submit" disabled={form.formState.isSubmitting}>
+          {form.formState.isSubmitting
+            ? "Updating..."
+            : "Update Shipping Information"}
         </Button>
       </form>
     </Form>

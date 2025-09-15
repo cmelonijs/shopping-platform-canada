@@ -14,14 +14,18 @@ export default async function AdminLayout({
     redirect("/sign-in");
   }
 
-  if (!session.user || !("role" in session.user) || session.user.role !== "admin") {
+  if (
+    !session.user ||
+    !("role" in session.user) ||
+    session.user.role !== "admin"
+  ) {
     redirect("/");
   }
 
   return (
     <div className="flex flex-col min-h-screen">
       <SessionProvider>
-        <AdminHeader/>
+        <AdminHeader />
         {children}
       </SessionProvider>
     </div>

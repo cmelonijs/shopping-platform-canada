@@ -1,4 +1,10 @@
-import { CardHeader, Card, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
+import {
+  CardHeader,
+  Card,
+  CardTitle,
+  CardDescription,
+  CardContent,
+} from "@/components/ui/card";
 import { APP_NAME } from "@/lib/constants";
 import { Metadata } from "next";
 import Image from "next/image";
@@ -30,8 +36,7 @@ const SignInPage = async (props: {
     // We are using Shadcn UI components for the card layout here
     <div className="w-full max-w-md mx-auto">
       <Link href="/">
-        <MoveLeft className="absolute top-4 left-4" size={36}>
-        </MoveLeft>
+        <MoveLeft className="absolute top-4 left-4" size={36}></MoveLeft>
       </Link>
       <Card>
         <CardHeader className="space-y-4">

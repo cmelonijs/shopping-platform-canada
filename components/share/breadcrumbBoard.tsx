@@ -1,13 +1,19 @@
 // components/share/breadcrumbBoard.tsx
 
-import { Breadcrumb, BreadcrumbItem, BreadcrumbList, BreadcrumbSeparator } from "@/components/ui/breadcrumb"
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbList,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
 function BreadcrumbBoard({ step }: { step: string }) {
-
-  return ( 
-    <Breadcrumb className= "mx-auto my-4 text-lg">
+  return (
+    <Breadcrumb className="mx-auto my-4 text-lg">
       <BreadcrumbList className="flex flex-col  md:flex-row items-center gap-4 md:gap-3 ">
         <BreadcrumbItem>
-          <span className={`text-xl ${step === 'home' ? 'bg-gray-300 rounded-3xl px-4 py-2' : ''}`}>
+          <span
+            className={`text-xl ${step === "home" ? "bg-gray-300 rounded-3xl px-4 py-2" : ""}`}
+          >
             Login
           </span>
         </BreadcrumbItem>
@@ -17,7 +23,11 @@ function BreadcrumbBoard({ step }: { step: string }) {
         </BreadcrumbSeparator>
 
         <BreadcrumbItem>
-          <span className={`text-xl ${step === 'shipping' ? 'bg-gray-300 rounded-3xl px-4 py-2' : ''}`}>Shipping Address</span>
+          <span
+            className={`text-xl ${step === "shipping" ? "bg-gray-300 rounded-3xl px-4 py-2" : ""}`}
+          >
+            Shipping Address
+          </span>
         </BreadcrumbItem>
 
         <BreadcrumbSeparator>
@@ -25,7 +35,11 @@ function BreadcrumbBoard({ step }: { step: string }) {
         </BreadcrumbSeparator>
 
         <BreadcrumbItem>
-          <span className={`text-xl ${step === 'payment' ? 'bg-gray-300 rounded-3xl px-4 py-2' : ''}`}>Payment Method</span>
+          <span
+            className={`text-xl ${step === "payment" ? "bg-gray-300 rounded-3xl px-4 py-2" : ""}`}
+          >
+            Payment Method
+          </span>
         </BreadcrumbItem>
 
         <BreadcrumbSeparator>
@@ -33,10 +47,14 @@ function BreadcrumbBoard({ step }: { step: string }) {
         </BreadcrumbSeparator>
 
         <BreadcrumbItem>
-          <span className={`text-xl ${step === 'order' ? 'bg-gray-300 rounded-3xl px-4 py-2' : ''}`}>Place Order</span>
+          <span
+            className={`text-xl ${step === "order" ? "bg-gray-300 rounded-3xl px-4 py-2" : ""}`}
+          >
+            Place Order
+          </span>
         </BreadcrumbItem>
       </BreadcrumbList>
     </Breadcrumb>
-  )
+  );
 }
 export default BreadcrumbBoard;

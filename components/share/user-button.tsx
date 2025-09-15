@@ -18,7 +18,7 @@ const UserButton = async () => {
     return (
       <Button asChild>
         <Link href="/sign-in">
-          <UserIcon /> 
+          <UserIcon />
           Sign in
         </Link>
       </Button>
@@ -61,14 +61,16 @@ const UserButton = async () => {
               Order History
             </Link>
           </DropdownMenuItem>
-          
-          {session.user && "role" in session.user && session.user.role === "admin" && (
-            <DropdownMenuItem className="border border-gray-300 rounded-sm p-3 mb-1">
-              <Link href="/admin/overview" className="w-full">
-                Admin
-              </Link>
-            </DropdownMenuItem>
-          )}
+
+          {session.user &&
+            "role" in session.user &&
+            session.user.role === "admin" && (
+              <DropdownMenuItem className="border border-gray-300 rounded-sm p-3 mb-1">
+                <Link href="/admin/overview" className="w-full">
+                  Admin
+                </Link>
+              </DropdownMenuItem>
+            )}
           <DropdownMenuItem className="border border-gray-300 rounded-sm p-3 mb-1">
             <form action={signOutUser} className="w-full">
               <Button

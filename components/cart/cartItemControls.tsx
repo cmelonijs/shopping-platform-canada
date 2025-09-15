@@ -8,31 +8,29 @@ import { useTransition } from "react";
 import { CartItem } from "@/types";
 import { usePathname, useRouter } from "next/navigation";
 
-
 // Show 'Go to Cart' only when not already on the cart page
 
 export default function CartItemControls({ item }: { item: CartItem }) {
   const [isPending, startTransition] = useTransition();
-  const router = useRouter();         //  add here
+  const router = useRouter(); //  add here
   const pathName = usePathname();
 
   const handleIncreaseQuantity = () => {
     startTransition(async () => {
       const res = await addItemToCart(item);
 
-      if (pathName !== "/cart") {       
+      if (pathName !== "/cart") {
         toast.success(res.message, {
           action: {
             label: "Go to Cart",
             onClick: () => router.push("/cart"),
           },
         });
-      } else {        
+      } else {
         toast.success(res.message);
       }
     });
   };
-
 
   //     if (!res.success) {
   //       toast.error(res.message);
@@ -51,12 +49,12 @@ export default function CartItemControls({ item }: { item: CartItem }) {
   const handleDecreaseQuantity = () => {
     startTransition(async () => {
       const res = await removeItemFormCart(item.productId);
-      
+
       if (!res.success) {
         toast.error(res.message);
         return;
       }
-      
+
       toast.success(res.message);
     });
   };
@@ -65,9 +63,9 @@ export default function CartItemControls({ item }: { item: CartItem }) {
     <>
       {/* Quantity Controls */}
       <div className="flex items-center gap-2">
-        <Button 
-          variant="outline" 
-          size="icon" 
+        <Button
+          variant="outline"
+          size="icon"
           onClick={handleDecreaseQuantity}
           disabled={isPending}
         >
@@ -78,9 +76,9 @@ export default function CartItemControls({ item }: { item: CartItem }) {
           )}
         </Button>
         <span className="w-8 text-center">{item.qty}</span>
-        <Button 
-          variant="outline" 
-          size="icon" 
+        <Button
+          variant="outline"
+          size="icon"
           onClick={handleIncreaseQuantity}
           disabled={isPending}
         >
