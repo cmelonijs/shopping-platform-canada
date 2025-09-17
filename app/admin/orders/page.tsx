@@ -1,4 +1,3 @@
-"use client";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -9,8 +8,12 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { getAllOrders } from "@/lib/actions/order.actions";
+import { formatCurrency } from "@/lib/utils";
 
-export default function OrdersAdminPage() {
+export default async function OrdersAdminPage() {
+  const orders = await getAllOrders();
+
   return (
     <div className="container mx-auto px-3 py-3">
       <div className="flex justify-between items-center mb-4 px-3">
@@ -30,22 +33,31 @@ export default function OrdersAdminPage() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            <TableRow>
-              <TableCell>1</TableCell>
-              <TableCell>8-09-2025</TableCell>
-              <TableCell>Leon</TableCell>
-              <TableCell>12$</TableCell>
-              <TableCell>not paid</TableCell>
-              <TableCell>not delivered</TableCell>
-              <TableCell className="flex gap-2">
-                <Button className="bg-gray-200 text-black px-3 py-1 rounded text-sm hover:bg-gray-300">
-                  Details
-                </Button>
-                <Button className="bg-orange-500 text-white px-3 py-1 rounded text-sm hover:bg-red-600">
-                  Delete
-                </Button>
-              </TableCell>
-            </TableRow>
+            {orders.map((order) => (
+              <TableRow key={order.id}>
+                <TableCell title={order.id}>{"..." + order.id.slice(-4)}</TableCell>
+                <TableCell>{new Date(order.createdAt).toLocaleDateString("it-IT", {
+                  day: "2-digit",
+                  month: "2-digit",
+                  year: "numeric",
+                })}</TableCell>
+                <TableCell>{order.user?.name}</TableCell>
+                <TableCell>{formatCurrency(order.totalPrice)}</TableCell>
+                <TableCell>{order.isPaid ? "Paid" : "Not paid"}</TableCell>
+                <TableCell>{order.isDelivered && order.deliveredAt
+                  ? new Date(order.deliveredAt).toLocaleDateString("it-IT")
+                  : "Not delivered"}
+                </TableCell>
+                <TableCell className="flex gap-2">
+                  <Button className="bg-gray-200 text-black px-3 py-1 rounded text-sm hover:bg-gray-300">
+                    Details
+                  </Button>
+                  <Button className="bg-orange-500 text-white px-3 py-1 rounded text-sm hover:bg-red-600">
+                    Delete
+                  </Button>
+                </TableCell>
+              </TableRow>
+            ))}
           </TableBody>
         </Table>
       </div>

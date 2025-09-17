@@ -1,11 +1,13 @@
-"use client";
+
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { BadgeDollarSign, CreditCard, Users, Barcode } from "lucide-react";
 import BarChartOverview from "@/components/admin/BarChartOverview";
 import TableOrdersOverview from "@/components/admin/TableOrdersOverview";
 
-export default function OverviewPage() {
+
+export default async function OverviewPage() {
+  
   return (
     <div className="container mx-auto px-3 py-3">
       <div className="flex justify-between items-center mb-4 px-3">
@@ -15,7 +17,7 @@ export default function OverviewPage() {
         <Card>
           <CardHeader>
             <CardTitle className="flex justify-between items-center">
-              Total revenue <BadgeDollarSign />
+              totalRevenue <BadgeDollarSign />
             </CardTitle>
           </CardHeader>
           <CardContent>€12,000</CardContent>

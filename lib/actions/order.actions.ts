@@ -8,6 +8,8 @@ import { CartItem } from "@/types";
 import { getUserById } from "./auth.actions";
 import { insertOrderSchema, insertShippingAddressSchema } from "../validator";
 
+
+
 // create order and create the order items
 export async function createOrder() {
   try {
@@ -145,8 +147,6 @@ export async function getOrderById(orderId: string) {
   }
 }
 
-
-
 export async function getAllMyOrders()  {
   try {
     const session = await auth();
@@ -181,3 +181,41 @@ export async function getAllMyOrders()  {
       throw new Error(formatError(err));
   }
 }
+
+export async function getAllOrders() {
+  const orders = await prisma.order.findMany({
+    orderBy: { createdAt: 'desc' },
+    include: {
+      user: true,
+    },
+  });
+
+  return convertToPlainObject(orders);
+}
+
+// import { startOfMonth, endOfMonth } from "date-fns";
+// export async function getMonthlyOrderTotal() {
+//   const now = new Date();
+//   const start = startOfMonth(now);
+//   const end = endOfMonth(now);
+
+//   const orders = await prisma.order.findMany({
+//     where: {
+//       createdAt: {
+//         gte: start,
+//         lte: end,
+//       },
+//     },
+//     select: {
+//       totalPrice: true, // Assumendo che ogni ordine abbia un campo `total`
+//     },
+//   });
+
+//   const totalRevenue = orders.reduce((sum, order) => {
+//     return sum + parseFloat(order.totalPrice);
+//   }, 0);
+
+//     return totalRevenue;
+// }
+
+
