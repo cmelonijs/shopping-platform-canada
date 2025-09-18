@@ -9,6 +9,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { getAllUsers } from "@/lib/actions/administration.actions";
+import { formatId } from "@/lib/utils";
 
 export default async function ProductAdminPage() {
   const users = await getAllUsers();
@@ -31,7 +32,7 @@ export default async function ProductAdminPage() {
           <TableBody>
             {users.map((user) => (
             <TableRow key={user.id}>
-              <TableCell title={user.id}>{"..." + user.id.slice(-4)}</TableCell>
+              <TableCell title={user.id}>{formatId( user.id)}</TableCell>
               <TableCell>{user.name}</TableCell>
               <TableCell>{user.email}</TableCell>
               <TableCell>{user.role}</TableCell>

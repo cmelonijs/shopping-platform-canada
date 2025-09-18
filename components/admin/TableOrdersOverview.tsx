@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { getAllOrders } from "@/lib/actions/administration.actions";
-import { formatCurrency } from "@/lib/utils";
+import { formatCurrency, formatDate } from "@/lib/utils";
 
 export default async function TableOrdersOverview() {
   const orders = await getAllOrders();
@@ -29,11 +29,7 @@ export default async function TableOrdersOverview() {
           .map((order) => (
             <TableRow key={order.id}>
               <TableCell>{order.user?.name}</TableCell>
-              <TableCell>{new Date(order.createdAt).toLocaleDateString("it-IT", {
-                day: "2-digit",
-                month: "2-digit",
-                year: "numeric",
-              })}
+              <TableCell>{formatDate(order.createdAt)}
               </TableCell>
               <TableCell>{formatCurrency(order.totalPrice)}
               </TableCell>

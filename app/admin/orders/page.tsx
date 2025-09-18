@@ -9,7 +9,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { getAllOrders } from "@/lib/actions/administration.actions";
-import { formatCurrency } from "@/lib/utils";
+import { formatCurrency, formatDate, formatId } from "@/lib/utils";
 import Link from "next/link";
 
 
@@ -37,17 +37,13 @@ export default async function OrdersAdminPage() {
           <TableBody>
             {orders.map((order) => (
               <TableRow key={order.id}>
-                <TableCell title={order.id}>{"..." + order.id.slice(-4)}</TableCell>
-                <TableCell>{new Date(order.createdAt).toLocaleDateString("it-IT", {
-                  day: "2-digit",
-                  month: "2-digit",
-                  year: "numeric",
-                })}</TableCell>
+                <TableCell title={order.id}>{formatId(order.id)}</TableCell>
+                <TableCell>{formatDate(order.createdAt)}</TableCell>
                 <TableCell>{order.user?.name}</TableCell>
                 <TableCell>{formatCurrency(order.totalPrice)}</TableCell>
                 <TableCell>{order.isPaid ? "Paid" : "Not paid"}</TableCell>
                 <TableCell>{order.isDelivered && order.deliveredAt
-                  ? new Date(order.deliveredAt).toLocaleDateString("it-IT")
+                  ? formatDate(order.deliveredAt)
                   : "Not delivered"}
                 </TableCell>
                 <TableCell className="flex gap-2">

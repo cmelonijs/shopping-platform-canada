@@ -183,29 +183,4 @@ export async function getAllMyOrders()  {
 }
 
 
-// import { startOfMonth, endOfMonth } from "date-fns";
-// export async function getMonthlyOrderTotal() {
-//   const now = new Date();
-//   const start = startOfMonth(now);
-//   const end = endOfMonth(now);
-
-//   const orders = await prisma.order.findMany({
-//     where: {
-//       createdAt: {
-//         gte: start,
-//         lte: end,
-//       },
-//     },
-//     select: {
-//       totalPrice: true, // Assumendo che ogni ordine abbia un campo `total`
-//     },
-//   });
-
-//   const totalRevenue = orders.reduce((sum, order) => {
-//     return sum + parseFloat(order.totalPrice);
-//   }, 0);
-
-//     return totalRevenue;
-// }
-
 

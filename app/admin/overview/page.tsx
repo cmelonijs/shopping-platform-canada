@@ -17,7 +17,7 @@ export default async function OverviewPage() {
         <Card>
           <CardHeader>
             <CardTitle className="flex justify-between items-center">
-              totalRevenue <BadgeDollarSign />
+              Total revenue <BadgeDollarSign />
             </CardTitle>
           </CardHeader>
           <CardContent>€12,000</CardContent>
