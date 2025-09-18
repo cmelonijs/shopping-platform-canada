@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import logo from "@/assets/images/logo.png";
 import Menu from "@/components/share/menu";
+import { Button } from "@/components/ui/button";
 
 export default function UserHeader() {
   return (
@@ -17,18 +18,12 @@ export default function UserHeader() {
               className="scale-110 object-contain"
             />
           </Link>
-          <Link
-            href="/user/profile"
-            className="text-l hover:bg-gray-200 py-2 px-3 rounded-md transition-colors "
-          >
-            Profile
-          </Link>
-          <Link
-            href="/user/orders"
-            className="text-l hover:bg-gray-200 py-2 px-3 rounded-md transition-colors"
-          >
-            Order
-          </Link>
+          <Button asChild variant={"ghost"}>
+            <Link href="/user/profile">Profile</Link>
+          </Button>
+          <Button asChild variant={"ghost"}>
+            <Link href="/user/orders">Order</Link>
+          </Button>
         </div>
         <Menu />
       </div>

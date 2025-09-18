@@ -1,5 +1,3 @@
-"use client";
-
 import { Button } from "@/components/ui/button";
 import {
   Table,
@@ -9,8 +7,13 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { getAllProducts } from "@/lib/actions/administration.actions";
+import { Product } from "@prisma/client";
 
-export default function ProductAdminPage() {
+export default async function ProductAdminPage() {
+ const product  = await getAllProducts();
+
+
   return (
     <div className="container mx-auto px-3 py-3">
       <div className="flex justify-between items-center mb-4 px-3">
@@ -33,8 +36,9 @@ export default function ProductAdminPage() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            <TableRow>
-              <TableCell>1</TableCell>
+            {product.map((product) => (
+            <TableRow key ={product.id}>
+              <TableCell>{product.name}</TableCell>
               <TableCell>Product Name</TableCell>
               <TableCell>€120</TableCell>
               <TableCell>Category</TableCell>
@@ -49,6 +53,7 @@ export default function ProductAdminPage() {
                 </Button>
               </TableCell>
             </TableRow>
+            ))}
           </TableBody>
         </Table>
       </div>

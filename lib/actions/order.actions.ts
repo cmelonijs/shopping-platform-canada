@@ -182,16 +182,6 @@ export async function getAllMyOrders()  {
   }
 }
 
-export async function getAllOrders() {
-  const orders = await prisma.order.findMany({
-    orderBy: { createdAt: 'desc' },
-    include: {
-      user: true,
-    },
-  });
-
-  return convertToPlainObject(orders);
-}
 
 // import { startOfMonth, endOfMonth } from "date-fns";
 // export async function getMonthlyOrderTotal() {

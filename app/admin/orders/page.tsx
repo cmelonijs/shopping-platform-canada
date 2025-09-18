@@ -1,5 +1,5 @@
 
-import { Button } from "@/components/ui/button";
+import DeleteOrderButton from "@/components/admin/DeleteOrderButton";
 import {
   Table,
   TableBody,
@@ -8,8 +8,10 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { getAllOrders } from "@/lib/actions/order.actions";
+import { getAllOrders } from "@/lib/actions/administration.actions";
 import { formatCurrency } from "@/lib/utils";
+import Link from "next/link";
+
 
 export default async function OrdersAdminPage() {
   const orders = await getAllOrders();
@@ -49,12 +51,11 @@ export default async function OrdersAdminPage() {
                   : "Not delivered"}
                 </TableCell>
                 <TableCell className="flex gap-2">
-                  <Button className="bg-gray-200 text-black px-3 py-1 rounded text-sm hover:bg-gray-300">
+                   <Link href={`/order/${order.id}`}      /*check*/
+                  className=" bg-white text-black px-3 py-2 rounded text-sm hover:bg-gray-300 ">
                     Details
-                  </Button>
-                  <Button className="bg-orange-500 text-white px-3 py-1 rounded text-sm hover:bg-red-600">
-                    Delete
-                  </Button>
+                  </Link>
+                  <DeleteOrderButton orderId={order.id} />
                 </TableCell>
               </TableRow>
             ))}

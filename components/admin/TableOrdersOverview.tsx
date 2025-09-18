@@ -8,7 +8,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
-import { getAllOrders } from "@/lib/actions/order.actions";
+import { getAllOrders } from "@/lib/actions/administration.actions";
 import { formatCurrency } from "@/lib/utils";
 
 export default async function TableOrdersOverview() {
@@ -23,7 +23,7 @@ export default async function TableOrdersOverview() {
           <TableHead className=" text-center">ACTION</TableHead>
         </TableRow>
       </TableHeader>
-      <TableBody>
+       <TableBody>
         {orders
           .filter((order) => order.isPaid) 
           .map((order) => (
@@ -42,7 +42,7 @@ export default async function TableOrdersOverview() {
               </TableCell>
             </TableRow>
           ))}
-      </TableBody>
+      </TableBody> 
     </Table>
   );
 }
