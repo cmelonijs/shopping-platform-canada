@@ -129,11 +129,6 @@ export async function getOrderById(orderId: string) {
         : order.shippingAddress
     );
 
-    // Verify the order belongs to the authenticated user
-    if (order.userId !== session.user?.id) {
-      throw new Error("Access denied");
-    }
-
     return {
       success: true,
       order,

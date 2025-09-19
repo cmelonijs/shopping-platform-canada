@@ -1,5 +1,5 @@
 
-import DeleteOrderButton from "@/components/admin/DeleteOrderButton";
+import { Button } from "@/components/ui/button";
 import {
   Table,
   TableBody,
@@ -47,11 +47,13 @@ export default async function OrdersAdminPage() {
                   : "Not delivered"}
                 </TableCell>
                 <TableCell className="flex gap-2">
-                   <Link href={`/order/${order.id}`}      /*check*/
-                  className=" bg-white text-black px-3 py-2 rounded text-sm hover:bg-gray-300 ">
+                  <Link href={`/order/${order.id}`}
+                    className=" bg-white text-black px-3 py-2 rounded text-sm hover:bg-gray-300 ">
                     Details
                   </Link>
-                  <DeleteOrderButton orderId={order.id} />
+                  <Button className="bg-orange-500 text-white px-3 py-1 rounded text-sm hover:bg-red-600">
+                    Delete
+                  </Button>
                 </TableCell>
               </TableRow>
             ))}

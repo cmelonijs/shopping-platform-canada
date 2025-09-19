@@ -10,6 +10,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { getAllOrders } from "@/lib/actions/administration.actions";
 import { formatCurrency, formatDate } from "@/lib/utils";
+import Link from "next/link";
 
 export default async function TableOrdersOverview() {
   const orders = await getAllOrders();
@@ -34,7 +35,9 @@ export default async function TableOrdersOverview() {
               <TableCell>{formatCurrency(order.totalPrice)}
               </TableCell>
               <TableCell>
+                <Link href={`/order/${order.id}`}>
                 <Button variant={"link"}>Details</Button>
+                </Link>
               </TableCell>
             </TableRow>
           ))}
