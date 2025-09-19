@@ -1,7 +1,10 @@
+"use server";
+
 import { prisma } from "@/db/prisma";
 import { convertToPlainObject, formatError } from "../utils";
 import { isRedirectError } from "next/dist/client/components/redirect-error";
 import { auth } from "@/auth";
+import { revalidatePath } from "next/cache";
 
 
 // get all users
@@ -25,32 +28,45 @@ export async function getAllProducts() {
 }
 
 // get all orders
-export async function getAllOrders(){
-  
+export async function getAllOrders() {
   const orders = await prisma.order.findMany({
+
     orderBy: { 
       createdAt: 'desc' 
     },
     include: {
       user: true,
+      orderItems: {
+          include: {
+            product: true
+          }
+        }
     },
   });
+
   return convertToPlainObject(orders);
 }
 
-//delete-orders
-export async function deleteOrderById(orderId: string) {
+
+export async function deleteProductById(formData: FormData) {
+  
   try {
     const session = await auth();
     const userId = session?.user?.id as string;
 
     if (!userId) {
-      return null;
+      throw new Error("Unauthorized");
     }
-    const order = await prisma.order.delete({
-      where: { id: orderId },
+
+    const productId = formData.get("productId") as string;
+    
+    await prisma.product.delete({
+      where: { 
+        id: productId 
+      },
     });
-    return order;
+
+    revalidatePath("/admin/products");
 
     } catch (err) {
       if (isRedirectError(err)) {

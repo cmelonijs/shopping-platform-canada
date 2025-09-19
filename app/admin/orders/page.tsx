@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import {
   Table,
@@ -8,7 +7,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { getAllOrders } from "@/lib/actions/administration.actions";
+import { getAllOrders } from "@/lib/actions/admin.actions";
 import { formatCurrency, formatDate, formatId } from "@/lib/utils";
 import Link from "next/link";
 

@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import {
   Table,
@@ -8,7 +7,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { getAllUsers } from "@/lib/actions/administration.actions";
+import { getAllUsers } from "@/lib/actions/admin.actions";
 import { formatId } from "@/lib/utils";
 
 export default async function ProductAdminPage() {
