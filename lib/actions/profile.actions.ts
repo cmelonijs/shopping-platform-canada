@@ -4,7 +4,7 @@ import { auth } from "@/auth";
 import { updateProfileNameSchema } from "../validator";
 import { prisma } from "@/db/prisma";
 import { isRedirectError } from "next/dist/client/components/redirect-error";
-import { formatError } from "../utils";
+import { convertToPlainObject, formatError } from "../utils";
 import { Profile } from "@/types";
 
 export async function updateProfile(data: Profile) {
@@ -77,3 +77,4 @@ export async function getName(): Promise<{ name: string; email?: string } | null
         throw new Error(formatError(err));
     }
 }
+

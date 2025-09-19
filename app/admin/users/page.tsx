@@ -1,7 +1,5 @@
-"use client";
 
 import { Button } from "@/components/ui/button";
-
 import {
   Table,
   TableBody,
@@ -10,8 +8,11 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { getAllUsers } from "@/lib/actions/administration.actions";
+import { formatId } from "@/lib/utils";
 
-export default function ProductAdminPage() {
+export default async function ProductAdminPage() {
+  const users = await getAllUsers();
   return (
     <div className="container mx-auto px-3 py-3">
       <div className="flex justify-between items-center mb-4 px-3">
@@ -29,11 +30,12 @@ export default function ProductAdminPage() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            <TableRow>
-              <TableCell>1</TableCell>
-              <TableCell>Leon</TableCell>
-              <TableCell>Leon.admin@gmail.com</TableCell>
-              <TableCell>Admin</TableCell>
+            {users.map((user) => (
+            <TableRow key={user.id}>
+              <TableCell title={user.id}>{formatId( user.id)}</TableCell>
+              <TableCell>{user.name}</TableCell>
+              <TableCell>{user.email}</TableCell>
+              <TableCell>{user.role}</TableCell>
               <TableCell className="flex gap-2">
                 <Button className="bg-gray-200 text-black px-3 py-1 rounded text-sm hover:bg-gray-300">
                   Edit
@@ -43,6 +45,7 @@ export default function ProductAdminPage() {
                 </Button>
               </TableCell>
             </TableRow>
+            ))}
           </TableBody>
         </Table>
       </div>

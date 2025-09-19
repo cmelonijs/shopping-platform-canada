@@ -1,5 +1,3 @@
-"use client";
-
 import { Button } from "@/components/ui/button";
 import {
   Table,
@@ -9,8 +7,11 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { getAllProducts } from "@/lib/actions/administration.actions";
+import { formatCurrency, formatId } from "@/lib/utils";
 
-export default function ProductAdminPage() {
+export default async function ProductAdminPage() {
+ const product  = await getAllProducts();
   return (
     <div className="container mx-auto px-3 py-3">
       <div className="flex justify-between items-center mb-4 px-3">
@@ -33,13 +34,14 @@ export default function ProductAdminPage() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            <TableRow>
-              <TableCell>1</TableCell>
-              <TableCell>Product Name</TableCell>
-              <TableCell>€120</TableCell>
-              <TableCell>Category</TableCell>
-              <TableCell>In Stock</TableCell>
-              <TableCell>4.5</TableCell>
+            {product.map((product) => (
+            <TableRow key ={product.id}>
+              <TableCell title={product.id}>{formatId(product.id)}</TableCell>
+              <TableCell>{product.name}</TableCell>
+              <TableCell>{formatCurrency(product.price)}</TableCell>
+              <TableCell>{product.category}</TableCell>
+              <TableCell>{product.stock}</TableCell>
+              <TableCell>{product.rating}</TableCell>
               <TableCell className="flex gap-2">
                 <Button className="bg-gray-200 text-black px-3 py-1 rounded text-sm hover:bg-gray-300">
                   Edit
@@ -49,6 +51,7 @@ export default function ProductAdminPage() {
                 </Button>
               </TableCell>
             </TableRow>
+            ))}
           </TableBody>
         </Table>
       </div>

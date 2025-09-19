@@ -1,3 +1,4 @@
+
 import {
   Table,
   TableBody,
@@ -7,8 +8,12 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
+import { getAllOrders } from "@/lib/actions/administration.actions";
+import { formatCurrency, formatDate } from "@/lib/utils";
+import Link from "next/link";
 
-export default function TableOrdersOverview() {
+export default async function TableOrdersOverview() {
+  const orders = await getAllOrders();
   return (
     <Table>
       <TableHeader>
@@ -19,16 +24,24 @@ export default function TableOrdersOverview() {
           <TableHead className=" text-center">ACTION</TableHead>
         </TableRow>
       </TableHeader>
-      <TableBody>
-        <TableRow>
-          <TableCell>Mario Rossi</TableCell>
-          <TableCell>11/09/2025</TableCell>
-          <TableCell>€120</TableCell>
-          <TableCell>
-            <Button variant={"link"}>Details</Button>
-          </TableCell>
-        </TableRow>
-      </TableBody>
+       <TableBody>
+        {orders
+          .filter((order) => order.isPaid) 
+          .map((order) => (
+            <TableRow key={order.id}>
+              <TableCell>{order.user?.name}</TableCell>
+              <TableCell>{formatDate(order.createdAt)}
+              </TableCell>
+              <TableCell>{formatCurrency(order.totalPrice)}
+              </TableCell>
+              <TableCell>
+                <Link href={`/order/${order.id}`}>
+                <Button variant={"link"}>Details</Button>
+                </Link>
+              </TableCell>
+            </TableRow>
+          ))}
+      </TableBody> 
     </Table>
   );
 }

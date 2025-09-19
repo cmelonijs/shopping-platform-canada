@@ -8,6 +8,8 @@ import { CartItem } from "@/types";
 import { getUserById } from "./auth.actions";
 import { insertOrderSchema, insertShippingAddressSchema } from "../validator";
 
+
+
 // create order and create the order items
 export async function createOrder() {
   try {
@@ -127,11 +129,6 @@ export async function getOrderById(orderId: string) {
         : order.shippingAddress
     );
 
-    // Verify the order belongs to the authenticated user
-    if (order.userId !== session.user?.id) {
-      throw new Error("Access denied");
-    }
-
     return {
       success: true,
       order,
@@ -144,8 +141,6 @@ export async function getOrderById(orderId: string) {
     };
   }
 }
-
-
 
 export async function getAllMyOrders()  {
   try {
@@ -181,3 +176,6 @@ export async function getAllMyOrders()  {
       throw new Error(formatError(err));
   }
 }
+
+
+

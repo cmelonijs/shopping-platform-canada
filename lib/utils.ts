@@ -78,3 +78,21 @@ export function formatCurrency(amount: number | string | null) {
   // It inserts a space after the currency symbol.
   return formatted.replace(/^(\D+)/, "$1 ");
 }
+
+// FORMAT DATE
+export function formatDate(date: string | Date) {
+  const options: Intl.DateTimeFormatOptions = {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+  };
+return new Date(date).toLocaleDateString("it-IT", options);}
+
+// FORMAT ORDER ID
+export function formatId(id: string, visibleChars = 6) {
+  return "..." + id.slice(-visibleChars)
+}
+
+
