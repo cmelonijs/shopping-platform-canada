@@ -45,10 +45,10 @@ export default async function ProductAdminPage() {
               <TableCell>{product.stock}</TableCell>
               <TableCell>{product.rating}</TableCell>
               <TableCell className="flex gap-2">
-                <Button className="bg-gray-200 text-black px-3 py-1 rounded text-sm hover:bg-gray-300">
+                <Button variant="secondary">
                   Edit
                 </Button>
-                  <DeleteProductButton productId={product.id} />
+                <DeleteProductButton productId={product.id} />
               </TableCell>
             </TableRow>
             ))}

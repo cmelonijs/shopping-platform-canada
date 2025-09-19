@@ -36,10 +36,8 @@ export default async function ProductAdminPage() {
               <TableCell>{user.email}</TableCell>
               <TableCell>{user.role}</TableCell>
               <TableCell className="flex gap-2">
-                <Button className="bg-gray-200 text-black px-3 py-1 rounded text-sm hover:bg-gray-300">
-                  Edit
-                </Button>
-                <Button className="bg-orange-500 text-white px-3 py-1 rounded text-sm hover:bg-red-600">
+                <Button variant="secondary">Edit</Button>  
+                <Button variant="destructive">
                   Delete
                 </Button>
               </TableCell>

@@ -29,10 +29,10 @@ export default function PlaceOrderButton() {
     <Button
       onClick={handleCreateOrder}
       disabled={isPending}
-      className="item-center"
+      className="bg-primary"
     >
       {isPending ? "Creating order..." : "Place order"}
-      <ArrowRight className="text-white h-4 w-4 animate-bounce" />
+      <ArrowRight className="animate-bounce"/>
     </Button>
   );
 }
