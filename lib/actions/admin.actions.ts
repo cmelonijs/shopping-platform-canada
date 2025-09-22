@@ -75,3 +75,59 @@ export async function deleteProductById(formData: FormData) {
       throw new Error(formatError(err));
   }
 }
+
+export async function deleteOrdertById(formData: FormData) {
+  
+  try {
+    const session = await auth();
+    const userId = session?.user?.id as string;
+
+    if (!userId) {
+      throw new Error("Unauthorized");
+    }
+
+    const orderId = formData.get("orderId") as string;
+
+    await prisma.order.delete({
+      where: {
+        id: orderId
+      },
+    });
+
+    revalidatePath("/admin/orders");
+
+    } catch (err) {
+      if (isRedirectError(err)) {
+        throw err;
+      }
+      throw new Error(formatError(err));
+  }
+}
+
+export async function deleteUserById(formData: FormData) {
+  
+  try {
+    const session = await auth();
+    const userId = session?.user?.id as string;
+
+    if (!userId) {
+      throw new Error("Unauthorized");
+    }
+
+    const userIdToDelete = formData.get("userId") as string;
+
+    await prisma.user.delete({
+      where: {
+        id: userIdToDelete
+      },
+    });
+
+    revalidatePath("/admin/users");
+
+    } catch (err) {
+      if (isRedirectError(err)) {
+        throw err;
+      }
+      throw new Error(formatError(err));
+  }
+}

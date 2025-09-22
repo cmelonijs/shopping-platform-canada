@@ -1,3 +1,4 @@
+import DeleteButton from "@/components/admin/DeleteButton";
 import { Button } from "@/components/ui/button";
 import {
   Table,
@@ -7,7 +8,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { getAllOrders } from "@/lib/actions/admin.actions";
+import { deleteOrdertById, getAllOrders } from "@/lib/actions/admin.actions";
 import { formatCurrency, formatDate, formatId } from "@/lib/utils";
 import Link from "next/link";
 
@@ -50,9 +51,11 @@ export default async function OrdersAdminPage() {
                   <Link href={`/order/${order.id}`}>
                     <Button variant="outline">Details</Button> 
                   </Link>
-                  <Button variant="destructive">
-                    Delete
-                  </Button>
+                  <DeleteButton
+                    action={deleteOrdertById}
+                    itemId={order.id}
+                    itemType="orderId"
+                  />
                 </TableCell>
               </TableRow>
             ))}
