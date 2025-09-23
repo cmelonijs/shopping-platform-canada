@@ -10,7 +10,7 @@ export default function Navbar() {
   const pathname = usePathname();
 
   return (
-    <div className="flex items-center gap-4  ">
+    <div className="flex flex-col sm:flex-row items-center gap-4">
       <Link href="/" className="shirnk-0">
         <Image
           src={logo}

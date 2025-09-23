@@ -26,7 +26,6 @@ export default async function TableOrdersOverview() {
       </TableHeader>
        <TableBody>
         {orders
-          .filter((order) => order.isPaid) 
           .map((order) => (
             <TableRow key={order.id}>
               <TableCell>{order.user?.name}</TableCell>
