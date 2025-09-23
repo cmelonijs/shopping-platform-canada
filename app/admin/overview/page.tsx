@@ -1,14 +1,10 @@
 
-
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { BadgeDollarSign, CreditCard, Users, Barcode } from "lucide-react";
 import BarChartOverview from "@/components/admin/BarChartOverview";
 import TableOrdersOverview from "@/components/admin/TableOrdersOverview";
-import dashboardchart, {getDashboardCards} from "@/lib/actions/admin.actions";
+import  {getDashboardValue} from "@/lib/actions/admin.actions";
 import { formatCurrency } from "@/lib/utils";
-import getDailyRevenue from "@/lib/actions/admin.actions";
-
-
 
 export default async function OverviewPage() {
   
@@ -16,10 +12,9 @@ export default async function OverviewPage() {
     totalRevenue,
     totalSales,
     totalCustomers,
-    totalProducts 
-  } = await getDashboardCards();
-  const chartData = await dashboardchart();
-  
+    totalProducts ,
+    monthlyRevenue
+  } = await getDashboardValue();
   
   return (
     <div className="container mx-auto px-3 py-3">
@@ -70,7 +65,7 @@ export default async function OverviewPage() {
 
         <div>
           <Card className=" p-6 ">
-            <BarChartOverview chartData={chartData}/>
+            <BarChartOverview chartData={monthlyRevenue}/>
           </Card>
         </div>
       </div>

@@ -7,7 +7,7 @@ import { auth } from "@/auth";
 import { revalidatePath } from "next/cache";
 
 // get sales
-export async function getDashboardCards() {
+export async function getDashboardValue() {
   const [orders, users, products] = await Promise.all([
     prisma.order.findMany({
       where: { isPaid: true },
@@ -47,11 +47,6 @@ export async function getDashboardCards() {
     totalCustomers,
     totalProducts,
   };
-}
-
-export default async function dashBoardChart() {
-  const { monthlyRevenue } = await getDashboardCards();
-  return monthlyRevenue;
 }
 
 //get all users  
