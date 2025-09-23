@@ -64,7 +64,7 @@ export default async function placeOrderpage() {
                         <p>No shipping address found.</p>
                       )}
                       <Link href="/shipping-address">
-                        <Button className="bg-white text-black border border-black hover:bg-gray-600 hover:text-white ">
+                        <Button variant="secondary">
                           Edit
                         </Button>
                       </Link>
@@ -86,7 +86,7 @@ export default async function placeOrderpage() {
                         <p> No Payment Method found.</p>
                       )}
                       <Link href="/payment-method">
-                        <Button className="bg-white text-black border border-black hover:bg-gray-600 hover:text-white ">
+                        <Button variant="secondary">
                           Edit
                         </Button>
                       </Link>

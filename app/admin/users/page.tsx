@@ -1,4 +1,4 @@
-
+import DeleteButton from "@/components/admin/DeleteButton";
 import { Button } from "@/components/ui/button";
 import {
   Table,
@@ -8,8 +8,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { getAllUsers } from "@/lib/actions/administration.actions";
+import { deleteProductById, getAllUsers } from "@/lib/actions/admin.actions";
 import { formatId } from "@/lib/utils";
+import { deleteUserById } from "@/lib/actions/admin.actions";
 
 export default async function ProductAdminPage() {
   const users = await getAllUsers();
@@ -37,12 +38,12 @@ export default async function ProductAdminPage() {
               <TableCell>{user.email}</TableCell>
               <TableCell>{user.role}</TableCell>
               <TableCell className="flex gap-2">
-                <Button className="bg-gray-200 text-black px-3 py-1 rounded text-sm hover:bg-gray-300">
-                  Edit
-                </Button>
-                <Button className="bg-orange-500 text-white px-3 py-1 rounded text-sm hover:bg-red-600">
-                  Delete
-                </Button>
+                <Button variant="secondary">Edit</Button>  
+                <DeleteButton
+                  action={deleteUserById}
+                  itemId={user.id}
+                  itemType="userId"
+                />
               </TableCell>
             </TableRow>
             ))}

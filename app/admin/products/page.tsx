@@ -7,11 +7,13 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { getAllProducts } from "@/lib/actions/administration.actions";
+import { getAllProducts, deleteProductById } from "@/lib/actions/admin.actions";
 import { formatCurrency, formatId } from "@/lib/utils";
+import DeleteButton from "@/components/admin/DeleteButton";
 
 export default async function ProductAdminPage() {
  const product  = await getAllProducts();
+
   return (
     <div className="container mx-auto px-3 py-3">
       <div className="flex justify-between items-center mb-4 px-3">
@@ -43,14 +45,16 @@ export default async function ProductAdminPage() {
               <TableCell>{product.stock}</TableCell>
               <TableCell>{product.rating}</TableCell>
               <TableCell className="flex gap-2">
-                <Button className="bg-gray-200 text-black px-3 py-1 rounded text-sm hover:bg-gray-300">
+                <Button variant="secondary">
                   Edit
                 </Button>
-                <Button className="bg-orange-500 text-white px-3 py-1 rounded text-sm hover:bg-red-600">
-                  Delete
-                </Button>
+                <DeleteButton 
+                  action={deleteProductById}
+                  itemId={product.id}
+                  itemType="productId"
+                />
               </TableCell>
-            </TableRow>
+            </TableRow> 
             ))}
           </TableBody>
         </Table>

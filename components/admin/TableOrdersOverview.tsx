@@ -8,7 +8,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
-import { getAllOrders } from "@/lib/actions/administration.actions";
+import { getAllOrders } from "@/lib/actions/admin.actions";
 import { formatCurrency, formatDate } from "@/lib/utils";
 import Link from "next/link";
 
