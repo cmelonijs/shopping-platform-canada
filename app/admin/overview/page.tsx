@@ -1,12 +1,20 @@
 
-
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { BadgeDollarSign, CreditCard, Users, Barcode } from "lucide-react";
 import BarChartOverview from "@/components/admin/BarChartOverview";
 import TableOrdersOverview from "@/components/admin/TableOrdersOverview";
-
+import  {getDashboardValue} from "@/lib/actions/admin.actions";
+import { formatCurrency } from "@/lib/utils";
 
 export default async function OverviewPage() {
+  
+  const { 
+    totalRevenue,
+    totalSales,
+    totalCustomers,
+    totalProducts ,
+    monthlyRevenue
+  } = await getDashboardValue();
   
   return (
     <div className="container mx-auto px-3 py-3">
@@ -20,7 +28,7 @@ export default async function OverviewPage() {
               Total revenue <BadgeDollarSign />
             </CardTitle>
           </CardHeader>
-          <CardContent>€12,000</CardContent>
+          <CardContent>{formatCurrency(totalRevenue)}</CardContent>
         </Card>
         <Card>
           <CardHeader>
@@ -28,7 +36,7 @@ export default async function OverviewPage() {
               Sales <CreditCard />
             </CardTitle>
           </CardHeader>
-          <CardContent>€3,200</CardContent>
+          <CardContent>{totalSales}</CardContent>
         </Card>
         <Card>
           <CardHeader>
@@ -36,7 +44,7 @@ export default async function OverviewPage() {
               Customers <Users />
             </CardTitle>
           </CardHeader>
-          <CardContent>128</CardContent>
+          <CardContent>{totalCustomers}</CardContent>
         </Card>
         <Card>
           <CardHeader>
@@ -44,7 +52,7 @@ export default async function OverviewPage() {
               Products <Barcode />
             </CardTitle>
           </CardHeader>
-          <CardContent>42</CardContent>
+          <CardContent>{totalProducts}</CardContent>
         </Card>
       </div>
 
@@ -57,7 +65,7 @@ export default async function OverviewPage() {
 
         <div>
           <Card className=" p-6 ">
-            <BarChartOverview />
+            <BarChartOverview chartData={monthlyRevenue}/>
           </Card>
         </div>
       </div>

@@ -6,12 +6,54 @@ import { isRedirectError } from "next/dist/client/components/redirect-error";
 import { auth } from "@/auth";
 import { revalidatePath } from "next/cache";
 
+// get sales
+export async function getDashboardValue() {
+  const [orders, users, products] = await Promise.all([
+    prisma.order.findMany({
+      where: { isPaid: true },
+      select: {
+        createdAt: true,
+        totalPrice: true
+      },
+      orderBy: { createdAt: "asc" },
+    }),
+    prisma.user.findMany({ select: { id: true } }),
+    prisma.product.findMany({ select: { id: true } }),
+  ]);
 
-// get all users
-export async function getAllUsers(){
+  const totalSales = orders.length;
+  const totalCustomers = users.length;
+  const totalProducts = products.length;
+  const totalRevenue = orders.reduce(
+    (sum, order) => sum + Number(order.totalPrice),
+    0
+  );
+  const monthlyMap: Record<string, number> = {};
+  for (const order of orders) {
+    const key = order.createdAt.toLocaleString("en", {
+      month: "short",
+    });
+    monthlyMap[key] = (monthlyMap[key] ?? 0) + Number(order.totalPrice);
+  }
+  const monthlyRevenue = Object.entries(monthlyMap).map(([month, total]) => ({
+    month,
+    total,
+  }));
+
+  return {
+    monthlyRevenue,
+    totalSales,
+    totalRevenue,
+    totalCustomers,
+    totalProducts,
+  };
+}
+
+//get all users  
+export async function getAllUsers() {
   const users = await prisma.user.findMany({
-    orderBy: { 
-        createdAt: 'desc' 
+    orderBy: {
+      createdAt: 'desc'
     },
   });
   return convertToPlainObject(users)
@@ -20,8 +62,8 @@ export async function getAllUsers(){
 // get all products
 export async function getAllProducts() {
   const product = await prisma.product.findMany({
-    orderBy: { 
-      createdAt: 'desc' 
+    orderBy: {
+      createdAt: 'desc'
     },
   });
   return convertToPlainObject(product)
@@ -30,17 +72,13 @@ export async function getAllProducts() {
 // get all orders
 export async function getAllOrders() {
   const orders = await prisma.order.findMany({
-
-    orderBy: { 
-      createdAt: 'desc' 
+    where:{ isPaid:true},
+    take: 5,
+    orderBy: {
+      createdAt: 'desc'
     },
     include: {
       user: true,
-      orderItems: {
-          include: {
-            product: true
-          }
-        }
     },
   });
 
@@ -49,7 +87,7 @@ export async function getAllOrders() {
 
 
 export async function deleteProductById(formData: FormData) {
-  
+
   try {
     const session = await auth();
     const userId = session?.user?.id as string;
@@ -59,20 +97,20 @@ export async function deleteProductById(formData: FormData) {
     }
 
     const productId = formData.get("productId") as string;
-    
+
     await prisma.product.delete({
-      where: { 
-        id: productId 
+      where: {
+        id: productId
       },
     });
 
     revalidatePath("/admin/products");
 
-    } catch (err) {
-      if (isRedirectError(err)) {
-        throw err;
-      }
-      throw new Error(formatError(err));
+  } catch (err) {
+    if (isRedirectError(err)) {
+      throw err;
+    }
+    throw new Error(formatError(err));
   }
 }
 
