@@ -8,9 +8,11 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { deleteProductById, getAllUsers } from "@/lib/actions/admin.actions";
+import { getAllUsers } from "@/lib/actions/admin.actions";
 import { formatId } from "@/lib/utils";
 import { deleteUserById } from "@/lib/actions/admin.actions";
+import Link from "next/link";
+
 
 export default async function ProductAdminPage() {
   const users = await getAllUsers();
@@ -38,7 +40,13 @@ export default async function ProductAdminPage() {
               <TableCell>{user.email}</TableCell>
               <TableCell>{user.role}</TableCell>
               <TableCell className="flex gap-2">
-                <Button variant="secondary">Edit</Button>  
+                
+                <Link href={`/admin/users/${user.id}`}>
+                  <Button variant="secondary">
+                    Edit
+                  </Button>
+                </Link>
+
                 <DeleteButton
                   action={deleteUserById}
                   itemId={user.id}

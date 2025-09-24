@@ -5,6 +5,9 @@ import { convertToPlainObject, formatError } from "../utils";
 import { isRedirectError } from "next/dist/client/components/redirect-error";
 import { auth } from "@/auth";
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
+import { getName } from "./profile.actions";
+import { updateProfileNameSchema } from "../validator";
 
 // get sales
 export async function getDashboardValue() {
@@ -169,3 +172,64 @@ export async function deleteUserById(formData: FormData) {
       throw new Error(formatError(err));
   }
 }
+
+export async function getNameById(userId: string): Promise<{ name: string; email?: string } | null> {
+  try {
+    const session = await auth();
+    const adminUserId = session?.user?.id as string;
+
+    if (!adminUserId) {
+      return null;
+    }
+
+    const user = await prisma.user.findUnique({
+      where: {
+        id: userId
+      },
+      select: {
+        name: true,
+        email: true
+      },
+    });
+
+    if (!user) return null;
+
+    const validatedProfile = updateProfileNameSchema.safeParse(user);
+    return validatedProfile.success ? validatedProfile.data : null;
+  } catch (err) {
+    if (isRedirectError(err)) {
+      throw err;
+    }
+    throw new Error(formatError(err));
+  }
+}
+
+export async function updateNameById(formData: FormData) {
+  try {
+    const session = await auth();
+    const userId = session?.user?.id as string;
+
+    if (!userId) {
+      throw new Error("Unauthorized");
+    }
+
+    const usertoUpdate = formData.get("userId") as string;
+
+    await prisma.user.update({
+      where: {
+        id: usertoUpdate,
+      },
+      data: {
+        name: formData.get("name") as string,
+      },
+    });
+    
+    redirect("/admin/users");
+  } catch (err) {
+    if (isRedirectError(err)) {
+      throw err;
+    }
+    throw new Error(formatError(err));
+  }
+}
+
