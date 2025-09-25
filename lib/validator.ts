@@ -101,3 +101,10 @@ export const updateProfileNameSchema = z.object({
   name: z.string().min(3, "Name must be at least 3 characters"),
   email: z.string().email().optional(),
 });
+
+// SCHEMA FOR UPDATING user NAME
+export const updateAdminProfileNameSchema = z.object({
+  name: z.string().min(3, "Name must be at least 3 characters"),
+  email: z.string().email().optional(),
+  role: z.enum(["user","admin"]),
+});
