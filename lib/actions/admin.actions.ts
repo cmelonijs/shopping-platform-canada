@@ -5,6 +5,8 @@ import { convertToPlainObject, formatError } from "../utils";
 import { isRedirectError } from "next/dist/client/components/redirect-error";
 import { auth } from "@/auth";
 import { revalidatePath } from "next/cache";
+import { AdminProfile } from "@/types";
+import { updateAdminProfileNameSchema } from "../validator";
 
 // get sales
 export async function getDashboardValue() {
@@ -115,7 +117,7 @@ export async function deleteProductById(formData: FormData) {
 }
 
 export async function deleteOrdertById(formData: FormData) {
-  
+
   try {
     const session = await auth();
     const userId = session?.user?.id as string;
@@ -134,16 +136,16 @@ export async function deleteOrdertById(formData: FormData) {
 
     revalidatePath("/admin/orders");
 
-    } catch (err) {
-      if (isRedirectError(err)) {
-        throw err;
-      }
-      throw new Error(formatError(err));
+  } catch (err) {
+    if (isRedirectError(err)) {
+      throw err;
+    }
+    throw new Error(formatError(err));
   }
 }
 
 export async function deleteUserById(formData: FormData) {
-  
+
   try {
     const session = await auth();
     const userId = session?.user?.id as string;
@@ -162,10 +164,42 @@ export async function deleteUserById(formData: FormData) {
 
     revalidatePath("/admin/users");
 
-    } catch (err) {
-      if (isRedirectError(err)) {
-        throw err;
-      }
-      throw new Error(formatError(err));
+  } catch (err) {
+    if (isRedirectError(err)) {
+      throw err;
+    }
+    throw new Error(formatError(err));
+  }
+}
+
+export async function updateAdminProfile(data: AdminProfile) {
+  try {
+    const session = await auth();
+    const userId = session?.user?.id as string;
+    const updateAdmin = updateAdminProfileNameSchema.parse(data);
+    await prisma.user.update({
+
+      where: {
+        id: userId,
+      },
+      data: {
+        name: updateAdmin.name,
+        role: updateAdmin.role
+      },
+    });
+
+    return {
+      success: true,
+      message: "Profile updated successfully",
+    };
+  } catch (err) {
+    if (isRedirectError(err)) {
+      throw err;
+    }
+
+    return {
+      success: false,
+      message: formatError(err),
+    };
   }
 }

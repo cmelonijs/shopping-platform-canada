@@ -11,6 +11,7 @@ import {
 import { deleteProductById, getAllUsers } from "@/lib/actions/admin.actions";
 import { formatId } from "@/lib/utils";
 import { deleteUserById } from "@/lib/actions/admin.actions";
+import Link from "next/link";
 
 export default async function ProductAdminPage() {
   const users = await getAllUsers();
@@ -32,20 +33,22 @@ export default async function ProductAdminPage() {
           </TableHeader>
           <TableBody>
             {users.map((user) => (
-            <TableRow key={user.id}>
-              <TableCell title={user.id}>{formatId( user.id)}</TableCell>
-              <TableCell>{user.name}</TableCell>
-              <TableCell>{user.email}</TableCell>
-              <TableCell>{user.role}</TableCell>
-              <TableCell className="flex gap-2">
-                <Button variant="secondary">Edit</Button>  
-                <DeleteButton
-                  action={deleteUserById}
-                  itemId={user.id}
-                  itemType="userId"
-                />
-              </TableCell>
-            </TableRow>
+              <TableRow key={user.id}>
+                <TableCell title={user.id}>{formatId( user.id)}</TableCell>
+                <TableCell>{user.name}</TableCell>
+                <TableCell>{user.email}</TableCell>
+                <TableCell>{user.role}</TableCell>
+                <TableCell className="flex gap-2">
+                  <Button asChild variant="secondary">
+                    <Link href={`/admin/users/${user.id}`}>Edit</Link>
+                  </Button>
+                  <DeleteButton
+                    action={deleteUserById}
+                    itemId={user.id}
+                    itemType="userId"
+                  />
+                </TableCell>
+              </TableRow>
             ))}
           </TableBody>
         </Table>
