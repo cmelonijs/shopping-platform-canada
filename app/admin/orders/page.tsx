@@ -12,7 +12,6 @@ import { deleteOrdertById, getAllOrders } from "@/lib/actions/admin.actions";
 import { formatCurrency, formatDate, formatId } from "@/lib/utils";
 import Link from "next/link";
 
-
 export default async function OrdersAdminPage() {
   const orders = await getAllOrders();
 
@@ -41,15 +40,24 @@ export default async function OrdersAdminPage() {
                 <TableCell>{formatDate(order.createdAt)}</TableCell>
                 <TableCell>{order.user?.name}</TableCell>
                 <TableCell>{formatCurrency(order.totalPrice)}</TableCell>
-                <TableCell>{order.isPaid ? "Paid" : "Not paid"}</TableCell>
+                <TableCell>
+                  <span
+                    className={`px-2 py-1 rounded-md ${order.isPaid 
+                      ? "bg-green-600/50" 
+                      : "bg-red-600/50"
+                      }`}
+                  >
+                    {order.isPaid ? "Paid" : "Not paid"}
+                  </span>
+                </TableCell>
                 <TableCell>{order.isDelivered && order.deliveredAt
                   ? formatDate(order.deliveredAt)
                   : "Not delivered"}
                 </TableCell>
                 <TableCell className="flex gap-2">
-                  
+
                   <Link href={`/order/${order.id}`}>
-                    <Button variant="outline">Details</Button> 
+                    <Button variant="outline">Details</Button>
                   </Link>
                   <DeleteButton
                     action={deleteOrdertById}

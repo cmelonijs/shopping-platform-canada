@@ -2,6 +2,7 @@ import { SessionProvider } from "next-auth/react";
 import AdminHeader from "@/components/admin/AdminHeader";
 import { auth } from "@/auth";
 import { redirect, unauthorized } from "next/navigation";
+import { Toaster } from "@/components/ui/sonner";
 
 export default async function AdminLayout({
   children,
@@ -27,6 +28,7 @@ export default async function AdminLayout({
       <SessionProvider>
         <AdminHeader />
         {children}
+         <Toaster />
       </SessionProvider>
     </div>
   );
