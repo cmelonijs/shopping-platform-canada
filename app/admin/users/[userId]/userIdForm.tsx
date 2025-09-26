@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { updateAdminProfileNameSchema } from "@/lib/validator";
 import { AdminProfile } from "@/types";
-import { updateAdminProfile } from "@/lib/actions/admin.actions";
+import { updateUserRole } from "@/lib/actions/admin.actions";
 import { useRouter } from "next/navigation";
 import { Select, SelectContent, SelectValue, SelectItem, SelectTrigger } from "@/components/ui/select";
 
@@ -20,6 +20,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 
+
 export default function ProfileAdminForm({
     defaultValues,
 }: {
@@ -29,6 +30,7 @@ export default function ProfileAdminForm({
     const form = useForm<AdminProfile>({
         resolver: zodResolver(updateAdminProfileNameSchema),
         defaultValues: defaultValues || {
+            id: "",
             name: "",
             email: "",
             role: "user",
@@ -37,11 +39,17 @@ export default function ProfileAdminForm({
     const router = useRouter();
 
     const onSubmit = async (data: AdminProfile) => {
-        const res = await updateAdminProfile(data);
-        if (res.success) {
-            router.refresh();
-        }
+        const res = await updateUserRole(data);
 
+        if (res.success) {
+            toast.success(res.message); // ← Mostra "Users update"
+            router.refresh();
+            setTimeout(() => {
+                router.push("/admin/users");
+            }, 1500);
+        } else {
+            toast.error(res.message || "Update failed");
+        }
     };
 
     return (

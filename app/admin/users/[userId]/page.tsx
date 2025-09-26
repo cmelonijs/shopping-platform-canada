@@ -20,6 +20,7 @@ const role = user.role === "admin" ? "admin" : "user";
     <div className="max-w-xl mx-auto mt-8">
       <ProfileAdminForm
         defaultValues={{
+          id:user.id,
           name: user.name,
           email: user.email ??"",
           role : role,

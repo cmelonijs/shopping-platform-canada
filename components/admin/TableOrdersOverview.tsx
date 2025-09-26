@@ -26,6 +26,7 @@ export default async function TableOrdersOverview() {
       </TableHeader>
        <TableBody>
         {orders
+        .slice(0,5)
           .map((order) => (
             <TableRow key={order.id}>
               <TableCell>{order.user?.name}</TableCell>

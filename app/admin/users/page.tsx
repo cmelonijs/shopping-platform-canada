@@ -8,7 +8,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { deleteProductById, getAllUsers } from "@/lib/actions/admin.actions";
+import { getAllUsers } from "@/lib/actions/admin.actions";
 import { formatId } from "@/lib/utils";
 import { deleteUserById } from "@/lib/actions/admin.actions";
 import Link from "next/link";
@@ -34,10 +34,20 @@ export default async function ProductAdminPage() {
           <TableBody>
             {users.map((user) => (
               <TableRow key={user.id}>
-                <TableCell title={user.id}>{formatId( user.id)}</TableCell>
+                <TableCell title={user.id}>{formatId(user.id)}</TableCell>
                 <TableCell>{user.name}</TableCell>
                 <TableCell>{user.email}</TableCell>
-                <TableCell>{user.role}</TableCell>
+                <TableCell className="p-1 text-sm">
+                  <span
+                    className={`px-2 py-1 rounded-md
+                      ${user.role === "admin"
+                        ? "bg-green-600/50"
+                        : "bg-blue-600/50"
+                      }`}
+                  >
+                    {user.role}
+                  </span>
+                </TableCell>
                 <TableCell className="flex gap-2">
                   <Button asChild variant="secondary">
                     <Link href={`/admin/users/${user.id}`}>Edit</Link>

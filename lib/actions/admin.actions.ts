@@ -12,7 +12,6 @@ import { updateAdminProfileNameSchema } from "../validator";
 export async function getDashboardValue() {
   const [orders, users, products] = await Promise.all([
     prisma.order.findMany({
-      where: { isPaid: true },
       select: {
         createdAt: true,
         totalPrice: true
@@ -74,8 +73,6 @@ export async function getAllProducts() {
 // get all orders
 export async function getAllOrders() {
   const orders = await prisma.order.findMany({
-    where:{ isPaid:true},
-    take: 5,
     orderBy: {
       createdAt: 'desc'
     },
@@ -172,34 +169,21 @@ export async function deleteUserById(formData: FormData) {
   }
 }
 
-export async function updateAdminProfile(data: AdminProfile) {
-  try {
-    const session = await auth();
-    const userId = session?.user?.id as string;
-    const updateAdmin = updateAdminProfileNameSchema.parse(data);
-    await prisma.user.update({
-
-      where: {
-        id: userId,
-      },
-      data: {
-        name: updateAdmin.name,
-        role: updateAdmin.role
-      },
-    });
-
-    return {
-      success: true,
-      message: "Profile updated successfully",
-    };
-  } catch (err) {
-    if (isRedirectError(err)) {
-      throw err;
-    }
-
-    return {
-      success: false,
-      message: formatError(err),
-    };
+export async function updateUserRole(data: AdminProfile) {
+  const parsed = updateAdminProfileNameSchema.safeParse(data);
+  if (!parsed.success) {
+    return { success: false, message: "Invalid data. Please check your input." };
   }
+
+  await prisma.user.update({
+    where: { id: parsed.data.id },
+    data: {
+      name: parsed.data.name,
+      role: parsed.data.role,
+    },
+  });
+
+  revalidatePath("/admin/users");
+
+  return { success: true, message: "Users update" };
 }
