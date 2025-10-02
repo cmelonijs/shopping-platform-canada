@@ -5,8 +5,8 @@ import { convertToPlainObject, formatError } from "../utils";
 import { isRedirectError } from "next/dist/client/components/redirect-error";
 import { auth } from "@/auth";
 import { revalidatePath } from "next/cache";
-import { AdminProfile } from "@/types";
-import { updateAdminProfileNameSchema } from "../validator";
+import { UsersProfile } from "@/types";
+import { updateUsersProfileNameSchema } from "../validator";
 
 // get sales
 export async function getDashboardValue() {
@@ -169,10 +169,14 @@ export async function deleteUserById(formData: FormData) {
   }
 }
 
-export async function updateUserRole(data: AdminProfile) {
-  const parsed = updateAdminProfileNameSchema.safeParse(data);
+export async function updateUserRole(data: UsersProfile) {
+  const parsed = updateUsersProfileNameSchema.safeParse(data);
   if (!parsed.success) {
-    return { success: false, message: "Invalid data. Please check your input." };
+    return {
+      success: false,
+      message: "Invalid data. Please check your input." ,
+      redirectTo:"/admin/users"
+    };
   }
 
   await prisma.user.update({
@@ -185,5 +189,5 @@ export async function updateUserRole(data: AdminProfile) {
 
   revalidatePath("/admin/users");
 
-  return { success: true, message: "Users update" };
+  return { success: true, message: "User update" , redirectTo:"/admin/users"};
 }

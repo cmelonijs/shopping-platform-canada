@@ -7,7 +7,7 @@ import {
   insertShippingAddressSchema,
   paymentMethodSchema,
   updateProfileNameSchema,
-  updateAdminProfileNameSchema,
+  updateUsersProfileNameSchema,
 } from "@/lib/validator";
 import { z } from "zod";
 
@@ -44,4 +44,4 @@ export type OrderItem = z.infer<typeof insertOrderItemSchema>;
 
 export type Profile = z.infer<typeof updateProfileNameSchema>;
 
-export type AdminProfile =z.infer<typeof updateAdminProfileNameSchema>;
+export type UsersProfile =z.infer<typeof updateUsersProfileNameSchema>;

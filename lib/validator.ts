@@ -103,7 +103,7 @@ export const updateProfileNameSchema = z.object({
 });
 
 // SCHEMA FOR UPDATING user NAME
-export const updateAdminProfileNameSchema = z.object({
+export const updateUsersProfileNameSchema = z.object({
   id: z.string().uuid(), 
   name: z.string().min(3, "Name must be at least 3 characters"),
   email: z.string().email().optional(),

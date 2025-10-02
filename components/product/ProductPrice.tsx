@@ -1,5 +1,4 @@
 import { cn } from "@/lib/utils";
-import { formatCurrency } from "@/lib/utils";
 
 const ProductPrice = ({
   value,

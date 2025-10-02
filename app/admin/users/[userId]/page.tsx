@@ -1,29 +1,31 @@
 import { getUserById } from "@/lib/actions/auth.actions";
-import ProfileAdminForm from "./userIdForm";
+import ProfileUsersForm from "./userIdForm";
 
 export default async function UserPage({
   params,
 }: {
-  params: { userId: string };
+  params: Promise<{ userId: string }>;
 }) {
-  const user = await getUserById(params.userId);
- 
+  const { userId } = await params;
+  const user = await getUserById(userId);
+
   if (!user) {
     return (
       <div className="p-4 text-center text-red-600">
-      User not found.
+        User not found.
       </div>
     );
   }
-const role = user.role === "admin" ? "admin" : "user";
+
+  const role = user.role === "admin" ? "admin" : "user";
   return (
     <div className="max-w-xl mx-auto mt-8">
-      <ProfileAdminForm
+      <ProfileUsersForm
         defaultValues={{
-          id:user.id,
+          id: user.id,
           name: user.name,
-          email: user.email ??"",
-          role : role,
+          email: user.email ?? "",
+          role: role,
         }}
       />
     </div>
