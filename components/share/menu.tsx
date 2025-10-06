@@ -15,7 +15,6 @@ import { auth } from "@/auth";
 const Menu = async () => {
   const session = await auth();
 
-  console.log("session?", session);
 
   return (
     <div className="flex justify-end gap-3">

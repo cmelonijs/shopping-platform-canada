@@ -1,10 +1,8 @@
-import { Button } from "@/components/ui/button";
-import { AlignLeft } from "lucide-react";
-
 import Link from "next/link";
 import Image from "next/image";
 import logo from "@/assets/images/logo.png";
 import Menu from "./menu";
+import HamburgerMenu from "./hamburgerMenu";
 
 export default function Header() {
   return (
@@ -12,9 +10,7 @@ export default function Header() {
       <div className="container mx-auto px-3 flex justify-between items-center py-3">
         {/* Left Side */}
         <div className="flex items-center">
-          <Button variant="ghost" size="lg" className="p-3 shadow-none">
-            <AlignLeft className="text-2xl scale-150" />
-          </Button>
+          <HamburgerMenu />
           <Link href="/" className="shirnk-0">
             <Image
               src={logo}
