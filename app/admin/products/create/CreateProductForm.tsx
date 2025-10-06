@@ -12,8 +12,9 @@ import { useRouter } from "next/navigation";
 import { CreateProduct } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createProductSchema } from "@/lib/validator";
-import { format } from "path";
 import { formatError } from "@/lib/utils";
+import { UploadButton } from "@/lib/uploadthing";
+import { X } from "lucide-react";
 
 export default function CreateProductForm({
     defaultValues,
@@ -32,7 +33,7 @@ export default function CreateProductForm({
             brand: "",
             price: 0,
             stock: 0,
-            //image: "",
+            images: [],
             isFeatured: false,
             description: "",
         },
@@ -159,19 +160,55 @@ export default function CreateProductForm({
                     />
                 </div>
 
-                {/*<FormField
+                <FormField
                     control={form.control}
                     name="images"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Product Image URL</FormLabel>
+                            <FormLabel>Product Images</FormLabel>
                             <FormControl>
-                                <Input type="file" id="picture"{...field} />
+                                <div className="border rounded-md p-4 space-y-4">
+                                    <UploadButton
+                                        endpoint="productImage"
+                                        onClientUploadComplete={(res) => {
+                                            const urls = res.map((file) => file.url);
+                                            field.onChange([...field.value, ...urls]);
+                                            toast.success("Upload completed!");
+                                        }}
+                                        onUploadError={(error: Error) => {
+                                            toast.error(`Error: ${error.message}`);
+                                        }}
+                                        className="ut-button:bg-primary ut-button:text-primary-foreground ut-button:hover:bg-primary/90 ut-button:px-6 ut-button:py-3 ut-label:text-foreground"
+                                    />
+                                    {field.value && field.value.length > 0 && (
+                                        <div className="grid grid-cols-4 gap-4">
+                                            {field.value.map((url, index) => (
+                                                <div key={index} className="relative group">
+                                                    <img
+                                                        src={url}
+                                                        alt={`Product ${index + 1}`}
+                                                        className="w-full h-32 object-contain rounded-lg"
+                                                    />
+                                                    <button
+                                                        type="button"
+                                                        onClick={() => {
+                                                            const newImages = field.value.filter((_, i) => i !== index);
+                                                            field.onChange(newImages);
+                                                        }}
+                                                        className="absolute top-0 right-2 bg-red-500 text-white p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+                                                    >
+                                                        <X className="w-4 h-4" />
+                                                    </button>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    )}
+                                </div>
                             </FormControl>
                             <FormMessage />
                         </FormItem>
                     )}
-                />*/}
+                />
 
                 <FormField
                     control={form.control}

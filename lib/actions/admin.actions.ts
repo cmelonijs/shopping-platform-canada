@@ -207,7 +207,7 @@ export async function createProduct(data: CreateProduct) {
         name: data.name,
         slug: data.slug,
         category: data.category,
-        //images: data.images,
+        images: data.images,
         brand: data.brand,
         description: data.description,
         stock: data.stock,
