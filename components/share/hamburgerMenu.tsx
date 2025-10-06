@@ -8,13 +8,16 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import { getAllCategoriesWithCount } from "@/lib/actions/products.actions";
+import { Button } from "../ui/button";
 
 export default async function HamburgerMenu() {
     const categories =await getAllCategoriesWithCount();
   return (
     <Drawer direction="left">
       <DrawerTrigger>
-        <AlignLeft />
+        <Button variant="ghost">
+          <AlignLeft />
+        </Button>
       </DrawerTrigger>
       <DrawerContent>
         <DrawerHeader>
