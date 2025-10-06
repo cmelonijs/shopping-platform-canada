@@ -1,5 +1,6 @@
 import {
   cartItemSchema,
+  createProductSchema,
   insertCartSchema,
   insertOrderItemSchema,
   insertOrderSchema,
@@ -45,3 +46,5 @@ export type OrderItem = z.infer<typeof insertOrderItemSchema>;
 export type Profile = z.infer<typeof updateProfileNameSchema>;
 
 export type UsersProfile =z.infer<typeof updateUsersProfileNameSchema>;
+
+export type CreateProduct = z.infer<typeof createProductSchema>;

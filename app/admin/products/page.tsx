@@ -10,6 +10,7 @@ import {
 import { getAllProducts, deleteProductById } from "@/lib/actions/admin.actions";
 import { formatCurrency, formatId } from "@/lib/utils";
 import DeleteButton from "@/components/admin/DeleteButton";
+import Link from "next/link";
 
 export default async function ProductAdminPage() {
  const product  = await getAllProducts();
@@ -18,8 +19,8 @@ export default async function ProductAdminPage() {
     <div className="container mx-auto px-3 py-3">
       <div className="flex justify-between items-center mb-4 px-3">
         <h1 className="font-bold text-xl">Product</h1>
-        <Button className="bg-gray-800 text-white px-4 py-2 rounded">
-          Add Product
+        <Button className="bg-gray-800 text-white px-4 py-2 rounded ">
+          <Link href="/admin/products/create">Add Product</Link>
         </Button>
       </div>
       <div className="w-full h-full px-3 pb-8">
