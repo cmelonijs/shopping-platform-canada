@@ -10,11 +10,7 @@ export default async function UserPage({
   const user = await getUserById(userId);
 
   if (!user) {
-    return (
-      <div className="p-4 text-center text-red-600">
-        User not found.
-      </div>
-    );
+    return <div className="p-4 text-center text-red-600">User not found.</div>;
   }
 
   const role = user.role === "admin" ? "admin" : "user";

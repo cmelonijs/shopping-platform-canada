@@ -28,7 +28,7 @@ export default async function AdminLayout({
       <SessionProvider>
         <AdminHeader />
         {children}
-         <Toaster />
+        <Toaster />
       </SessionProvider>
     </div>
   );
