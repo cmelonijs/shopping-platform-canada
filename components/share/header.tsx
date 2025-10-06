@@ -10,7 +10,7 @@ export default function Header() {
       <div className="container mx-auto px-3 flex justify-between items-center py-3">
         {/* Left Side */}
         <div className="flex items-center">
-          <HamburgerMenu />
+          <HamburgerMenu/>
           <Link href="/" className="shirnk-0">
             <Image
               src={logo}
