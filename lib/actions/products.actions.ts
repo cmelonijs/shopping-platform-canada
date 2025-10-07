@@ -29,3 +29,17 @@ export async function getProductBySlug(slug: string) {
 
   return convertToPlainObject(data);
 }
+
+export async function getAllCategoriesWithCount() {
+  const categories = await prisma.product.groupBy({
+    by: ["category"],
+    _count: {
+      category: true,
+    },
+  });
+
+  return categories.map(cat => ({
+    category: cat.category,
+    count: cat._count.category,
+  }));
+}
