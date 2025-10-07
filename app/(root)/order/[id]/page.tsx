@@ -46,7 +46,7 @@ const OrderPage = async ({ params }: { params: Promise<{ id: string }> }) => {
                   </h2>
                   <CardContent className="space-y-4 grid grid-cols-2 gap-x-4 ">
                     {userAddress ? (
-                      <div  className="col-span-2 md:col-span-1 space-y-2">
+                      <div className="col-span-2 md:col-span-1 space-y-2">
                         <CardTitle>Name:</CardTitle>
                         <CardDescription>
                           {" "}

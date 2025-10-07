@@ -42,20 +42,19 @@ export default async function OrdersAdminPage() {
                 <TableCell>{formatCurrency(order.totalPrice)}</TableCell>
                 <TableCell>
                   <span
-                    className={`px-2 py-1 rounded-md ${order.isPaid 
-                      ? "bg-green-600/50" 
-                      : "bg-red-600/50"
-                      }`}
+                    className={`px-2 py-1 rounded-md ${
+                      order.isPaid ? "bg-green-600/50" : "bg-red-600/50"
+                    }`}
                   >
                     {order.isPaid ? "Paid" : "Not paid"}
                   </span>
                 </TableCell>
-                <TableCell>{order.isDelivered && order.deliveredAt
-                  ? formatDate(order.deliveredAt)
-                  : "Not delivered"}
+                <TableCell>
+                  {order.isDelivered && order.deliveredAt
+                    ? formatDate(order.deliveredAt)
+                    : "Not delivered"}
                 </TableCell>
                 <TableCell className="flex gap-2">
-
                   <Link href={`/order/${order.id}`}>
                     <Button variant="outline">Details</Button>
                   </Link>

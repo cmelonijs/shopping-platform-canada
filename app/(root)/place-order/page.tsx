@@ -64,9 +64,7 @@ export default async function placeOrderpage() {
                         <p>No shipping address found.</p>
                       )}
                       <Link href="/shipping-address">
-                        <Button variant="secondary">
-                          Edit
-                        </Button>
+                        <Button variant="secondary">Edit</Button>
                       </Link>
                     </CardContent>
                   </Card>
@@ -86,9 +84,7 @@ export default async function placeOrderpage() {
                         <p> No Payment Method found.</p>
                       )}
                       <Link href="/payment-method">
-                        <Button variant="secondary">
-                          Edit
-                        </Button>
+                        <Button variant="secondary">Edit</Button>
                       </Link>
                     </CardContent>
                   </Card>

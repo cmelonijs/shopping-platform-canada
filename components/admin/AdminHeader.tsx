@@ -1,6 +1,5 @@
 import Menu from "@/components/share/menu";
 import Navbar from "./Navbar";
-import { Button } from "../ui/button";
 
 export default function AdminHeader() {
   return (

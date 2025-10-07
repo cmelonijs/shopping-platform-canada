@@ -40,9 +40,10 @@ export default async function ProductAdminPage() {
                 <TableCell className="p-1 text-sm">
                   <span
                     className={`px-2 py-1 rounded-md
-                      ${user.role === "admin"
-                        ? "bg-green-600/50"
-                        : "bg-blue-600/50"
+                      ${
+                        user.role === "admin"
+                          ? "bg-green-600/50"
+                          : "bg-blue-600/50"
                       }`}
                   >
                     {user.role}

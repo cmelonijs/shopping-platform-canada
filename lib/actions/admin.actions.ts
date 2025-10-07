@@ -5,8 +5,9 @@ import { convertToPlainObject, formatError } from "../utils";
 import { isRedirectError } from "next/dist/client/components/redirect-error";
 import { auth } from "@/auth";
 import { revalidatePath } from "next/cache";
-import { AdminProfile } from "@/types";
-import { updateAdminProfileNameSchema } from "../validator";
+import { CreateProduct, UsersProfile } from "@/types";
+import { updateUsersProfileNameSchema } from "../validator";
+import { redirect } from "next/navigation";
 
 // get sales
 export async function getDashboardValue() {
@@ -169,10 +170,14 @@ export async function deleteUserById(formData: FormData) {
   }
 }
 
-export async function updateUserRole(data: AdminProfile) {
-  const parsed = updateAdminProfileNameSchema.safeParse(data);
+export async function updateUserRole(data: UsersProfile) {
+  const parsed = updateUsersProfileNameSchema.safeParse(data);
   if (!parsed.success) {
-    return { success: false, message: "Invalid data. Please check your input." };
+    return {
+      success: false,
+      message: "Invalid data. Please check your input." ,
+      redirectTo:"/admin/users"
+    };
   }
 
   await prisma.user.update({
@@ -185,5 +190,47 @@ export async function updateUserRole(data: AdminProfile) {
 
   revalidatePath("/admin/users");
 
-  return { success: true, message: "Users update" };
+  return { success: true, message: "User update" , redirectTo:"/admin/users"};
+}
+
+export async function createProduct(data: CreateProduct) {
+  try {
+    const session = await auth();
+    const userId = session?.user?.id as string;
+
+    if (!userId) {
+      throw new Error("Unauthorized");
+    }
+
+    await prisma.product.create({
+      data: {
+        name: data.name,
+        slug: data.slug,
+        category: data.category,
+        images: data.images,
+        brand: data.brand,
+        description: data.description,
+        stock: data.stock,
+        price: data.price,
+        isFeatured: data.isFeatured,
+      },
+    });
+
+    revalidatePath("/admin/products/create");
+    
+    return { 
+      success: true,
+      message: "Product created successfully", 
+    };
+    
+
+  } catch (err) {
+    if (isRedirectError(err)) {
+      throw err;
+    }
+    return { 
+      success: false,
+      message: formatError(err), 
+    };
+  }
 }
