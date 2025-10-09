@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import BreadcrumbBoard from "@/components/share/breadcrumbBoard";
 import {
   Card,
