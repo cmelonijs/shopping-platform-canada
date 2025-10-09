@@ -21,30 +21,37 @@ export default function Navbar() {
         />
       </Link>
 
-      <Button asChild
+      <Button
+        asChild
         variant={pathname === "/admin/overview" ? "default" : "ghost"}
-        className={pathname === "/admin/overview" ? "bg-primary" : ""}>
+        className={pathname === "/admin/overview" ? "bg-primary" : ""}
+      >
         <Link href="/admin/overview">Overview</Link>
       </Button>
 
-      <Button asChild
+      <Button
+        asChild
         variant={pathname === "/admin/products" ? "default" : "ghost"}
-        className={pathname === "/admin/products" ? "bg-primary" : ""}>
+        className={pathname === "/admin/products" ? "bg-primary" : ""}
+      >
         <Link href="/admin/products">Product</Link>
       </Button>
 
-      <Button asChild
+      <Button
+        asChild
         variant={pathname === "/admin/orders" ? "default" : "ghost"}
-        className={pathname === "/admin/orders" ? "bg-primary" : ""}>
+        className={pathname === "/admin/orders" ? "bg-primary" : ""}
+      >
         <Link href="/admin/orders">Orders</Link>
       </Button>
 
-      <Button asChild
+      <Button
+        asChild
         variant={pathname === "/admin/users" ? "default" : "ghost"}
-        className={pathname === "/admin/users" ? "bg-primary" : ""}>
+        className={pathname === "/admin/users" ? "bg-primary" : ""}
+      >
         <Link href="/admin/users">Users</Link>
       </Button>
-
-    </div >
+    </div>
   );
 }
