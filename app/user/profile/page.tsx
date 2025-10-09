@@ -1,4 +1,5 @@
 //userProfilePage
+export const dynamic = "force-dynamic";
 
 import { Card } from "@/components/ui/card";
 import { getName } from "@/lib/actions/profile.actions";
