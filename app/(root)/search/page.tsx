@@ -64,7 +64,7 @@ export default async function SearchPage({ searchParams }: { searchParams: any }
                         </Link>
                     </div>
                 </div>
-                <h1 className="text-lg font-semibold mb-2">Customer Ratings</h1>
+
                 <div>
                     <h1 className="text-lg font-semibold mb-2">Customer Ratings</h1>
                     <div className="flex flex-col gap-2">
