@@ -94,4 +94,18 @@ export function formatId(id: string, visibleChars = 6) {
   return "..." + id.slice(-visibleChars)
 }
 
+export function buildQuery(existing: Record<string, string | string[]>, updates: Record<string, string>) {
+  const plain: Record<string, string> = {};
+
+  for (const key in existing) {
+    const value = existing[key];
+    if (typeof value === "string") {
+      plain[key] = value;
+    }
+  }
+
+  return { ...plain, ...updates };
+}
+
+
 
