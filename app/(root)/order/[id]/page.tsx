@@ -15,7 +15,7 @@ import {
   TableHeader,
 } from "@/components/ui/table";
 import Image from "next/image";
-import { formatCurrency } from "@/lib/utils";
+import { formatCurrency, formatDate } from "@/lib/utils";
 import MarkAsPaidButton from "@/components/Order/paidButton";
 import MarkAsDeliveredButton from "@/components/Order/deliveredButton";
 
@@ -80,13 +80,7 @@ const OrderPage = async ({ params }: { params: Promise<{ id: string }> }) => {
 
                             {order.deliveredAt && (
                               <span>
-                                {new Date(order.deliveredAt).toLocaleDateString("en-EN", {
-                                  day: "2-digit",
-                                  month: "short",
-                                  year: "numeric",
-                                  hour: "2-digit",
-                                  minute: "2-digit",
-                                })}
+                                {formatDate(order.deliveredAt)}
                               </span>
                             )}
                           </div>
@@ -118,13 +112,7 @@ const OrderPage = async ({ params }: { params: Promise<{ id: string }> }) => {
                       </span>
                       {order.paidAt && (
                         <span>
-                          {new Date(order.paidAt).toLocaleDateString("en-EN", {
-                            day: "2-digit",
-                            month: "short",
-                            year: "numeric",
-                            hour: "2-digit",
-                            minute: "2-digit",
-                          })}
+                          {formatDate(order.paidAt)}
                         </span>
                       )}
                     </CardDescription>
