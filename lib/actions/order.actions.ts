@@ -177,5 +177,49 @@ export async function getAllMyOrders()  {
   }
 }
 
+export async function markOrderAsPaid(orderId: string) {
+  try {
+     await prisma.order.update({
+      where: { id: orderId },
+      data: {
+        isPaid: true,
+        paidAt: new Date(),
+      },
+    });
 
+    return {
+      success: true,
+      message: "Order marked as paid",
+      redirectTo: `/order/${orderId}`,
+    };
+  } catch (error) {
+    return {
+      success: false,
+      message: "Failed to mark as paid",
+      redirectTo: `/order/${orderId}`,
+    };
+  }
+}
+
+export async function markOrderAsDelivered( orderId: string){
+  try {
+     await prisma.order.update({
+       where: { id: orderId },
+            data: {
+              isDelivered: true,
+              deliveredAt: new Date(),}
+    });
+    return {
+      success: true,
+      message: "Order marked as delivered",
+      redirectTo: `/order/${orderId}`,
+    };
+  } catch (error) {
+    return {
+      success: false,
+      message: "Failed to mark as delivered", 
+      redirectTo: `/order/${orderId}`,
+    };
+  }
+}
 
