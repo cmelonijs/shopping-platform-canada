@@ -15,12 +15,15 @@ import {
   TableHeader,
 } from "@/components/ui/table";
 import Image from "next/image";
-import { formatCurrency } from "@/lib/utils";
+import { formatCurrency, formatDate } from "@/lib/utils";
+import MarkAsPaidButton from "@/components/Order/paidButton";
+import MarkAsDeliveredButton from "@/components/Order/deliveredButton";
 
 const OrderPage = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params;
 
   const orderData = await getOrderById(id);
+  console.log(orderData);
 
   if (!orderData.success || !orderData.order) {
     return (
@@ -65,15 +68,22 @@ const OrderPage = async ({ params }: { params: Promise<{ id: string }> }) => {
 
                         <CardTitle>Delivery Status:</CardTitle>
                         <CardDescription>
-                          <span
-                            className={`px-3 py-1 rounded-full text-sm font-medium ${
-                              order.isDelivered
+                          <div className="space-y-1">
+                            <span
+                              className={`px-3 py-1 rounded-full text-sm font-medium ${order.isDelivered
                                 ? "bg-green-100 text-green-800"
                                 : "bg-red-100 text-red-800"
-                            }`}
-                          >
-                            {order.isDelivered ? "Delivered" : "Not Delivered"}
-                          </span>
+                                }`}
+                            >
+                              {order.isDelivered ? "Delivered" : "Not Delivered"}
+                            </span>
+
+                            {order.deliveredAt && (
+                              <span>
+                                {formatDate(order.deliveredAt)}
+                              </span>
+                            )}
+                          </div>
                         </CardDescription>
                       </div>
                     ) : (
@@ -93,14 +103,18 @@ const OrderPage = async ({ params }: { params: Promise<{ id: string }> }) => {
                     <CardTitle>Payment Status:</CardTitle>
                     <CardDescription>
                       <span
-                        className={`px-3 py-1 rounded-full text-sm font-medium ${
-                          order.isPaid
-                            ? "bg-green-100 text-green-800"
-                            : "bg-red-100 text-red-800"
-                        }`}
+                        className={`px-3 py-1 rounded-full text-sm font-medium ${order.isPaid
+                          ? "bg-green-100 text-green-800"
+                          : "bg-red-100 text-red-800"
+                          }`}
                       >
                         {order.isPaid ? "Paid" : "Not Paid"}
                       </span>
+                      {order.paidAt && (
+                        <span>
+                          {formatDate(order.paidAt)}
+                        </span>
+                      )}
                     </CardDescription>
                   </CardContent>
                 </Card>
@@ -155,6 +169,14 @@ const OrderPage = async ({ params }: { params: Promise<{ id: string }> }) => {
                     <CardDescription>
                       {formatCurrency(order.totalPrice)}
                     </CardDescription>
+                    <div className="col-span-2 pt-2">
+                      {!order.isPaid && (
+                        <MarkAsPaidButton orderId={order.id} />
+                      )}
+                       {!order.isDelivered && order.isPaid && (
+                        <MarkAsDeliveredButton orderId={order.id} />
+                      )}
+                    </div>
                   </CardContent>
                 </Card>
               </div>

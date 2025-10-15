@@ -19,7 +19,7 @@ export default async function CartPage() {
   if (!cart) {
     // return <div>Your cart is empty</div>;
     return (
-      <div className="mx-auto w-full max-w-7xl p-6 h-screen">
+      <div className="mx-auto w-full max-w-7xl p-6">
         <div>
           <h1 className="text-2xl font-semibold">Shopping Cart</h1>
           <p className="text-muted-foreground">0 items in your cart</p>
@@ -29,8 +29,8 @@ export default async function CartPage() {
   }
 
   return (
-    <div className="mx-auto w-full max-w-7xl p-6 h-screen">
-      <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
+    <div className="mx-auto w-full max-w-7xl p-6 ">
+      <div className="grid grid-cols-1 gap-8 lg:grid-cols-3 lg:min-h-[90vh]">
         {/* Main Cart Section */}
         <div className="space-y-6 lg:col-span-2">
           <div>
@@ -87,8 +87,8 @@ export default async function CartPage() {
 
         {/* Order Summary */}
         {cart.items.length > 0 && (
-          <div className="space-y-6">
-            <Card>
+          <div className=" space-y-6">
+            <Card  className="flex flex-col flex-1">
               <CardHeader>
                 <CardTitle>Order Summary</CardTitle>
                 <CardDescription>

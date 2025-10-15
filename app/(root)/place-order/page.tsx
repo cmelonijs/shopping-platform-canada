@@ -35,7 +35,7 @@ export default async function placeOrderpage() {
       <div className="flex flex-col min-h-screen">
         <div className="flex-grow">
           <div className="flex flex-col">
-            <div className="w-full max-w-max mx-auto p-6s min-h-screen">
+            <div className="w-full max-w-max mx-auto p-6s min-h-screen p-4">
               <h1 className="text-3xl font-bold mb-3">Place Order</h1>
               <p className="text-sm text-muted-foreground mb-2">
                 Review your order and confirm
