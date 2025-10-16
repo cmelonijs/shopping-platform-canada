@@ -43,9 +43,9 @@ cd shopping-platform-canada
 npm install       # or pnpm install / yarn
 ```
 
+---
 2. Create `.env` in project root (do not commit)
 Example `.env`
----
 ```
 NEXTAUTH_SECRET= "..."
 NEXTAUTH_URL= "..."
