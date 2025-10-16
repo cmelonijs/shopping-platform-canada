@@ -1,4 +1,3 @@
-// ...existing code...
 # 🛒 Shopping Platform - Canada
 
 A modern, high-performance e-commerce scaffold for the Canadian market built with Next.js (App Router), TypeScript, Tailwind CSS and Prisma.
@@ -33,7 +32,7 @@ A modern, high-performance e-commerce scaffold for the Canadian market built wit
 
 1. Clone and install
 ```bash
-git clone <repo-url>
+git clone https://github.com/cmelonijs/shopping-platform-canada.git
 cd shopping-platform-canada
 npm install       # or pnpm install / yarn
 ```
@@ -64,7 +63,6 @@ npm run prisma:seed
 npm run dev
 # Visit http://localhost:3000
 ```
-
 ---
 
 ## Important scripts
