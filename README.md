@@ -26,12 +26,7 @@ A modern, high-performance e-commerce scaffold for the Canadian market built wit
 ## Features
 
 - Product catalog, cart, checkout flow
-- User authentication
 - Admin panels: products, users, orders
-- File uploads (UploadThing)
-- Payment integrations (PayPal/Stripe)
-- Prisma migrations & seeds
-
 ---
 
 ## Quickstart (local)
@@ -78,7 +73,4 @@ Check `package.json` for exact scripts. Common ones:
 - npm run dev — development
 - npm run build — production build
 - npm run start — start production server
-- npx prisma migrate dev — run migrations
-- npx prisma db seed — run seed
-
 ---
