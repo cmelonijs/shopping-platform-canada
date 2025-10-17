@@ -16,7 +16,7 @@ import Link from "next/link";
 export default async function OrdersAdminPage({
   searchParams,
 }: {
-  searchParams?: { q?: string } | Promise<{ q?: string }>;
+  searchParams: Promise<{ q?: string }>;
 }) {
   const sp = await searchParams;
   const q = sp?.q;

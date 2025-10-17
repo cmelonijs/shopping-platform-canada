@@ -17,7 +17,7 @@ import ClearSearchBar from "@/components/admin/ClearSearchBar";
 export default async function UsersPage({
   searchParams,
 }: {
-  searchParams?: { q?: string } | Promise<{ q?: string }>;
+  searchParams: Promise<{ q?: string }>;
 }) {
   
   const sp = await searchParams;
