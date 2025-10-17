@@ -16,8 +16,8 @@ import {
 } from "@/components/ui/table";
 import Image from "next/image";
 import { formatCurrency, formatDate } from "@/lib/utils";
-import MarkAsPaidButton from "@/components/Order/paidButton";
-import MarkAsDeliveredButton from "@/components/Order/deliveredButton";
+import MarkAsPaidButton from "@/components/order/paidButton";
+import MarkAsDeliveredButton from "@/components/order/deliveredButton";
 
 const OrderPage = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params;
