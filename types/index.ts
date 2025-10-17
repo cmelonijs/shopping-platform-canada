@@ -5,6 +5,7 @@ import {
   insertOrderItemSchema,
   insertOrderSchema,
   insertProductSchema,
+  insertReviewSchema,
   insertShippingAddressSchema,
   paymentMethodSchema,
   updateProfileNameSchema,
@@ -45,6 +46,14 @@ export type OrderItem = z.infer<typeof insertOrderItemSchema>;
 
 export type Profile = z.infer<typeof updateProfileNameSchema>;
 
-export type UsersProfile =z.infer<typeof updateUsersProfileNameSchema>;
+export type UsersProfile = z.infer<typeof updateUsersProfileNameSchema>;
 
 export type CreateProduct = z.infer<typeof createProductSchema>;
+
+export type Review = z.infer<typeof insertReviewSchema> & {
+  id: string;
+  createdAt: Date;
+  user?: {
+    name: string;
+  };
+};
