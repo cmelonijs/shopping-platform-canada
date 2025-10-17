@@ -104,7 +104,7 @@ export const updateProfileNameSchema = z.object({
 
 // SCHEMA FOR UPDATING user NAME
 export const updateUsersProfileNameSchema = z.object({
-  id: z.string().uuid(), 
+  id: z.string().uuid(),
   name: z.string().min(3, "Name must be at least 3 characters"),
   email: z.string().email().optional(),
   role: z.enum(["user", "admin"]),
@@ -121,4 +121,17 @@ export const createProductSchema = z.object({
   images: z.array(z.string()).min(1, "Product must have at least one image"),
   isFeatured: z.boolean(),
   description: z.string().min(3, "Description must be at least 3 characters"),
+});
+
+// SCHEMA FOR INSERT VIEWS
+export const insertReviewSchema = z.object({
+  title: z.string().min(3, "Title must be at least 3 characters"),
+  description: z.string().min(3, "Description must be at least 3 characters"),
+  productId: z.string().min(1, "Product is required"),
+  userId: z.string().min(1, "User is required"),
+  rating: z.coerce
+    .number()
+    .int()
+    .min(1, "Rating must be at least one")
+    .max(5, "Rating must be at most one"),
 });
