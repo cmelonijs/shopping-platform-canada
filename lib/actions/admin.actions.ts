@@ -67,7 +67,7 @@ export async function getAllUsers(q?: string) {
     where,
     orderBy: { createdAt: "desc" },
   });
-  return users;
+  return convertToPlainObject(users);
 }
 
 // get all products
