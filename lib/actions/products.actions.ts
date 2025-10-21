@@ -45,7 +45,8 @@ export async function getAllCategoriesWithCount() {
   }));
 }
 
-export async function getFilteredProducts({ category, price, rating, sort, page }: {
+export async function getFilteredProducts({ q, category, price, rating, sort, page }: {
+  q?: string;
   category?: string;
   price?: string;
   rating?: string;
@@ -64,32 +65,35 @@ export async function getFilteredProducts({ category, price, rating, sort, page 
   if (rating && rating !== "all") {
     query.rating = { gte: Number(rating) };
   }
+  const textSearch =
+    q && q.trim()
+      ? {
+        OR: [
+          { name: { contains: q, mode: "insensitive" } },
+          { category: { contains: q, mode: "insensitive" } },
+        ],
+      }
+      : {};
 
-const sortOption: Prisma.ProductOrderByWithRelationInput | undefined =
+  const sortOption: Prisma.ProductOrderByWithRelationInput | undefined =
     sort === "newest"
       ? { createdAt: "desc" as Prisma.SortOrder }
       : sort === "price-low"
-      ? { price: "asc" as Prisma.SortOrder }
-      : sort === "price-high"
-      ? { price: "desc" as Prisma.SortOrder }
-      : undefined;
+        ? { price: "asc" as Prisma.SortOrder }
+        : sort === "price-high"
+          ? { price: "desc" as Prisma.SortOrder }
+          : undefined;
 
   const pageNumber = Number(page) || 1;
   const pageSize = 12;
   const skip = (pageNumber - 1) * pageSize;
 
   return await prisma.product.findMany({
-  where: query,
-  orderBy: sortOption,
+    where: {
+      AND: [query, textSearch],
+    },
+    orderBy: sortOption,
   skip,
   take: pageSize,
-});
-}
-
-export async function getAllCategories() {
-  const categories = await prisma.product.groupBy({
-    by: ['category'],
   });
-
-  return categories;
 }

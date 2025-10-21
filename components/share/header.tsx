@@ -3,14 +3,15 @@ import Image from "next/image";
 import logo from "@/assets/images/logo.png";
 import Menu from "./menu";
 import HamburgerMenu from "./hamburgerMenu";
-
+import SearchBar from "./SearchBar";
 export default function Header() {
+
   return (
     <div className="w-full border-b">
       <div className="container mx-auto px-3 flex justify-between items-center py-3">
         {/* Left Side */}
         <div className="flex items-center">
-          <HamburgerMenu/>
+          <HamburgerMenu />
           <Link href="/" className="shirnk-0">
             <Image
               src={logo}
@@ -27,8 +28,12 @@ export default function Header() {
             SimpleShop
           </Link>
         </div>
-
-        <Menu />
+        <div className="flex gap-2 items-center">
+          <div className="hidden md:flex gap-2">
+            <SearchBar />
+          </div>
+          <Menu />
+        </div>
       </div>
     </div>
   );
