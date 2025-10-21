@@ -8,6 +8,7 @@ import { revalidatePath } from "next/cache";
 import { CreateProduct, UsersProfile } from "@/types";
 import { updateUsersProfileNameSchema } from "../validator";
 import { redirect } from "next/navigation";
+import { Prisma } from "@prisma/client";
 
 // get sales
 export async function getDashboardValue() {
@@ -52,34 +53,52 @@ export async function getDashboardValue() {
 }
 
 //get all users  
-export async function getAllUsers() {
+export async function getAllUsers(q?: string) {
+  const where: Prisma.UserWhereInput | undefined = q
+    ? {
+        OR: [
+          { name: { contains: q, mode: "insensitive" } },
+          { email: { contains: q, mode: "insensitive" } },
+        ],
+      }
+    : undefined;
+
   const users = await prisma.user.findMany({
-    orderBy: {
-      createdAt: 'desc'
-    },
+    where,
+    orderBy: { createdAt: "desc" },
   });
-  return convertToPlainObject(users)
+  return convertToPlainObject(users);
 }
 
 // get all products
-export async function getAllProducts() {
-  const product = await prisma.product.findMany({
-    orderBy: {
-      createdAt: 'desc'
-    },
+export async function getAllProducts(q?: string) {
+  const where: Prisma.ProductWhereInput | undefined = q
+    ? {
+        OR: [
+          { name: { contains: q, mode: "insensitive" } },
+        ],
+      }
+    : undefined;
+
+  const products = await prisma.product.findMany({
+    where,
+    orderBy: { createdAt: "desc" },
   });
-  return convertToPlainObject(product)
+  return convertToPlainObject(products);
 }
 
 // get all orders
-export async function getAllOrders() {
+export async function getAllOrders(q?: string) {
+   const where: Prisma.OrderWhereInput | undefined = q
+   ?{
+    OR:[
+      { user: { name: { contains: q, mode: "insensitive" } } },
+    ]
+   }: undefined;
   const orders = await prisma.order.findMany({
-    orderBy: {
-      createdAt: 'desc'
-    },
-    include: {
-      user: true,
-    },
+    where,
+    orderBy: {createdAt: 'desc'},
+    include: { user: true },
   });
 
   return convertToPlainObject(orders);

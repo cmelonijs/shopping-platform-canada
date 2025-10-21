@@ -12,14 +12,26 @@ import { getAllUsers } from "@/lib/actions/admin.actions";
 import { formatId } from "@/lib/utils";
 import { deleteUserById } from "@/lib/actions/admin.actions";
 import Link from "next/link";
+import ClearSearchBar from "@/components/admin/ClearSearchBar";
 
-export default async function ProductAdminPage() {
-  const users = await getAllUsers();
+export default async function UsersPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ q?: string }>;
+}) {
+  
+  const sp = await searchParams;
+  const q = sp?.q;
+  const users = await getAllUsers(q);
+
   return (
-    <div className="container mx-auto px-3 py-3">
-      <div className="flex justify-between items-center mb-4 px-3">
-        <h1 className="font-bold text-xl">Users</h1>
-      </div>
+     <div className="container mx-auto px-3 py-3">
+          <div className="sm:col-col-1 md:flex justify-between items-center mb-4 px-3">
+            <div className="flex items-center gap-4 ">
+              <h1 className="font-bold text-xl">Users</h1>
+             <ClearSearchBar path="/admin/users" query={q} />
+            </div>
+          </div>
       <div className="w-full h-full px-3 pb-8">
         <Table>
           <TableHeader>
