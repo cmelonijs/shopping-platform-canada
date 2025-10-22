@@ -1,5 +1,5 @@
-"use client"
-import * as React from "react"
+"use client";
+import * as React from "react";
 import { AlignLeft } from "lucide-react";
 import {
   Drawer,
@@ -17,7 +17,7 @@ export default function HamburgerMenuClient({
 }: {
   categories: { category: string; count: number }[];
 }) {
-  const [open, setOpen] = React.useState(false)
+  const [open, setOpen] = React.useState(false);
   return (
     <Drawer direction="left" open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
@@ -32,7 +32,7 @@ export default function HamburgerMenuClient({
         </DrawerHeader>
         <DrawerClose asChild>
           <div className="space-y-2 px-2">
-            {categories.map(cat => (
+            {categories.map((cat) => (
               <Link
                 key={cat.category}
                 href={`/search?category=${encodeURIComponent(cat.category)}`}
@@ -40,7 +40,9 @@ export default function HamburgerMenuClient({
                 className="flex justify-between items-center px-4 py-2 hover:bg-muted rounded-md"
               >
                 <span>{cat.category}</span>
-                <span className="text-sm text-muted-foreground">{cat.count}</span>
+                <span className="text-sm text-muted-foreground">
+                  {cat.count}
+                </span>
               </Link>
             ))}
           </div>

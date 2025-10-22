@@ -27,7 +27,7 @@ export default function SearchBar({
     if (selected !== "all") params.set("category", selected);
     if (searchText.trim()) params.set("q", searchText.trim());
     router.push(`/search?${params.toString()}`);
-     setSearchText("");
+    setSearchText("");
     setSelected("all");
   };
 

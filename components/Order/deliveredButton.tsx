@@ -7,7 +7,11 @@ import { useTransition } from "react";
 import { toast } from "sonner";
 import { Truck } from "lucide-react";
 
-export default function MarkAsDeliveredButton({ orderId }: { orderId: string }) {
+export default function MarkAsDeliveredButton({
+  orderId,
+}: {
+  orderId: string;
+}) {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
 

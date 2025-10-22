@@ -70,18 +70,19 @@ const OrderPage = async ({ params }: { params: Promise<{ id: string }> }) => {
                         <CardDescription>
                           <div className="space-y-1">
                             <span
-                              className={`px-3 py-1 rounded-full text-sm font-medium ${order.isDelivered
-                                ? "bg-green-100 text-green-800"
-                                : "bg-red-100 text-red-800"
-                                }`}
+                              className={`px-3 py-1 rounded-full text-sm font-medium ${
+                                order.isDelivered
+                                  ? "bg-green-100 text-green-800"
+                                  : "bg-red-100 text-red-800"
+                              }`}
                             >
-                              {order.isDelivered ? "Delivered" : "Not Delivered"}
+                              {order.isDelivered
+                                ? "Delivered"
+                                : "Not Delivered"}
                             </span>
 
                             {order.deliveredAt && (
-                              <span>
-                                {formatDate(order.deliveredAt)}
-                              </span>
+                              <span>{formatDate(order.deliveredAt)}</span>
                             )}
                           </div>
                         </CardDescription>
@@ -103,18 +104,15 @@ const OrderPage = async ({ params }: { params: Promise<{ id: string }> }) => {
                     <CardTitle>Payment Status:</CardTitle>
                     <CardDescription>
                       <span
-                        className={`px-3 py-1 rounded-full text-sm font-medium ${order.isPaid
-                          ? "bg-green-100 text-green-800"
-                          : "bg-red-100 text-red-800"
-                          }`}
+                        className={`px-3 py-1 rounded-full text-sm font-medium ${
+                          order.isPaid
+                            ? "bg-green-100 text-green-800"
+                            : "bg-red-100 text-red-800"
+                        }`}
                       >
                         {order.isPaid ? "Paid" : "Not Paid"}
                       </span>
-                      {order.paidAt && (
-                        <span>
-                          {formatDate(order.paidAt)}
-                        </span>
-                      )}
+                      {order.paidAt && <span>{formatDate(order.paidAt)}</span>}
                     </CardDescription>
                   </CardContent>
                 </Card>
@@ -170,10 +168,8 @@ const OrderPage = async ({ params }: { params: Promise<{ id: string }> }) => {
                       {formatCurrency(order.totalPrice)}
                     </CardDescription>
                     <div className="col-span-2 pt-2">
-                      {!order.isPaid && (
-                        <MarkAsPaidButton orderId={order.id} />
-                      )}
-                       {!order.isDelivered && order.isPaid && (
+                      {!order.isPaid && <MarkAsPaidButton orderId={order.id} />}
+                      {!order.isDelivered && order.isPaid && (
                         <MarkAsDeliveredButton orderId={order.id} />
                       )}
                     </div>

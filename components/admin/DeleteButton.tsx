@@ -15,10 +15,10 @@ import {
 import { toast } from "sonner";
 import { useTransition } from "react";
 
-const DeleteButton = ({ 
-  action, 
-  itemId, 
-  itemType
+const DeleteButton = ({
+  action,
+  itemId,
+  itemType,
 }: {
   action: (formData: FormData) => Promise<void>;
   itemId: string;
@@ -31,7 +31,7 @@ const DeleteButton = ({
       try {
         const formData = new FormData();
         formData.append(itemType, itemId);
-        
+
         await action(formData);
         toast.success("Deleted successfully");
       } catch (error) {
@@ -51,12 +51,17 @@ const DeleteButton = ({
         <AlertDialogHeader>
           <AlertDialogTitle>Are you sure?</AlertDialogTitle>
           <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete the {itemType}.
+            This action cannot be undone. This will permanently delete the{" "}
+            {itemType}.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction onClick={handleDelete} disabled={isPending} className="bg-red-500 hover:bg-red-600">
+          <AlertDialogAction
+            onClick={handleDelete}
+            disabled={isPending}
+            className="bg-red-500 hover:bg-red-600"
+          >
             {isPending ? "Deleting..." : "Delete"}
           </AlertDialogAction>
         </AlertDialogFooter>

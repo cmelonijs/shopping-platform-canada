@@ -39,13 +39,20 @@ export async function getAllCategoriesWithCount() {
     },
   });
 
-  return categories.map(cat => ({
+  return categories.map((cat) => ({
     category: cat.category,
     count: cat._count.category,
   }));
 }
 
-export async function getFilteredProducts({ q, category, price, rating, sort, page }: {
+export async function getFilteredProducts({
+  q,
+  category,
+  price,
+  rating,
+  sort,
+  page,
+}: {
   q?: string;
   category?: string;
   price?: string;
@@ -68,11 +75,11 @@ export async function getFilteredProducts({ q, category, price, rating, sort, pa
   const textSearch =
     q && q.trim()
       ? {
-        OR: [
-          { name: { contains: q, mode: "insensitive" } },
-          { category: { contains: q, mode: "insensitive" } },
-        ],
-      }
+          OR: [
+            { name: { contains: q, mode: "insensitive" } },
+            { category: { contains: q, mode: "insensitive" } },
+          ],
+        }
       : {};
 
   const sortOption: Prisma.ProductOrderByWithRelationInput | undefined =
@@ -93,7 +100,7 @@ export async function getFilteredProducts({ q, category, price, rating, sort, pa
       AND: [query, textSearch],
     },
     orderBy: sortOption,
-  skip,
-  take: pageSize,
+    skip,
+    take: pageSize,
   });
 }

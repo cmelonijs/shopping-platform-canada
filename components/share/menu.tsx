@@ -15,7 +15,6 @@ import { auth } from "@/auth";
 const Menu = async () => {
   const session = await auth();
 
-
   return (
     <div className="flex justify-end gap-3">
       <nav className="hidden md:flex w-full max-w-xs gap-1">

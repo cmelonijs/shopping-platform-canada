@@ -32,7 +32,7 @@ export default async function Header() {
         </div>
         <div className="flex gap-2 items-center">
           <div className="hidden md:flex gap-2">
-            <SearchBar categories={categories}/>
+            <SearchBar categories={categories} />
           </div>
           <Menu />
         </div>

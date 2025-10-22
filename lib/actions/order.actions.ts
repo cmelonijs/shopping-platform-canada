@@ -8,8 +8,6 @@ import { CartItem } from "@/types";
 import { getUserById } from "./auth.actions";
 import { insertOrderSchema, insertShippingAddressSchema } from "../validator";
 
-
-
 // create order and create the order items
 export async function createOrder() {
   try {
@@ -108,25 +106,25 @@ export async function getOrderById(orderId: string) {
     if (!session) throw new Error("User is not authenticated");
 
     const order = await prisma.order.findUnique({
-      where: { 
-        id: orderId, 
+      where: {
+        id: orderId,
       },
-      include: { 
+      include: {
         orderItems: {
           include: {
-            product: true
-          }
+            product: true,
+          },
         },
-        user: true
+        user: true,
       },
     });
 
     if (!order) throw new Error("Order not found");
 
     const userAddress = insertShippingAddressSchema.parse(
-      typeof order.shippingAddress === "string" 
-        ? JSON.parse(order.shippingAddress) 
-        : order.shippingAddress
+      typeof order.shippingAddress === "string"
+        ? JSON.parse(order.shippingAddress)
+        : order.shippingAddress,
     );
 
     return {
@@ -135,14 +133,14 @@ export async function getOrderById(orderId: string) {
       userAddress,
     };
   } catch (err) {
-    return { 
-      success: false, 
-      message: formatError(err) 
+    return {
+      success: false,
+      message: formatError(err),
     };
   }
 }
 
-export async function getAllMyOrders()  {
+export async function getAllMyOrders() {
   try {
     const session = await auth();
     const userId = session?.user?.id as string;
@@ -152,34 +150,33 @@ export async function getAllMyOrders()  {
     }
 
     const orders = await prisma.order.findMany({
-      where: { 
-        userId: userId 
+      where: {
+        userId: userId,
       },
-      orderBy: { 
-        createdAt: "desc" 
+      orderBy: {
+        createdAt: "desc",
       },
       include: {
         orderItems: {
           include: {
-            product: true
-          }
-        }
-      }
+            product: true,
+          },
+        },
+      },
     });
 
     return convertToPlainObject(orders);
-    
   } catch (err) {
-      if (isRedirectError(err)) {
-        throw err;
-      }
-      throw new Error(formatError(err));
+    if (isRedirectError(err)) {
+      throw err;
+    }
+    throw new Error(formatError(err));
   }
 }
 
 export async function markOrderAsPaid(orderId: string) {
   try {
-     await prisma.order.update({
+    await prisma.order.update({
       where: { id: orderId },
       data: {
         isPaid: true,
@@ -201,13 +198,14 @@ export async function markOrderAsPaid(orderId: string) {
   }
 }
 
-export async function markOrderAsDelivered( orderId: string){
+export async function markOrderAsDelivered(orderId: string) {
   try {
-     await prisma.order.update({
-       where: { id: orderId },
-            data: {
-              isDelivered: true,
-              deliveredAt: new Date(),}
+    await prisma.order.update({
+      where: { id: orderId },
+      data: {
+        isDelivered: true,
+        deliveredAt: new Date(),
+      },
     });
     return {
       success: true,
@@ -217,9 +215,8 @@ export async function markOrderAsDelivered( orderId: string){
   } catch (error) {
     return {
       success: false,
-      message: "Failed to mark as delivered", 
+      message: "Failed to mark as delivered",
       redirectTo: `/order/${orderId}`,
     };
   }
 }
-

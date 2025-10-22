@@ -32,7 +32,7 @@ export default function PlaceOrderButton() {
       className="bg-primary"
     >
       {isPending ? "Creating order..." : "Place order"}
-      <ArrowRight className="animate-bounce"/>
+      <ArrowRight className="animate-bounce" />
     </Button>
   );
 }

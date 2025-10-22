@@ -88,7 +88,7 @@ export default async function CartPage() {
         {/* Order Summary */}
         {cart.items.length > 0 && (
           <div className=" space-y-6">
-            <Card  className="flex flex-col flex-1">
+            <Card className="flex flex-col flex-1">
               <CardHeader>
                 <CardTitle>Order Summary</CardTitle>
                 <CardDescription>

@@ -22,7 +22,7 @@ export function formatError(error: any) {
   if (error.name === "ZodError") {
     // handle zod error
     const fieldErrors = Object.keys(error.errors).map(
-      (field) => error.errors[field].message
+      (field) => error.errors[field].message,
     );
 
     return fieldErrors.join(". ");
@@ -34,10 +34,12 @@ export function formatError(error: any) {
     const field = error.meta?.target ? error.meta.target[0] : "Field";
 
     return `${field.charAt(0).toUpperCase() + field.slice(1)} already exists.`;
-  } else if (error.type === "CredentialsSignin" || error.name === "CredentialsSignin") {
+  } else if (
+    error.type === "CredentialsSignin" ||
+    error.name === "CredentialsSignin"
+  ) {
     // handle nextauth credentials signin error
     return "Invalid email or password. Please try again.";
-    
   } else {
     // handle other error
 
@@ -87,14 +89,18 @@ export function formatDate(date: string | Date) {
     hour: "numeric",
     minute: "numeric",
   };
-return new Date(date).toLocaleDateString("it-IT", options);}
+  return new Date(date).toLocaleDateString("it-IT", options);
+}
 
 // FORMAT ORDER ID
 export function formatId(id: string, visibleChars = 6) {
-  return "..." + id.slice(-visibleChars)
+  return "..." + id.slice(-visibleChars);
 }
 
-export function buildQuery(existing: Record<string, string | string[]>, updates: Record<string, string>) {
+export function buildQuery(
+  existing: Record<string, string | string[]>,
+  updates: Record<string, string>,
+) {
   const plain: Record<string, string> = {};
 
   for (const key in existing) {
@@ -106,6 +112,3 @@ export function buildQuery(existing: Record<string, string | string[]>, updates:
 
   return { ...plain, ...updates };
 }
-
-
-

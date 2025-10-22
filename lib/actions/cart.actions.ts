@@ -14,14 +14,12 @@ const calcPrice = (items: CartItem[]) => {
   const itemsPrice = round2(
     items.reduce((acc, item) => {
       return acc + Number(item.price) * item.qty;
-    }, 0)
+    }, 0),
   );
 
   // const shippingPrice = round2(itemsPrice > 100 ? 1 : 10); changed from Paolo
-  const shippingPrice = items.length === 0                                
-  ? 0 
-  : round2(itemsPrice > 100 ? 1 : 10);
-
+  const shippingPrice =
+    items.length === 0 ? 0 : round2(itemsPrice > 100 ? 1 : 10);
 
   const taxPrice = round2(0.22 * itemsPrice);
 
@@ -83,7 +81,7 @@ export async function addItemToCart(data: CartItem) {
     } else {
       // check if item is already in the cart
       const existsItem = (cart.items as CartItem[]).find(
-        (prod) => prod.productId === item.productId
+        (prod) => prod.productId === item.productId,
       );
 
       if (existsItem) {
@@ -94,7 +92,7 @@ export async function addItemToCart(data: CartItem) {
 
         // increase the quantity
         (cart.items as CartItem[]).find(
-          (prod) => prod.productId === item.productId
+          (prod) => prod.productId === item.productId,
         )!.qty = existsItem.qty + 1;
       } else {
         // check stock
@@ -119,7 +117,7 @@ export async function addItemToCart(data: CartItem) {
         success: true,
         message: `${product.name} ${
           existsItem ? "updated in" : "added to"
-        } cart` ,
+        } cart`,
       };
     }
   } catch (err) {
@@ -177,7 +175,7 @@ export async function removeItemFormCart(productId: string) {
 
     // check for item
     const exist = (cart.items as CartItem[]).find(
-      (prod) => prod.productId === productId
+      (prod) => prod.productId === productId,
     );
 
     if (!exist) throw new Error("Item not found");
@@ -186,12 +184,12 @@ export async function removeItemFormCart(productId: string) {
     if (exist.qty === 1) {
       //remove from cart
       cart.items = (cart.items as CartItem[]).filter(
-        (prod) => prod.productId !== exist.productId
+        (prod) => prod.productId !== exist.productId,
       );
     } else {
       // decrease qty by one
       (cart.items as CartItem[]).find(
-        (prod) => prod.productId === productId
+        (prod) => prod.productId === productId,
       )!.qty = exist.qty - 1;
     }
 

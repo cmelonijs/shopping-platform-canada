@@ -5,7 +5,7 @@ const currency = z
   .string()
   .refine(
     (val) => /^\d+(\.\d{2})?$/.test(formatNumberWithDecimal(Number(val))),
-    "Price must have exactly two decimal places."
+    "Price must have exactly two decimal places.",
   );
 
 // SCHEMA FOR INSERTING PRODUCT

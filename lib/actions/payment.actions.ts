@@ -1,4 +1,4 @@
-"use server"
+"use server";
 
 import { PaymentMethod } from "@/types";
 import { auth } from "@/auth";
@@ -44,9 +44,9 @@ export async function updatePaymentMethod(data: PaymentMethod) {
       message: formatError(err),
     };
   }
-} 
+}
 
-export async function getPaymentMethod(): Promise<PaymentMethod | null> { 
+export async function getPaymentMethod(): Promise<PaymentMethod | null> {
   try {
     const session = await auth();
     const userId = session?.user?.id as string;
@@ -64,11 +64,11 @@ export async function getPaymentMethod(): Promise<PaymentMethod | null> {
       },
     });
 
-   const paymentMethod = user?.paymentMethod || null;
-   if (!paymentMethod) return null;
+    const paymentMethod = user?.paymentMethod || null;
+    if (!paymentMethod) return null;
 
-   const validatedPaymentMethod = paymentMethodSchema.parse({ paymentMethod });
-   return validatedPaymentMethod;
+    const validatedPaymentMethod = paymentMethodSchema.parse({ paymentMethod });
+    return validatedPaymentMethod;
   } catch (err) {
     if (isRedirectError(err)) {
       throw err;

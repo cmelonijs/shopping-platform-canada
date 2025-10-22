@@ -1,4 +1,3 @@
-
 import {
   Table,
   TableBody,
@@ -24,24 +23,20 @@ export default async function TableOrdersOverview() {
           <TableHead className=" text-center">ACTION</TableHead>
         </TableRow>
       </TableHeader>
-       <TableBody>
-        {orders
-        .slice(0,5)
-          .map((order) => (
-            <TableRow key={order.id}>
-              <TableCell>{order.user?.name}</TableCell>
-              <TableCell>{formatDate(order.createdAt)}
-              </TableCell>
-              <TableCell>{formatCurrency(order.totalPrice)}
-              </TableCell>
-              <TableCell>
-                <Link href={`/order/${order.id}`}>
+      <TableBody>
+        {orders.slice(0, 5).map((order) => (
+          <TableRow key={order.id}>
+            <TableCell>{order.user?.name}</TableCell>
+            <TableCell>{formatDate(order.createdAt)}</TableCell>
+            <TableCell>{formatCurrency(order.totalPrice)}</TableCell>
+            <TableCell>
+              <Link href={`/order/${order.id}`}>
                 <Button variant={"link"}>Details</Button>
-                </Link>
-              </TableCell>
-            </TableRow>
-          ))}
-      </TableBody> 
+              </Link>
+            </TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
     </Table>
   );
 }

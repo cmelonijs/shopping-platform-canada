@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts";
 import {
   ChartContainer,
@@ -21,7 +21,7 @@ export default function BarChartOverview({
       }}
       className="min-h-[200px] w-full"
     >
-      <BarChart  accessibilityLayer data={chartData}>
+      <BarChart accessibilityLayer data={chartData}>
         <CartesianGrid vertical={false} />
         <XAxis
           dataKey="month"
