@@ -4,7 +4,7 @@ import Link from "next/link";
 import FilteredProducts from "./filteredProduct";
 import { buildQuery } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import SearchBar from "@/components/share/SearchBar";
+import SearchBar from "@/components/share/searchBar";
 
 export default async function SearchPage({
     searchParams,
@@ -130,18 +130,13 @@ export default async function SearchPage({
                             All ratings
                         </Link>
                     </div>
-                    <div className="mt-4 flex flex-col gap-2">
-                        <div className="md:hidden">
-                            <SearchBar />
-                        </div>
-                        <Link href="/search">
-                            <Button>Clear Filter</Button>
-                        </Link>
+                    <div className=" flex flex-col gap-4 mt-4 md:hidden">
+                            <SearchBar categories={categories} />
                     </div>
 
                 </div>
             </section>
-            
+
             <section className="flex-1 ">
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 gap-4">
                     <div className="flex flex-wrap items-center gap-4">
@@ -149,16 +144,20 @@ export default async function SearchPage({
                             {hasFilters ? "Filtered products" : "All products"}
                         </h1>
                         {activeFilters.length > 0 && (
-                            <div className="flex flex-wrap gap-2 text-sm ">
-                                {activeFilters.map((filter, index) => (
-                                    <span
-                                        key={index}
-                                        className=" px-2 py-1 rounded  text-xs"
-                                    >
-                                        {filter.label}: <span className="font-medium">{filter.value}</span>
-                                    </span>
-                                ))}
-
+                            <div className="transition-opacity duration-300 opacity-100 flex flex-row items-center gap-2">
+                                <Link href="/search">
+                                    <Button>Clear Filter</Button>
+                                </Link>
+                                <div className="flex flex-wrap gap-2 text-sm ">
+                                    {activeFilters.map((filter, index) => (
+                                        <span
+                                            key={index}
+                                            className=" px-2 py-1 rounded  text-xs"
+                                        >
+                                            {filter.label}: <span className="font-medium">{filter.value}</span>
+                                        </span>
+                                    ))}
+                                </div>
                             </div>
                         )}
                     </div>
@@ -201,5 +200,4 @@ export default async function SearchPage({
             </section>
         </div>
     );
-
 }

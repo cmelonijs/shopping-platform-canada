@@ -2,16 +2,18 @@ import Link from "next/link";
 import Image from "next/image";
 import logo from "@/assets/images/logo.png";
 import Menu from "./menu";
+import { getAllCategoriesWithCount } from "@/lib/actions/products.actions";
 import HamburgerMenu from "./hamburgerMenu";
-import SearchBar from "./SearchBar";
-export default function Header() {
+import SearchBar from "./searchBar";
 
+export default async function Header() {
+  const categories = await getAllCategoriesWithCount();
   return (
     <div className="w-full border-b">
       <div className="container mx-auto px-3 flex justify-between items-center py-3">
         {/* Left Side */}
         <div className="flex items-center">
-          <HamburgerMenu />
+          <HamburgerMenu categories={categories} />
           <Link href="/" className="shirnk-0">
             <Image
               src={logo}
@@ -30,7 +32,7 @@ export default function Header() {
         </div>
         <div className="flex gap-2 items-center">
           <div className="hidden md:flex gap-2">
-            <SearchBar />
+            <SearchBar categories={categories}/>
           </div>
           <Menu />
         </div>
