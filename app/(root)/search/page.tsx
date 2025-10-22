@@ -4,7 +4,7 @@ import Link from "next/link";
 import FilteredProducts from "./filteredProduct";
 import { buildQuery } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import SearchBar from "@/components/share/searchBar";
+import SearchBar from "@/components/share/searchBarUser";
 
 export default async function SearchPage({
     searchParams,
