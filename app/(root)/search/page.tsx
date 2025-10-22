@@ -1,9 +1,10 @@
 // app/search/page.tsx
-import { getAllCategories, getFilteredProducts } from "@/lib/actions/products.actions"
+import { getAllCategoriesWithCount, getFilteredProducts } from "@/lib/actions/products.actions"
 import Link from "next/link";
 import FilteredProducts from "./filteredProduct";
 import { buildQuery } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import SearchBar from "@/components/share/SearchBar";
 
 export default async function SearchPage({
     searchParams,
@@ -11,8 +12,9 @@ export default async function SearchPage({
     searchParams: Promise<Record<string, string>>;
 }) {
     const params = await searchParams;
-    const categories = await getAllCategories();
+    const categories = await getAllCategoriesWithCount();
     const products = await getFilteredProducts({
+        q: params.q,
         category: params.category,
         price: params.price,
         rating: params.rating,
@@ -21,6 +23,7 @@ export default async function SearchPage({
     });
     const activeFilters: { label: string; value: string }[] = [];
     const hasFilters =
+        (params.q) ||
         (params.category && params.category !== "all") ||
         (params.price && params.price !== "all") ||
         (params.rating && params.rating !== "all") ||
@@ -44,6 +47,10 @@ export default async function SearchPage({
         };
         activeFilters.push({ label: "Sort", value: sortLabels[params.sort] || params.sort });
     }
+    if (params.q) {
+        activeFilters.push({ label: "Search", value: params.q });
+    }
+
     return (
         <div className="min-h-screen p-6 md:p-10 flex flex-col md:flex-row gap-4">
             <section className="w-full md:max-w-xs flex flex-col gap-6 ">
@@ -123,33 +130,37 @@ export default async function SearchPage({
                             All ratings
                         </Link>
                     </div>
-                    <div className="mt-4">
+                    <div className="mt-4 flex flex-col gap-2">
+                        <div className="md:hidden">
+                            <SearchBar />
+                        </div>
                         <Link href="/search">
-                            <Button >Clear Filter</Button>
+                            <Button>Clear Filter</Button>
                         </Link>
                     </div>
+
                 </div>
             </section>
+            
             <section className="flex-1 ">
-
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 gap-4">
                     <div className="flex flex-wrap items-center gap-4">
-                    <h1 className="text-lg font-semibold">
-                        {hasFilters ? "Filtered products" : "All products"}
-                    </h1>
-                    {activeFilters.length > 0 && (
-                        <div className="flex flex-wrap gap-2 text-sm ">
-                            {activeFilters.map((filter, index) => (
-                                <span
-                                key={index}
-                                className=" px-2 py-1 rounded  text-xs"
-                                >
-                                    {filter.label}: <span className="font-medium">{filter.value}</span>
-                                </span>
-                            ))}
+                        <h1 className="text-lg font-semibold">
+                            {hasFilters ? "Filtered products" : "All products"}
+                        </h1>
+                        {activeFilters.length > 0 && (
+                            <div className="flex flex-wrap gap-2 text-sm ">
+                                {activeFilters.map((filter, index) => (
+                                    <span
+                                        key={index}
+                                        className=" px-2 py-1 rounded  text-xs"
+                                    >
+                                        {filter.label}: <span className="font-medium">{filter.value}</span>
+                                    </span>
+                                ))}
 
-                        </div>
-                    )}
+                            </div>
+                        )}
                     </div>
 
                     <div className="flex flex-wrap gap-4 text-sm font-medium">

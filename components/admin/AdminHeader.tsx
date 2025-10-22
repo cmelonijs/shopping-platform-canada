@@ -1,7 +1,7 @@
 
 import Menu from "@/components/share/menu";
 import Navbar from "./Navbar";
-import SearchBar from "./SearchBar";
+import SearchBar from "./SearchBarAdmin";
 
 
 export default function AdminHeader() {
