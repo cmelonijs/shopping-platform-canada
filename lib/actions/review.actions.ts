@@ -56,8 +56,6 @@ export async function createReview(data: CreateReview) {
                 },
             });
 
-            revalidatePath(`/products/${data.productId}`);
-
             return {
                 success: true,
                 message: "Review created successfully",

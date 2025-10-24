@@ -46,7 +46,6 @@ export default function ReviewForm({
 
   const onSubmit = async (data: CreateReview) => {
     try {
-      console.log("Submitting review data:", data);
       const result = await createReview(data);
       if (result.success) {
         toast.success("Review submitted successfully");
