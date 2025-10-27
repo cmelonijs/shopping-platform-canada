@@ -135,3 +135,15 @@ export const insertReviewSchema = z.object({
     .min(1, "Rating must be at least one")
     .max(5, "Rating must be at most one"),
 });
+
+
+export const createReviewFormSchema = z.object({
+  title: z.string().min(3, "Title must be at least 3 characters"),
+  description: z.string().min(3, "Description must be at least 3 characters"),
+  rating: z.coerce
+    .number()
+    .int()
+    .min(1, "Rating must be at least one")
+    .max(5, "Rating must be at most one"),
+  productId: z.string().min(1, "Product is required"),
+});
