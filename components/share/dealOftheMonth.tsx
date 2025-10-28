@@ -4,25 +4,33 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import { Button } from "../ui/button";
 import Link from "next/link";
+import { EXPIRATION_DEAL_DATE } from "@/lib/constants";
+
 
 export default function DealOfTheMonth({ images, product
 }: {
     images: string; product: { slug: string };
 }) {
     const [endOfDeal, setEndOfDeal] = useState(false);
+    const now = new Date();
+    const diff = EXPIRATION_DEAL_DATE.getTime() - now.getTime();
+
+    const setDays = (diff: number) => Math.floor(diff / (1000 * 60 * 60 * 24));
+    const setHours = (diff: number) => Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const setMinutes = (diff: number) => Math.floor((diff / (1000 * 60)) % 60);
+    const setSeconds = (diff: number) => Math.floor((diff / 1000) % 60);
+
     const [count, setCount] = useState({
-        days: 0,
-        hours: 0,
-        minutes: 0,
-        seconds: 0,
+        days: setDays(diff),
+        hours: setHours(diff),
+        minutes: setMinutes(diff),
+        seconds: setSeconds(diff),
     });
-    
+
     useEffect(() => {
-        // const targetDate = new Date(Date.now() + 0.25 * 60 * 1000);
-        const targetDate = new Date("2025-10-31T23:59:59.000Z");
         const interval = setInterval(() => {
             const now = new Date();
-            const diff = targetDate.getTime() - now.getTime();
+            const diff = EXPIRATION_DEAL_DATE.getTime() - now.getTime();
 
             if (diff <= 0) {
                 setEndOfDeal(true);
@@ -30,14 +38,14 @@ export default function DealOfTheMonth({ images, product
                 return;
             }
 
-            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-            const minutes = Math.floor((diff / (1000 * 60)) % 60);
-            const seconds = Math.floor((diff / 1000) % 60);
+            const days = setDays(diff);
+            const hours = setHours(diff);
+            const minutes = setMinutes(diff);
+            const seconds = setSeconds(diff);
 
             setCount({ days, hours, minutes, seconds });
         }, 1000);
-        
+
         return () => clearInterval(interval);
     }, []);
 
