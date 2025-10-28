@@ -5,9 +5,10 @@ export default function BrandPolicy() {
     <Card>
       <div className="container mx-auto px-2 py-2 grid grid-cols-1 md:grid-cols-4 gap-2 text-sm w-full">
         <div>
-          <CardHeader >
+          <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <ShoppingBag /> Free Shipping </CardTitle>
+              <ShoppingBag /> Free Shipping{" "}
+            </CardTitle>
           </CardHeader>
           <CardContent className="text-muted-foreground">
             Free Shipping on orders above 100$
@@ -16,15 +17,20 @@ export default function BrandPolicy() {
         <div>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <DollarSign />Money Back Guarantee </CardTitle>
+              <DollarSign />
+              Money Back Guarantee{" "}
+            </CardTitle>
           </CardHeader>
-          <CardContent className="text-muted-foreground"> Within 30 days of purchase
+          <CardContent className="text-muted-foreground">
+            {" "}
+            Within 30 days of purchase
           </CardContent>
         </div>
         <div>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <CreditCard />Flexible Payments
+              <CreditCard />
+              Flexible Payments
             </CardTitle>
           </CardHeader>
           <CardContent className="text-muted-foreground">
@@ -34,7 +40,8 @@ export default function BrandPolicy() {
         <div>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <Headset />24/7 Support
+              <Headset />
+              24/7 Support
             </CardTitle>
           </CardHeader>
           <CardContent className="text-muted-foreground">
@@ -43,6 +50,5 @@ export default function BrandPolicy() {
         </div>
       </div>
     </Card>
-
   );
 }

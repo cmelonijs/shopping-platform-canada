@@ -15,7 +15,7 @@ import {
   FormDescription,
   FormMessage,
 } from "@/components/ui/form";
-import { createProduct } from "@/lib/actions/admin.actions";
+import { createProduct, updateProduct } from "@/lib/actions/admin.actions";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { CreateProduct } from "@/types";
@@ -28,9 +28,11 @@ import { X } from "lucide-react";
 export default function CreateProductForm({
   defaultValues,
   context = "create",
+  productId,
 }: {
   defaultValues?: CreateProduct;
   context?: "create" | "edit";
+  productId?: string;
 }) {
   const router = useRouter();
   const form = useForm<CreateProduct>({
@@ -50,13 +52,20 @@ export default function CreateProductForm({
 
   const onSubmit = async (data: CreateProduct) => {
     try {
-      const result = await createProduct(data);
+      let result;
+      if (context === "edit" && productId) {
+        result = await updateProduct(productId, data);
+      } else {
+        result = await createProduct(data);
+      }
+
       if (result.success) {
         if (context === "create") {
           toast.success("Product created successfully");
           router.push("/admin/products");
         } else {
           toast.success("Product updated successfully");
+          router.push("/admin/products");
         }
       } else {
         form.setError("root", {

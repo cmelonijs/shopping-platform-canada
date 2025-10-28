@@ -202,6 +202,38 @@ export async function updateUserRole(data: UsersProfile) {
   return { success: true, message: "User update", redirectTo: "/admin/users" };
 }
 
+export async function getProductById(id: string): Promise<CreateProduct> {
+  try {
+    const product = await prisma.product.findUnique({
+      where: {
+        id: id,
+      },
+    });
+
+    if (!product) {
+      throw new Error("Product not found");
+    }
+
+    // Convert to CreateProduct format
+    return {
+      name: product.name,
+      slug: product.slug,
+      category: product.category,
+      brand: product.brand,
+      price: Number(product.price),
+      stock: product.stock,
+      images: product.images,
+      isFeatured: product.isFeatured,
+      description: product.description,
+    };
+  } catch (err) {
+    if (isRedirectError(err)) {
+      throw err;
+    }
+    throw new Error(formatError(err));
+  }
+}
+
 export async function createProduct(data: CreateProduct) {
   try {
     const session = await auth();
@@ -230,6 +262,50 @@ export async function createProduct(data: CreateProduct) {
     return {
       success: true,
       message: "Product created successfully",
+    };
+  } catch (err) {
+    if (isRedirectError(err)) {
+      throw err;
+    }
+    return {
+      success: false,
+      message: formatError(err),
+    };
+  }
+}
+
+export async function updateProduct(id: string, data: CreateProduct) {
+  try {
+    const session = await auth();
+    const userId = session?.user?.id as string;
+
+    if (!userId) {
+      throw new Error("Unauthorized");
+    }
+
+    await prisma.product.update({
+      where: {
+        id: id,
+      },
+      data: {
+        name: data.name,
+        slug: data.slug,
+        category: data.category,
+        images: data.images,
+        brand: data.brand,
+        description: data.description,
+        stock: data.stock,
+        price: data.price,
+        isFeatured: data.isFeatured,
+      },
+    });
+
+    revalidatePath("/admin/products");
+    revalidatePath(`/admin/products/${id}`);
+
+    return {
+      success: true,
+      message: "Product updated successfully",
     };
   } catch (err) {
     if (isRedirectError(err)) {

@@ -7,11 +7,13 @@ import {
 } from "@/components/ui/carousel";
 import { getProductBySlug } from "@/lib/actions/products.actions";
 import { getMyCart } from "@/lib/actions/cart.actions";
+import { getReview, getAllReviews } from "@/lib/actions/review.actions";
 import { Product } from "@/types";
 import Image from "next/image";
 import AddToCart from "@/components/cart/addToCart";
 import { RenderStars } from "@/components/share/stars";
 import { formatCurrency } from "@/lib/utils";
+import ReviewForm from "./ReviewForm";
 
 const DetailsPage = async ({
   params,
@@ -23,6 +25,12 @@ const DetailsPage = async ({
 
   // Get current cart to check if item exists
   const cart = await getMyCart();
+
+  // Get existing review for this product by the current user
+  const existingReview = await getReview(product.id);
+
+  // Get all reviews for this product
+  const allReviews = await getAllReviews(product.id);
 
   return (
     <div className="container flex flex-col max-w-screen-xl mx-auto p-6 space-y-8">
@@ -85,6 +93,35 @@ const DetailsPage = async ({
 
       <div className="border-t pt-6">
         <h2 className="text-2xl font-semibold">Customer Reviews</h2>
+      </div>
+
+      <div>
+        <ReviewForm productId={product.id} existingReview={existingReview} />
+      </div>
+
+      {/* Display all reviews */}
+      <div className="space-y-4">
+        {allReviews.length === 0 ? (
+          <p className="text-gray-500">No reviews yet. Be the first to review this product!</p>
+        ) : (
+          allReviews.map((review) => (
+            <div key={review.id} className="border rounded-lg p-4 space-y-2">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-2">
+                  <span className="font-semibold">{review.user?.name || "Anonymous"}</span>
+                  <div className="flex">
+                    <RenderStars rating={review.rating.toString()} />
+                  </div>
+                </div>
+                <span className="text-sm text-gray-500">
+                  {new Date(review.createdAt).toLocaleDateString()}
+                </span>
+              </div>
+              <h3 className="font-semibold">{review.title}</h3>
+              <p className="text-gray-700">{review.description}</p>
+            </div>
+          ))
+        )}
       </div>
     </div>
   );
