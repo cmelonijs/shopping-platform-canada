@@ -10,7 +10,7 @@ export default async function Header() {
   const categories = await getAllCategoriesWithCount();
   return (
     <div className="w-full border-b">
-      <div className="container mx-auto px-3 flex justify-between items-center py-3">
+      <div className="container mx-auto px-6 flex justify-between items-center py-3">
         {/* Left Side */}
         <div className="flex items-center">
           <HamburgerMenu categories={categories} />
@@ -31,7 +31,7 @@ export default async function Header() {
           </Link>
         </div>
         <div className="flex gap-2 items-center">
-          <div className="hidden md:flex gap-2">
+          <div className="hidden lg:flex gap-2">
             <SearchBar categories={categories} />
           </div>
           <Menu />
