@@ -172,13 +172,13 @@ export default async function SearchPage({
               All ratings
             </Link>
           </div>
-          <div className=" flex flex-col gap-4 mt-4 md:hidden">
-            <SearchBar categories={categories} />
-          </div>
         </div>
       </section>
 
-      <section className="flex-1 ">
+      <section className="flex-1 mx-auto">
+          <div className=" flex flex-col gap-4 mb-4 items-center lg:hidden">
+            <SearchBar categories={categories} />
+          </div>
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 gap-4">
           <div className="flex flex-wrap items-center gap-4">
             <h1 className="text-lg font-semibold">
@@ -208,7 +208,7 @@ export default async function SearchPage({
                 query: buildQuery(params, { sort: "newest" }),
               }}
               className={params.sort === "newest" ? "font-bold underline" : ""}
-            >
+              >
               NEWEST
             </Link>
             <Link
@@ -219,7 +219,7 @@ export default async function SearchPage({
               className={
                 params.sort === "price-low" ? "font-bold underline" : ""
               }
-            >
+              >
               LOWER
             </Link>
             <Link
@@ -230,7 +230,7 @@ export default async function SearchPage({
               className={
                 params.sort === "price-high" ? "font-bold underline" : ""
               }
-            >
+              >
               HIGHER
             </Link>
             <Link
@@ -241,7 +241,7 @@ export default async function SearchPage({
               className={
                 params.sort === "rating-high" ? "font-bold underline" : ""
               }
-            >
+              >
               RATING
             </Link>
           </div>
