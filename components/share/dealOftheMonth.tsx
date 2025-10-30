@@ -19,7 +19,8 @@ export default function DealOfTheMonth({ images, product
     const setHours = (diff: number) => Math.floor((diff / (1000 * 60 * 60)) % 24);
     const setMinutes = (diff: number) => Math.floor((diff / (1000 * 60)) % 60);
     const setSeconds = (diff: number) => Math.floor((diff / 1000) % 60);
-
+        
+    const [hasMounted, setHasMounted] = useState(false);
     const [count, setCount] = useState({
         days: setDays(diff),
         hours: setHours(diff),
@@ -28,6 +29,7 @@ export default function DealOfTheMonth({ images, product
     });
 
     useEffect(() => {
+         setHasMounted(true);
         const interval = setInterval(() => {
             const now = new Date();
             const diff = EXPIRATION_DEAL_DATE.getTime() - now.getTime();
@@ -48,7 +50,7 @@ export default function DealOfTheMonth({ images, product
 
         return () => clearInterval(interval);
     }, []);
-
+      if (!hasMounted) return null;
     return (
         <div className="font-bold">
             {endOfDeal ? (
