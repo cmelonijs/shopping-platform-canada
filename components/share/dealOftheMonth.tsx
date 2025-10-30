@@ -22,7 +22,8 @@ export default function DealOfTheMonth({
     const setHours = (diff: number) => Math.floor((diff / (1000 * 60 * 60)) % 24);
     const setMinutes = (diff: number) => Math.floor((diff / (1000 * 60)) % 60);
     const setSeconds = (diff: number) => Math.floor((diff / 1000) % 60);
-
+        
+    const [hasMounted, setHasMounted] = useState(false);
     const [count, setCount] = useState({
         days: setDays(diff),
         hours: setHours(diff),
@@ -31,6 +32,7 @@ export default function DealOfTheMonth({
     });
 
     useEffect(() => {
+         setHasMounted(true);
         const interval = setInterval(() => {
             const now = new Date();
             const diff = EXPIRATION_DEAL_DATE.getTime() - now.getTime();
@@ -52,9 +54,21 @@ export default function DealOfTheMonth({
 
         return () => clearInterval(interval);
     }, []);
-
-      setCount({ days, hours, minutes, seconds });
-    }, 1000);
+      if (!hasMounted) return null;
+    return (
+        <div className="font-bold">
+            {endOfDeal ? (
+                <div className="flex flex-row gap-5">
+                    <h1 className="text-2xl mb-2">Deal ended!</h1>
+                    <Button asChild variant="secondary">
+                        <Link href={`/search`}>view all products</Link>
+                    </Button>
+                </div>
+            ) : (
+                <div className="flex items-center justify-center">
+                    <div className="flex flex-col md:flex-row items-center gap-8 p-6">
+                        <div className="flex flex-col text-sm  max-w-xl">
+                            <h1 className="text-2xl  mb-2">Deal of the month</h1>
 
     return () => clearInterval(interval);
   }, []);
