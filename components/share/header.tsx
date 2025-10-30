@@ -6,7 +6,6 @@ import { getAllCategoriesWithCount } from "@/lib/actions/products.actions";
 import HamburgerMenu from "./hamburgerMenu";
 import SearchBar from "./searchBarUser";
 
-
 export default async function Header() {
   const categories = await getAllCategoriesWithCount();
   return (

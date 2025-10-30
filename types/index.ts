@@ -6,6 +6,7 @@ import {
   insertOrderSchema,
   insertProductSchema,
   insertReviewSchema,
+  createReviewFormSchema,
   insertShippingAddressSchema,
   paymentMethodSchema,
   updateProfileNameSchema,
@@ -57,3 +58,5 @@ export type Review = z.infer<typeof insertReviewSchema> & {
     name: string;
   };
 };
+
+export type CreateReview = z.infer<typeof createReviewFormSchema>;

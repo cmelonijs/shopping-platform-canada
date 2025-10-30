@@ -56,7 +56,7 @@ export default async function ProductAdminPage({
                 <TableCell>{product.stock}</TableCell>
                 <TableCell>{product.rating}</TableCell>
                 <TableCell className="flex gap-2">
-                  <Button variant="secondary">Edit</Button>
+                  <Button variant="secondary"><Link href={`/admin/products/${product.id}`}>Edit</Link></Button>
                   <DeleteButton
                     action={deleteProductById}
                     itemId={product.id}

@@ -10,7 +10,7 @@ export default function Homepage() {
         images={"/images/sample-products/p1-1.png"}
         product={{ slug: "polo-ralph-lauren-oxford-shirt" }}
       />
-      <BrandPolicy/>
+      <BrandPolicy />
     </div>
   );
 }
