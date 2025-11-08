@@ -1,0 +1,15 @@
+{
+  "footer": {
+    "rights": "Tutti i diritti riservati."
+  },
+  "menu": {
+    "cart": "carrello"
+  },
+  "productList": {
+    "newest": "Nuovi Arrivi"
+  },
+  "search": {
+    "category": "Tutte le categorie",
+    "searchProducts": "Cerca prodotti"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "footer": {
+    "rights": " All Rights Reserved."
+  },
+  "menu": {
+    "cart": "cart"
+  },
+  "productList": {
+    "newest": "Newest Arrivals"
+  },
+  "search": {
+    "category": "All categories",
+    "searchProducts": "Search products"
+  }
+}

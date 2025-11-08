@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Search } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 export default function SearchBar({
   categories,
@@ -21,7 +22,7 @@ export default function SearchBar({
   const [selected, setSelected] = useState("all");
   const [searchText, setSearchText] = useState("");
   const router = useRouter();
-
+ const t = useTranslations('search');
   const handleSubmit = () => {
     const params = new URLSearchParams();
     if (selected !== "all") params.set("category", selected);
@@ -38,7 +39,7 @@ export default function SearchBar({
           <SelectValue placeholder="Select category" />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="all">All categories</SelectItem>
+          <SelectItem value="all">{t("category")}</SelectItem>
           {categories.map((cat) => (
             <SelectItem key={cat.category} value={cat.category}>
               {cat.category}
@@ -49,7 +50,7 @@ export default function SearchBar({
 
       <div className="relative">
         <Input
-          placeholder="Search products..."
+          placeholder={t("searchProducts")}
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
