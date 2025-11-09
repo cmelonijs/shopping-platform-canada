@@ -1,4 +1,23 @@
 {
+  "brandPolicy": {
+    "flexHead": "Pagamenti Flessibili",
+    "flexSub": "Paga con carta di credito, PayPal o contrassegno",
+    "freeHead": "Spedizione gratuita",
+    "freeSub": "Spedizione gratuita per ordini superiori a 100$",
+    "moneyHead": "Garanzia di rimborso",
+    "moneySub": "Entro 30 giorni dall'acquisto",
+    "supportHead": "Supporto 24 ore su 24, 7 giorni su 7",
+    "supportSub": "Ricevi supporto in qualsiasi momento"
+  },
+  "deal": {
+    "days": "giorni",
+    "dealEnded": "Affare concluso",
+    "DealMonth": "Affare del mese",
+    "hours": "ore",
+    "minutes": "minuti",
+    "seconds": "secondi",
+    "viewProducts": "visualizza tutti i prodotti"
+  },
   "footer": {
     "rights": "Tutti i diritti riservati."
   },

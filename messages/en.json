@@ -1,4 +1,23 @@
 {
+  "brandPolicy": {
+    "flexHead": "Flexible Payments",
+    "flexSub": " Pay with credit card, PayPal, or cash on delivery",
+    "freeHead": "Free shipping",
+    "freeSub": "Free shipping on orders above 100$",
+    "moneyHead": "Money Back Guarantee",
+    "moneySub": " Within 30 days of purchase",
+    "supportHead": "24/7 Support",
+    "supportSub": "Get support at any time"
+  },
+  "deal": {
+    "days": "days",
+    "dealEnded": "Deal ended",
+    "DealMonth": "Deal of the month",
+    "hours": "hours",
+    "minutes": "minutes",
+    "seconds": "seconds",
+    "viewProducts": "view all products "
+  },
   "footer": {
     "rights": " All Rights Reserved."
   },
