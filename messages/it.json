@@ -21,6 +21,10 @@
   "footer": {
     "rights": "Tutti i diritti riservati."
   },
+  "hamb": {
+    "articles": "Articoli",
+    "category": "Categoria"
+  },
   "menu": {
     "cart": "carrello"
   },
@@ -33,5 +37,19 @@
   },
   "signInbtn": {
     "signIn": "Accedi"
+  },
+  "src": {
+    "allCategories": "Tutte le categorie",
+    "allPrices": "Tutti i prezzi",
+    "allRatings": "Tutte le valutazioni",
+    "categories": "Categorie",
+    "clearBtn":"Pulisci filtro",
+    "customerRatings": "Valutazioni dei clienti",
+    "higher": "ALTO",
+    "lower": "BASSO",
+    "newest": "NUOVO",
+    "noProductFnd": "nessun prodotto trovato",
+    "price": "Prezzo",
+    "rating": "VALUTAZIONE"
   }
 }

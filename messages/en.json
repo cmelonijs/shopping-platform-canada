@@ -21,6 +21,10 @@
   "footer": {
     "rights": " All Rights Reserved."
   },
+  "hamb": {
+    "articles": "Articles",
+    "category": "Category"
+  },
   "menu": {
     "cart": "cart"
   },
@@ -33,5 +37,19 @@
   },
   "signInbtn": {
     "signIn": "Sign In"
+  },
+  "src": {
+    "allCategories": "All categories",
+    "allPrices": "All prices",
+    "allRatings": "All ratings",
+    "categories": "Categories",
+    "clearBtn":"clear filter",
+    "customerRatings": "Customer ratings",
+    "higher": "HIGHER",
+    "lower": "LOWER",
+    "newest": "NEWEST",
+    "noProductFnd": "no product found",
+    "price": "Price",
+    "rating": "RATING"
   }
 }

@@ -21,6 +21,10 @@
   "footer": {
     "rights": "Tất cả quyền được bảo lưu."
   },
+  "hamb": {
+    "articles": "Bài viết",
+    "category": "Danh mục"
+  },
   "menu": {
     "cart": "giỏ hàng"
   },
@@ -33,5 +37,19 @@
   },
   "signInbtn": {
     "signIn": "Đăng Nhập"
+  },
+  "src": {
+    "allCategories": "Tất cả các danh mục",
+    "allPrices": "Tất cả giá cả",
+    "allRatings": "Tất cả các đánh giá",
+    "categories": "Danh mục",
+    "clearBtn": "Xóa bộ lọc",
+    "customerRatings": "Đánh giá của khách hàng",
+    "higher": "CAO HƠN",
+    "lower": "THẤP",
+    "newest": "MỚI NHẤT",
+    "noProductFnd":"Không tìm thấy sản phẩm nào",
+    "price": "Giá",
+    "rating": "ĐÁNH GIÁ"
   }
 }
