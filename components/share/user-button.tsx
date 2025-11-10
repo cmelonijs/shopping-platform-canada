@@ -9,9 +9,11 @@ import {
 import { signOutUser } from "@/lib/actions/auth.actions";
 import { DropdownMenuItem } from "@radix-ui/react-dropdown-menu";
 import { UserIcon } from "lucide-react";
+import { getTranslations } from "next-intl/server";
 import Link from "next/link";
 
 const UserButton = async () => {
+  const t = await getTranslations("signInbtn");
   const session = await auth();
 
   if (!session) {
@@ -19,7 +21,7 @@ const UserButton = async () => {
       <Button asChild>
         <Link href="/sign-in">
           <UserIcon />
-          Sign in
+          {t('signIn')}
         </Link>
       </Button>
     );

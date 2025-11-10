@@ -35,6 +35,12 @@ export default function LocaleSwitcher() {
             <span>IT</span>
           </div>
         </SelectItem>
+        <SelectItem value="vi">
+          <div className="flex items-center gap-2">
+            <Image src="/flagVI.svg" alt="vietnamese" width={20} height={14} />
+            <span>VI</span>
+          </div>
+        </SelectItem>
       </SelectContent>
     </Select>
   );

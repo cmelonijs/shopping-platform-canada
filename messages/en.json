@@ -30,5 +30,8 @@
   "search": {
     "category": "All categories",
     "searchProducts": "Search products"
+  },
+  "signInbtn": {
+    "signIn": "Sign In"
   }
 }

@@ -1,0 +1,37 @@
+{
+  "brandPolicy": {
+    "flexHead": "Thanh toán linh hoạt",
+    "flexSub": "Thanh toán bằng thẻ tín dụng, PayPal hoặc tiền mặt khi nhận hàng",
+    "freeHead": "Miễn phí vận chuyển",
+    "freeSub": "Miễn phí vận chuyển cho đơn hàng trên 100$",
+    "moneyHead": "Cam kết hoàn tiền",
+    "moneySub": "Trong vòng 30 ngày kể từ ngày mua",
+    "supportHead": "Hỗ trợ 24/7",
+    "supportSub": "Nhận hỗ trợ bất cứ lúc nào"
+  },
+  "deal": {
+    "days": "ngày",
+    "dealEnded": "Ưu đãi đã kết thúc",
+    "DealMonth": "Ưu đãi của tháng",
+    "hours": "giờ",
+    "minutes": "phút",
+    "seconds": "giây",
+    "viewProducts": "xem tất cả sản phẩm"
+  },
+  "footer": {
+    "rights": "Tất cả quyền được bảo lưu."
+  },
+  "menu": {
+    "cart": "giỏ hàng"
+  },
+  "productList": {
+    "newest": "Sản phẩm mới nhất"
+  },
+  "search": {
+    "category": "Tất cả các danh mục",
+    "searchProducts": "Tìm kiếm sản phẩm"
+  },
+  "signInbtn": {
+    "signIn": "Đăng Nhập"
+  }
+}

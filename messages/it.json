@@ -11,8 +11,8 @@
   },
   "deal": {
     "days": "giorni",
-    "dealEnded": "Affare concluso",
-    "DealMonth": "Affare del mese",
+    "dealEnded": "offerta conclusa",
+    "DealMonth": "offerta del mese",
     "hours": "ore",
     "minutes": "minuti",
     "seconds": "secondi",
@@ -30,5 +30,8 @@
   "search": {
     "category": "Tutte le categorie",
     "searchProducts": "Cerca prodotti"
+  },
+  "signInbtn": {
+    "signIn": "Accedi"
   }
 }
