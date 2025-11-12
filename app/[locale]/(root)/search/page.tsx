@@ -184,7 +184,7 @@ export default async function SearchPage({
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 gap-4">
           <div className="flex flex-wrap items-center gap-4">
             <h1 className="text-lg font-semibold">
-              {hasFilters ? "Filtered products" : "All products"}
+              {hasFilters ? t('filtered') : t('allProducts')}
             </h1>
             {activeFilters.length > 0 && (
               <div className="transition-opacity duration-300 opacity-100 flex flex-row items-center gap-2">
