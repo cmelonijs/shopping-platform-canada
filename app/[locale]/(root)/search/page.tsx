@@ -35,14 +35,14 @@ export default async function SearchPage({
     params.sort;
 
   if (params.category && params.category !== "all") {
-    activeFilters.push({ label: "Category", value: params.category });
+    activeFilters.push({ label: t("categories"), value: params.category });
   }
   if (params.price && params.price !== "all") {
-    activeFilters.push({ label: "Price", value: params.price });
+    activeFilters.push({ label: t("price"), value: params.price });
   }
   if (params.rating && params.rating !== "all") {
     activeFilters.push({
-      label: "Rating",
+      label: t("customerRatings"),
       value: `${params.rating} stars & up`,
     });
   }
@@ -54,7 +54,7 @@ export default async function SearchPage({
       "rating-high": "Top Rated",
     };
     activeFilters.push({
-      label: "Sort",
+      label: t("sort"),
       value: sortLabels[params.sort] || params.sort,
     });
   }
@@ -207,7 +207,7 @@ export default async function SearchPage({
             <Link
               href={{
                 pathname: "/search",
-                query: buildQuery(params, { sort: "newest" }),
+                query: buildQuery(params, { sort: t("newest") }),
               }}
               className={params.sort === "newest" ? "font-bold underline" : ""}
             >
@@ -216,7 +216,7 @@ export default async function SearchPage({
             <Link
               href={{
                 pathname: "/search",
-                query: buildQuery(params, { sort: "price-low" }),
+                query: buildQuery(params, { sort: t("lower") }),
               }}
               className={
                 params.sort === "price-low" ? "font-bold underline" : ""
@@ -227,7 +227,7 @@ export default async function SearchPage({
             <Link
               href={{
                 pathname: "/search",
-                query: buildQuery(params, { sort: "price-high" }),
+                query: buildQuery(params, { sort: t("higher") }),
               }}
               className={
                 params.sort === "price-high" ? "font-bold underline" : ""
@@ -238,7 +238,7 @@ export default async function SearchPage({
             <Link
               href={{
                 pathname: "/search",
-                query: buildQuery(params, { sort: "rating-high" }),
+                query: buildQuery(params, { sort: t("rating") }),
               }}
               className={
                 params.sort === "rating-high" ? "font-bold underline" : ""

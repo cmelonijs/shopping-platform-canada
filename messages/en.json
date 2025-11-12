@@ -46,12 +46,13 @@
     "categories": "Categories",
     "clearBtn":"clear filter",
     "customerRatings": "Customer ratings",
-    "fltered":"Filtered products",
+    "filtered":"Filtered products",
     "higher": "HIGHER",
     "lower": "LOWER",
     "newest": "NEWEST",
     "noProductFnd": "no product found",
     "price": "Price",
-    "rating": "RATING"
+    "rating": "RATING",
+    "sort": "Sort"
   }
 }

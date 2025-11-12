@@ -47,11 +47,12 @@
     "clearBtn":"Pulisci filtro",
     "customerRatings": "Valutazioni dei clienti",
     "filtered":"Prodotti filtrati",
-    "higher": "ALTO",
-    "lower": "BASSO",
-    "newest": "NUOVO",
-    "noProductFnd": "nessun prodotto trovato",
+    "higher": "PIÙ ALTO",
+    "lower": "PIÙ BASSO",
+    "newest": "PIÙ RECENTE",
+    "noProductFnd": "Nessun prodotto trovato",
     "price": "Prezzo",
-    "rating": "VALUTAZIONE"
+    "rating": "PIÙ VOTATI",
+    "sort": "Ordina"
   }
 }
