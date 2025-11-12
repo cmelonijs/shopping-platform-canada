@@ -211,7 +211,7 @@ export default async function SearchPage({
               }}
               className={params.sort === "newest" ? "font-bold underline" : ""}
             >
-              {t("newest")}
+              {t("newest").toUpperCase()}
             </Link>
             <Link
               href={{
@@ -222,7 +222,7 @@ export default async function SearchPage({
                 params.sort === "price-low" ? "font-bold underline" : ""
               }
             >
-              {t("lower")}
+              {t("lower").toUpperCase()}
             </Link>
             <Link
               href={{
@@ -233,7 +233,7 @@ export default async function SearchPage({
                 params.sort === "price-high" ? "font-bold underline" : ""
               }
             >
-              {t("higher")}
+              {t("higher").toUpperCase()}
             </Link>
             <Link
               href={{
@@ -244,7 +244,7 @@ export default async function SearchPage({
                 params.sort === "rating-high" ? "font-bold underline" : ""
               }
             >
-              {t("rating")}
+              {t("rating").toUpperCase()}
             </Link>
           </div>
         </div>

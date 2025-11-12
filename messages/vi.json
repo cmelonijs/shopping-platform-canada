@@ -47,12 +47,12 @@
     "clearBtn": "Xóa bộ lọc",
     "customerRatings": "Đánh giá của khách hàng",
     "filtered": "Sản phẩm đã lọc",
-    "higher": "CAO HƠN",
-    "lower": "THẤP",
-    "newest": "MỚI NHẤT",
+    "higher": "Cao hơn",
+    "lower": "Thấp hơn",
+    "newest": "Mới nhất",
     "noProductFnd":"Không tìm thấy sản phẩm nào",
     "price": "Giá",
-    "rating": "ĐÁNH GIÁ",
+    "rating": "Đánh giá",
     "sort": "Sắp xếp"
   }
 }
