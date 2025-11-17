@@ -11,17 +11,19 @@ import {
 import { ModeToggle } from "./theme";
 import UserButton from "./user-button";
 import { auth } from "@/auth";
+import { getTranslations } from "next-intl/server";
 
 const Menu = async () => {
   const session = await auth();
-
+  const t = await getTranslations("menu");
+  
   return (
     <div className="flex justify-end gap-3">
       <nav className="hidden md:flex w-full max-w-xs gap-1">
         <ModeToggle />
         <Button asChild variant="ghost">
           <Link href="/cart">
-            <ShoppingCart /> Cart
+            <ShoppingCart /> {t("cart")}
           </Link>
         </Button>
         <UserButton />
@@ -45,7 +47,7 @@ const Menu = async () => {
             <SheetClose asChild>
               <Button asChild variant="outline">
                 <Link href="/cart">
-                  <ShoppingCart /> Cart
+                  <ShoppingCart /> {t("cart")}
                 </Link>
               </Button>
             </SheetClose>

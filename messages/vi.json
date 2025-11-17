@@ -1,0 +1,58 @@
+{
+  "brandPolicy": {
+    "flexHead": "Thanh toán linh hoạt",
+    "flexSub": "Thanh toán bằng thẻ tín dụng, PayPal hoặc tiền mặt khi nhận hàng",
+    "freeHead": "Miễn phí vận chuyển",
+    "freeSub": "Miễn phí vận chuyển cho đơn hàng trên 100$",
+    "moneyHead": "Cam kết hoàn tiền",
+    "moneySub": "Trong vòng 30 ngày kể từ ngày mua",
+    "supportHead": "Hỗ trợ 24/7",
+    "supportSub": "Nhận hỗ trợ bất cứ lúc nào"
+  },
+  "deal": {
+    "days": "ngày",
+    "dealEnded": "Ưu đãi đã kết thúc",
+    "DealMonth": "Ưu đãi của tháng",
+    "hours": "giờ",
+    "minutes": "phút",
+    "seconds": "giây",
+    "viewProducts": "xem tất cả sản phẩm"
+  },
+  "footer": {
+    "rights": "Tất cả quyền được bảo lưu."
+  },
+  "hamb": {
+    "articles": "Bài viết",
+    "category": "Danh mục"
+  },
+  "menu": {
+    "cart": "giỏ hàng"
+  },
+  "productList": {
+    "newest": "Sản phẩm mới nhất"
+  },
+  "search": {
+    "category": "Tất cả các danh mục",
+    "searchProducts": "Tìm kiếm sản phẩm"
+  },
+  "signInbtn": {
+    "signIn": "Đăng Nhập"
+  },
+  "src": {
+    "allCategories": "Tất cả các danh mục",
+    "allPrices": "Tất cả giá cả",
+    "allRatings": "Tất cả các đánh giá",
+    "allProducts": "Tất cả sản phẩm",
+    "categories": "Danh mục",
+    "clearBtn": "Xóa bộ lọc",
+    "customerRatings": "Đánh giá của khách hàng",
+    "filtered": "Sản phẩm đã lọc",
+    "higher": "Cao hơn",
+    "lower": "Thấp hơn",
+    "newest": "Mới nhất",
+    "noProductFnd":"Không tìm thấy sản phẩm nào",
+    "price": "Giá",
+    "rating": "Đánh giá",
+    "sort": "Sắp xếp"
+  }
+}

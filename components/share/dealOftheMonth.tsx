@@ -5,12 +5,14 @@ import { useState, useEffect } from "react";
 import { Button } from "../ui/button";
 import Link from "next/link";
 import { EXPIRATION_DEAL_DATE } from "@/lib/constants";
+import { useTranslations } from "next-intl";
 
 
 export default function DealOfTheMonth({ images, product
 }: {
     images: string; product: { slug: string };
 }) {
+    const t= useTranslations("deal")
     const [endOfDeal, setEndOfDeal] = useState(false);
     const now = new Date();
     const diff = EXPIRATION_DEAL_DATE.getTime() - now.getTime();
@@ -55,17 +57,16 @@ export default function DealOfTheMonth({ images, product
         <div className="font-bold">
             {endOfDeal ? (
                 <div className="flex flex-row gap-5">
-                    <h1 className="text-2xl mb-2">Deal ended!</h1>
+                    <h1 className="text-2xl mb-2">{t("dealEnded")}</h1>
                     <Button asChild variant="secondary">
-                        <Link href={`/search`}>view all products</Link>
+                        <Link href={`/search`}>{t("viewProducts")}</Link>
                     </Button>
                 </div>
             ) : (
                 <div className="flex items-center justify-center">
                     <div className="flex flex-col md:flex-row items-center gap-8 p-6">
                         <div className="flex flex-col text-sm  max-w-xl">
-                            <h1 className="text-2xl  mb-2">Deal of the month</h1>
-
+                            <h1 className="text-2xl  mb-2">{t("DealMonth")}</h1>
                             <h2 className="mb-4 font-normal">
                                 Lorem ipsum dolor sit, amet consectetur adipisicing elit.
                                 Exercitationem quidem laborum sequi ullam maxime expedita doloremque
@@ -76,19 +77,19 @@ export default function DealOfTheMonth({ images, product
                             <div className="flex gap-10 justify-start mt-4">
                                 <div className="flex flex-col items-center">
                                     <span className="text-2xl">{count.days}</span>
-                                    <span className="text-xs">days</span>
+                                    <span className="text-xs">{t("days")}</span>
                                 </div>
                                 <div className="flex flex-col items-center">
                                     <span className="text-2xl">{count.hours}</span>
-                                    <span className="text-xs">hours</span>
+                                    <span className="text-xs">{t("hours")}</span>
                                 </div>
                                 <div className="flex flex-col items-center">
                                     <span className="text-2xl">{count.minutes}</span>
-                                    <span className="text-xs">minutes</span>
+                                    <span className="text-xs">{t("minutes")}</span>
                                 </div>
                                 <div className="flex flex-col items-center">
                                     <span className="text-2xl">{count.seconds}</span>
-                                    <span className="text-xs">seconds</span>
+                                    <span className="text-xs">{t("seconds")}</span>
                                 </div>
                             </div>
                         </div>
@@ -103,7 +104,7 @@ export default function DealOfTheMonth({ images, product
                             />
                         </div>
                         <Button asChild variant="secondary">
-                            <Link href={`/product/${product.slug}`}>view product</Link>
+                            <Link href={`/product/${product.slug}`}>{t("viewProducts")}</Link>
                         </Button>
                     </div>
                 </div>

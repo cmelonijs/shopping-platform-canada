@@ -1,0 +1,58 @@
+{
+  "brandPolicy": {
+    "flexHead": "Flexible Payments",
+    "flexSub": " Pay with credit card, PayPal, or cash on delivery",
+    "freeHead": "Free shipping",
+    "freeSub": "Free shipping on orders above 100$",
+    "moneyHead": "Money Back Guarantee",
+    "moneySub": " Within 30 days of purchase",
+    "supportHead": "24/7 Support",
+    "supportSub": "Get support at any time"
+  },
+  "deal": {
+    "days": "days",
+    "dealEnded": "Deal ended",
+    "DealMonth": "Deal of the month",
+    "hours": "hours",
+    "minutes": "minutes",
+    "seconds": "seconds",
+    "viewProducts": "view all products "
+  },
+  "footer": {
+    "rights": " All Rights Reserved."
+  },
+  "hamb": {
+    "articles": "Articles",
+    "category": "Category"
+  },
+  "menu": {
+    "cart": "cart"
+  },
+  "productList": {
+    "newest": "Newest Arrivals"
+  },
+  "search": {
+    "category": "All categories",
+    "searchProducts": "Search products"
+  },
+  "signInbtn": {
+    "signIn": "Sign In"
+  },
+  "src": {
+    "allCategories": "All categories",
+    "allPrices": "All prices",
+    "allRatings": "All ratings",
+    "allProducts":"All products",
+    "categories": "Categories",
+    "clearBtn":"clear filter",
+    "customerRatings": "Customer ratings",
+    "filtered":"Filtered products",
+    "higher": "Higher",
+    "lower": "Lower",
+    "newest": "Newest",
+    "noProductFnd": "No product found",
+    "price": "Price",
+    "rating": "Rating",
+    "sort": "Sort"
+  }
+}

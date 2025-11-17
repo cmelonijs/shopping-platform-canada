@@ -8,12 +8,14 @@ import FilteredProducts from "./filteredProduct";
 import { buildQuery } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import SearchBar from "@/components/share/searchBarUser";
+import { getTranslations } from "next-intl/server";
 
 export default async function SearchPage({
   searchParams,
 }: {
   searchParams: Promise<Record<string, string>>;
 }) {
+  const t = await getTranslations('src')
   const params = await searchParams;
   const categories = await getAllCategoriesWithCount();
   const products = await getFilteredProducts({
@@ -33,14 +35,14 @@ export default async function SearchPage({
     params.sort;
 
   if (params.category && params.category !== "all") {
-    activeFilters.push({ label: "Category", value: params.category });
+    activeFilters.push({ label: t("categories"), value: params.category });
   }
   if (params.price && params.price !== "all") {
-    activeFilters.push({ label: "Price", value: params.price });
+    activeFilters.push({ label: t("price"), value: params.price });
   }
   if (params.rating && params.rating !== "all") {
     activeFilters.push({
-      label: "Rating",
+      label: t("customerRatings"),
       value: `${params.rating} stars & up`,
     });
   }
@@ -52,7 +54,7 @@ export default async function SearchPage({
       "rating-high": "Top Rated",
     };
     activeFilters.push({
-      label: "Sort",
+      label: t("sort"),
       value: sortLabels[params.sort] || params.sort,
     });
   }
@@ -64,7 +66,7 @@ export default async function SearchPage({
     <div className="min-h-screen p-6 md:p-10 flex flex-col md:flex-row gap-4">
       <section className="w-full md:max-w-xs flex flex-col gap-6 ">
         <div>
-          <h1 className="text-lg font-semibold mb-2">Categories</h1>
+          <h1 className="text-lg font-semibold mb-2">{t("categories")}</h1>
           <div className="flex flex-col gap-2">
             {categories.map((cat) => (
               <Link
@@ -87,13 +89,13 @@ export default async function SearchPage({
                 !params.category || params.category === "all" ? "font-bold" : ""
               }
             >
-              All categories
+              {t("allCategories")}
             </Link>
           </div>
         </div>
 
         <div>
-          <h1 className="text-lg font-semibold mb-2">Price</h1>
+          <h1 className="text-lg font-semibold mb-2">{t("price")}</h1>
           <div className="flex flex-col gap-2">
             <Link
               href={{
@@ -140,13 +142,13 @@ export default async function SearchPage({
                 !params.price || params.price === "all" ? "font-bold" : ""
               }
             >
-              All prices
+              {t("allPrices")}
             </Link>
           </div>
         </div>
 
         <div>
-          <h1 className="text-lg font-semibold mb-2">Customer Ratings</h1>
+          <h1 className="text-lg font-semibold mb-2">{t("customerRatings")}</h1>
           <div className="flex flex-col gap-2">
             {["4", "3", "2", "1"].map((value) => (
               <Link
@@ -169,25 +171,25 @@ export default async function SearchPage({
                 !params.rating || params.rating === "all" ? "font-bold" : ""
               }
             >
-              All ratings
+              {t("allRatings")}
             </Link>
           </div>
         </div>
       </section>
 
       <section className="flex-1 mx-auto">
-          <div className=" flex flex-col gap-4 mb-4 items-center lg:hidden">
-            <SearchBar categories={categories} />
-          </div>
+        <div className=" flex flex-col gap-4 mb-4 items-center lg:hidden">
+          <SearchBar categories={categories} />
+        </div>
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 gap-4">
           <div className="flex flex-wrap items-center gap-4">
             <h1 className="text-lg font-semibold">
-              {hasFilters ? "Filtered products" : "All products"}
+              {hasFilters ? t('filtered') : t('allProducts')}
             </h1>
             {activeFilters.length > 0 && (
               <div className="transition-opacity duration-300 opacity-100 flex flex-row items-center gap-2">
                 <Link href="/search">
-                  <Button>Clear Filter</Button>
+                  <Button>{t("clearBtn")}</Button>
                 </Link>
                 <div className="flex flex-wrap gap-2 text-sm ">
                   {activeFilters.map((filter, index) => (
@@ -205,44 +207,44 @@ export default async function SearchPage({
             <Link
               href={{
                 pathname: "/search",
-                query: buildQuery(params, { sort: "newest" }),
+                query: buildQuery(params, { sort: t("newest") }),
               }}
               className={params.sort === "newest" ? "font-bold underline" : ""}
-              >
-              NEWEST
+            >
+              {t("newest").toUpperCase()}
             </Link>
             <Link
               href={{
                 pathname: "/search",
-                query: buildQuery(params, { sort: "price-low" }),
+                query: buildQuery(params, { sort: t("lower") }),
               }}
               className={
                 params.sort === "price-low" ? "font-bold underline" : ""
               }
-              >
-              LOWER
+            >
+              {t("lower").toUpperCase()}
             </Link>
             <Link
               href={{
                 pathname: "/search",
-                query: buildQuery(params, { sort: "price-high" }),
+                query: buildQuery(params, { sort: t("higher") }),
               }}
               className={
                 params.sort === "price-high" ? "font-bold underline" : ""
               }
-              >
-              HIGHER
+            >
+              {t("higher").toUpperCase()}
             </Link>
             <Link
               href={{
                 pathname: "/search",
-                query: buildQuery(params, { sort: "rating-high" }),
+                query: buildQuery(params, { sort: t("rating") }),
               }}
               className={
                 params.sort === "rating-high" ? "font-bold underline" : ""
               }
-              >
-              RATING
+            >
+              {t("rating").toUpperCase()}
             </Link>
           </div>
         </div>
@@ -250,7 +252,7 @@ export default async function SearchPage({
           <FilteredProducts products={products} />
         ) : (
           <div className=" text-sm mt-10 text-red-600">
-            No products found with the selected filters.
+            {t("noProductFnd")}
           </div>
         )}
       </section>

@@ -1,0 +1,58 @@
+{
+  "brandPolicy": {
+    "flexHead": "Pagamenti Flessibili",
+    "flexSub": "Paga con carta di credito, PayPal o contrassegno",
+    "freeHead": "Spedizione gratuita",
+    "freeSub": "Spedizione gratuita per ordini superiori a 100$",
+    "moneyHead": "Garanzia di rimborso",
+    "moneySub": "Entro 30 giorni dall'acquisto",
+    "supportHead": "Supporto 24 ore su 24, 7 giorni su 7",
+    "supportSub": "Ricevi supporto in qualsiasi momento"
+  },
+  "deal": {
+    "days": "giorni",
+    "dealEnded": "offerta conclusa",
+    "DealMonth": "offerta del mese",
+    "hours": "ore",
+    "minutes": "minuti",
+    "seconds": "secondi",
+    "viewProducts": "visualizza tutti i prodotti"
+  },
+  "footer": {
+    "rights": "Tutti i diritti riservati."
+  },
+  "hamb": {
+    "articles": "Articoli",
+    "category": "Categoria"
+  },
+  "menu": {
+    "cart": "carrello"
+  },
+  "productList": {
+    "newest": "Nuovi Arrivi"
+  },
+  "search": {
+    "category": "Tutte le categorie",
+    "searchProducts": "Cerca prodotti"
+  },
+  "signInbtn": {
+    "signIn": "Accedi"
+  },
+  "src": {
+    "allCategories": "Tutte le categorie",
+    "allPrices": "Tutti i prezzi",
+    "allRatings": "Tutte le valutazioni",
+    "allProducts":"Tutti i prodotti",
+    "categories": "Categorie",
+    "clearBtn":"Pulisci filtro",
+    "customerRatings": "Valutazioni dei clienti",
+    "filtered":"Prodotti filtrati",
+    "higher": "Più alto",
+    "lower": "Più basso",
+    "newest": "Più recente",
+    "noProductFnd": "Nessun prodotto trovato",
+    "price": "Prezzo",
+    "rating": "Più votati",
+    "sort": "Ordina"
+  }
+}

@@ -4,8 +4,8 @@ export const dynamic = "force-dynamic";
 import { Card } from "@/components/ui/card";
 import { getName } from "@/lib/actions/profile.actions";
 import ProfileForm from "./ProfileForm";
-import ShippingForm from "@/app/(root)/shipping-address/ShippingForm";
 import { getAddress } from "@/lib/actions/address.actions";
+import ShippingForm from "../../(root)/shipping-address/ShippingForm";
 
 const UserProfilePage = async () => {
   const existingName = await getName();

@@ -11,12 +11,14 @@ import {
 } from "@/components/ui/drawer";
 import { Button } from "../ui/button";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 export default function HamburgerMenuClient({
   categories,
 }: {
   categories: { category: string; count: number }[];
 }) {
+  const t= useTranslations('hamb')
   const [open, setOpen] = React.useState(false);
   return (
     <Drawer direction="left" open={open} onOpenChange={setOpen}>
@@ -27,8 +29,8 @@ export default function HamburgerMenuClient({
       </DrawerTrigger>
       <DrawerContent>
         <DrawerHeader className="flex flex-row justify-between ">
-          <DrawerTitle>Category</DrawerTitle>
-          <DrawerTitle>Articles</DrawerTitle>
+          <DrawerTitle>{t("category")}</DrawerTitle>
+          <DrawerTitle>{t("articles")}</DrawerTitle>
         </DrawerHeader>
         <DrawerClose asChild>
           <div className="space-y-2 px-2">
