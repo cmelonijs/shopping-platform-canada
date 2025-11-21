@@ -5,8 +5,10 @@ import { useRouter } from "next/navigation";
 import { useTransition } from "react";
 import { toast } from "sonner";
 import { ArrowRight } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 export default function PlaceOrderButton() {
+  const t= useTranslations('orderBtn')
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
 
@@ -31,7 +33,7 @@ export default function PlaceOrderButton() {
       disabled={isPending}
       className="bg-primary"
     >
-      {isPending ? "Creating order..." : "Place order"}
+      {isPending ? t("creating") : t("place")}
       <ArrowRight className="animate-bounce" />
     </Button>
   );

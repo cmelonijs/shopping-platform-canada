@@ -7,9 +7,11 @@ import { prisma } from "@/db/prisma";
 import { CartItem } from "@/types";
 import { getUserById } from "./auth.actions";
 import { insertOrderSchema, insertShippingAddressSchema } from "../validator";
+import { getTranslations } from "next-intl/server";
 
 // create order and create the order items
 export async function createOrder() {
+  const t = await getTranslations('message')
   try {
     const session = await auth();
     if (!session) throw new Error("User is not authenticated");
@@ -91,7 +93,7 @@ export async function createOrder() {
 
     return {
       success: true,
-      message: "Order created",
+      message: t("orderCreated"),
       redirectTo: `/order/${insertedOrderId}`,
     };
   } catch (err) {
@@ -101,6 +103,7 @@ export async function createOrder() {
 }
 
 export async function getOrderById(orderId: string) {
+    const t = await getTranslations('message')
   try {
     const session = await auth();
     if (!session) throw new Error("User is not authenticated");
@@ -119,7 +122,7 @@ export async function getOrderById(orderId: string) {
       },
     });
 
-    if (!order) throw new Error("Order not found");
+    if (!order) throw new Error(t("orderNoFound"));
 
     const userAddress = insertShippingAddressSchema.parse(
       typeof order.shippingAddress === "string"
@@ -175,6 +178,7 @@ export async function getAllMyOrders() {
 }
 
 export async function markOrderAsPaid(orderId: string) {
+    const t = await getTranslations('message')
   try {
     await prisma.order.update({
       where: { id: orderId },
@@ -186,19 +190,20 @@ export async function markOrderAsPaid(orderId: string) {
 
     return {
       success: true,
-      message: "Order marked as paid",
+      message: t("orderMarkPaid"),
       redirectTo: `/order/${orderId}`,
     };
   } catch (error) {
     return {
       success: false,
-      message: "Failed to mark as paid",
+      message: t("orderFailMarkPaid"),
       redirectTo: `/order/${orderId}`,
     };
   }
 }
 
 export async function markOrderAsDelivered(orderId: string) {
+  const t = await getTranslations('message')
   try {
     await prisma.order.update({
       where: { id: orderId },
@@ -209,13 +214,13 @@ export async function markOrderAsDelivered(orderId: string) {
     });
     return {
       success: true,
-      message: "Order marked as delivered",
+      message: t("orderMarkDelivered"),
       redirectTo: `/order/${orderId}`,
     };
   } catch (error) {
     return {
       success: false,
-      message: "Failed to mark as delivered",
+      message: t("orderFailmarkDelivered"),
       redirectTo: `/order/${orderId}`,
     };
   }

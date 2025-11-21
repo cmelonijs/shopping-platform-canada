@@ -26,6 +26,7 @@ import {
 import { CreateReview } from "@/types";
 import { createReview } from "@/lib/actions/review.actions";
 import { formatError } from "@/lib/utils";
+import { useTranslations } from "next-intl";
 
 export default function ReviewForm({
   productId,
@@ -34,6 +35,7 @@ export default function ReviewForm({
   productId: string;
   existingReview?: CreateReview | null;
 }) {
+  const t= useTranslations('review')
   const form = useForm<CreateReview>({
     resolver: zodResolver(createReviewFormSchema),
     defaultValues: existingReview || {
@@ -66,13 +68,13 @@ export default function ReviewForm({
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="default">Add a Review</Button>
+        <Button variant="default">{t("addReview")}</Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Add a Review</DialogTitle>
+          <DialogTitle>{t("addReview")}</DialogTitle>
           <DialogDescription>
-            Share your thoughts about this product with other customers.
+            {t("reviewDesc")}
           </DialogDescription>
         </DialogHeader>
 
@@ -89,9 +91,9 @@ export default function ReviewForm({
               name="title"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Title</FormLabel>
+                  <FormLabel>{t("titleLabel")}</FormLabel>
                   <FormControl>
-                    <Input placeholder="Enter title" {...field} />
+                    <Input placeholder={t("titlePlaceholder")}{...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -103,9 +105,9 @@ export default function ReviewForm({
               name="description"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Description</FormLabel>
+                  <FormLabel>{t("descriptionLabel")}</FormLabel>
                   <FormControl>
-                    <Input placeholder="Enter description" {...field} />
+                    <Input placeholder={t("descriptionPlaceholder")}{...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -117,7 +119,7 @@ export default function ReviewForm({
               name="rating"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Rating</FormLabel>
+                  <FormLabel>{t("ratingLabel")}</FormLabel>
                   <FormControl>
                     <RatingDropdown
                       value={field.value}
@@ -131,8 +133,8 @@ export default function ReviewForm({
 
             <Button type="submit" disabled={form.formState.isSubmitting}>
               {form.formState.isSubmitting 
-                ? "Submitting..." 
-                : "Submit Review"}
+                ? t("submitting") 
+                : t("submit")}
             </Button>
           </form>
         </Form>

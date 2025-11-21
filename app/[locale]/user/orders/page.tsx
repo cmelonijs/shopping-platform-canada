@@ -12,15 +12,17 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getAllMyOrders } from "@/lib/actions/order.actions";
 import Link from "next/link";
 import { formatCurrency } from "@/lib/utils";
+import { getTranslations } from "next-intl/server";
 
 export default async function TotalOrdersPage() {
+  const t= await getTranslations('order')
   const orders = await getAllMyOrders();
 
   return (
     <div className="mx-auto max-w-7xl p-4 md:p-6 min-h-screen">
-      <h1 className="text-xl md:text-2xl font-bold mb-4 md:mb-6">My Orders</h1>
+      <h1 className="text-xl md:text-2xl font-bold mb-4 md:mb-6">{t("myOrder")}</h1>
       {!orders || orders.length === 0 ? (
-        <div className="text-center">No orders found</div>
+        <div className="text-center">{t("noOrder")}</div>
       ) : (
         <div>
           {/* Mobile Card Layout */}
@@ -40,15 +42,15 @@ export default async function TotalOrdersPage() {
                 <CardContent>
                   <div className="grid grid-cols-3 gap-2 text-sm mb-4">
                     <div>
-                      <span className="text-muted-foreground">Date:</span>
+                      <span className="text-muted-foreground">{t("date")}:</span>
                       <p>{new Date(order.createdAt).toLocaleString()}</p>
                     </div>
                     <div>
-                      <span className="text-muted-foreground">Payment:</span>
+                      <span className="text-muted-foreground">{t("payment")}:</span>
                       <p>{order.isPaid ? "Paid" : "Unpaid"}</p>
                     </div>
                     <div>
-                      <span className="text-muted-foreground">Status:</span>
+                      <span className="text-muted-foreground">{t("orderStatus")}:</span>
                       <p>{order.isDelivered ? "Delivered" : "Pending"}</p>
                     </div>
                   </div>
@@ -56,7 +58,7 @@ export default async function TotalOrdersPage() {
                     href={`/order/${order.id}`}
                     className="text-primary hover:underline text-sm font-medium"
                   >
-                    Details
+                    {t("detail")}
                   </Link>
                 </CardContent>
               </Card>
@@ -68,12 +70,12 @@ export default async function TotalOrdersPage() {
             <Table className="table-fixed w-full">
               <TableHeader>
                 <TableRow>
-                  <TableHead>ID</TableHead>
-                  <TableHead>Date</TableHead>
-                  <TableHead>Total</TableHead>
-                  <TableHead>Paid</TableHead>
-                  <TableHead>Delivered</TableHead>
-                  <TableHead>Actions</TableHead>
+                  <TableHead>{t("id")}</TableHead>
+                  <TableHead>{t("date")}</TableHead>
+                  <TableHead>{t("total")}</TableHead>
+                  <TableHead>{t("paid")}</TableHead>
+                  <TableHead>{t("delivered")}</TableHead>
+                  <TableHead>{t("action")}</TableHead>
                 </TableRow>
               </TableHeader>
 
@@ -87,16 +89,16 @@ export default async function TotalOrdersPage() {
                       {new Date(order.createdAt).toLocaleString()}
                     </TableCell>
                     <TableCell>{formatCurrency(order.totalPrice)}</TableCell>
-                    <TableCell>{order.isPaid ? "Paid" : "Unpaid"}</TableCell>
+                    <TableCell>{order.isPaid ? t("paid") : t("notPaid")}</TableCell>
                     <TableCell>
-                      {order.isDelivered ? "Delivered" : "Pending"}
+                      {order.isDelivered ? t("delivered") : t("pending")}
                     </TableCell>
                     <TableCell>
                       <Link
                         href={`/order/${order.id}`}
                         className="hover:underline"
                       >
-                        Details
+                        {t("detail")}
                       </Link>
                     </TableCell>
                   </TableRow>

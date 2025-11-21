@@ -6,7 +6,7 @@ import Menu from "./menu";
 import { getAllCategoriesWithCount } from "@/lib/actions/products.actions";
 import HamburgerMenu from "./hamburgerMenu";
 import SearchBar from "./searchBarUser";
-import LanguageSwitcher from "./LocaleSwitcher";
+import LocaleSwitcher from "./LocaleSwitcher";
 
 export default async function Header() {
   const categories = await getAllCategoriesWithCount();
@@ -37,7 +37,7 @@ export default async function Header() {
             <SearchBar categories={categories} />
           </div>
           <Menu />
-            <LanguageSwitcher/>
+          <LocaleSwitcher />
         </div>
       </div>
     </div>

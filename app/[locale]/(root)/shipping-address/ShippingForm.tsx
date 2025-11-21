@@ -17,6 +17,7 @@ import {
   FormControl,
   FormMessage,
 } from "@/components/ui/form";
+import { useTranslations } from "next-intl";
 
 export default function ShippingForm({
   defaultValues,
@@ -25,6 +26,7 @@ export default function ShippingForm({
   defaultValues?: ShippingAddress;
   context?: "profile" | "checkout";
 }) {
+  const t= useTranslations('shipping')
   const router = useRouter();
 
   const form = useForm<ShippingAddress>({
@@ -75,9 +77,9 @@ export default function ShippingForm({
           name="fullName"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Full Name</FormLabel>
+              <FormLabel>{t("fullname")}</FormLabel>
               <FormControl>
-                <Input placeholder="Enter your full name" {...field} />
+                <Input placeholder={t("placeName")}{...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -89,9 +91,9 @@ export default function ShippingForm({
           name="address"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Address</FormLabel>
+              <FormLabel>{t("address")}</FormLabel>
               <FormControl>
-                <Input placeholder="Enter your address" {...field} />
+                <Input placeholder={t("placeAddress")}  {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -104,9 +106,9 @@ export default function ShippingForm({
             name="city"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>City</FormLabel>
+                <FormLabel>{t("city")}</FormLabel>
                 <FormControl>
-                  <Input placeholder="Enter your city" {...field} />
+                  <Input placeholder={t("placecity")} {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -118,9 +120,9 @@ export default function ShippingForm({
             name="postalCode"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Postal Code</FormLabel>
+                <FormLabel>{t("postalCode")}</FormLabel>
                 <FormControl>
-                  <Input placeholder="Enter postal code" {...field} />
+                  <Input placeholder={t("placeCode")} {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -133,9 +135,9 @@ export default function ShippingForm({
           name="country"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Country</FormLabel>
+              <FormLabel>{t("country")}</FormLabel>
               <FormControl>
-                <Input placeholder="Enter your country" {...field} />
+                <Input placeholder={t("placeCountry")}{...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -144,8 +146,8 @@ export default function ShippingForm({
 
         <Button type="submit" disabled={form.formState.isSubmitting}>
           {form.formState.isSubmitting
-            ? "Updating..."
-            : "Update Shipping Information"}
+            ? t("updating") 
+            : t("updateButton")}
         </Button>
       </form>
     </Form>

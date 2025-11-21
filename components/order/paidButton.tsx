@@ -6,8 +6,10 @@ import { useRouter } from "next/navigation";
 import { useTransition } from "react";
 import { toast } from "sonner";
 import { CheckCircle } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 export default function MarkAsPaidButton({ orderId }: { orderId: string }) {
+  const t = useTranslations('order')
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
 
@@ -32,7 +34,7 @@ export default function MarkAsPaidButton({ orderId }: { orderId: string }) {
       disabled={isPending}
       className="bg-primary w-full"
     >
-      {isPending ? "Processing..." : "Mark as Paid"}
+      {isPending ? t("processing") : t("markPaid")}
       <CheckCircle className="ml-2 h-4 w-4 animate-pulse" />
     </Button>
   );

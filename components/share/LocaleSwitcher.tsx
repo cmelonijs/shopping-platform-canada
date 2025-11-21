@@ -26,7 +26,7 @@ export default function LocaleSwitcher() {
         <SelectItem value="en">
           <div className="flex items-center gap-2">
             <Image src="/flagUK.svg" alt="English" width={20} height={14} />
-            <span>UK</span>
+            <span>EN</span>
           </div>
         </SelectItem>
         <SelectItem value="it">

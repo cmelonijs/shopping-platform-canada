@@ -13,7 +13,7 @@ import { getTranslations } from "next-intl/server";
 import Link from "next/link";
 
 const UserButton = async () => {
-  const t = await getTranslations("signInbtn");
+  const t = await getTranslations("userBtn");
   const session = await auth();
 
   if (!session) {
@@ -55,12 +55,12 @@ const UserButton = async () => {
           </DropdownMenuLabel>
           <DropdownMenuItem className="border border-gray-300 rounded-sm p-3 mb-1">
             <Link href="/user/profile" className="w-full">
-              Profile
+              {t('profile')}
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem className="border border-gray-300 rounded-sm p-3 mb-1">
             <Link href="/user/orders" className="w-full">
-              Order History
+              {t('order')}
             </Link>
           </DropdownMenuItem>
 
@@ -69,7 +69,7 @@ const UserButton = async () => {
             session.user.role === "admin" && (
               <DropdownMenuItem className="border border-gray-300 rounded-sm p-3 mb-1">
                 <Link href="/admin/overview" className="w-full">
-                  Admin
+                  {t('admin')}
                 </Link>
               </DropdownMenuItem>
             )}
@@ -79,7 +79,7 @@ const UserButton = async () => {
                 className="w-full py-4 px-2 h-4 justify-start"
                 variant="ghost"
               >
-                Sign out
+                {t('signOut')}
               </Button>
             </form>
           </DropdownMenuItem>

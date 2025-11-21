@@ -21,12 +21,36 @@
   "footer": {
     "rights": " All Rights Reserved."
   },
+  "message": {
+    "added": "{product} added to the cart",
+    "removed": "{product} was removed from cart",
+    "noStock": "not enough stock",
+    "updated": "{product}update in cart",
+    "noProduct": "product not found",
+    "paymentUpdated": "Payment method updated successfully",
+    "orderCreated": "Order created",
+    "orderMarkPaid": "order marked as paid",
+    "orderFailMarkPaid":"Failed to mark as paid",
+    "orderFailmarkDelivered":"Failed to mark as delivered",
+    "orderMarkDelivered":"Order marked as delivered",
+    "orderNoFound":"Order not found"
+  },
+  "breadcrumb": {
+    "login": "Login",
+    "shipping": "Shipping Address",
+    "payment": "Payment Method",
+    "place": "Place order"
+  },
   "hamb": {
     "articles": "Articles",
     "category": "Category"
   },
   "menu": {
     "cart": "cart"
+  },
+  "userHeader": {
+    "profile": "Profile",
+    "order": "Order"
   },
   "productList": {
     "newest": "Newest Arrivals"
@@ -35,18 +59,22 @@
     "category": "All categories",
     "searchProducts": "Search products"
   },
-  "signInbtn": {
-    "signIn": "Sign In"
+  "userBtn": {
+    "signIn": "Sign In",
+    "profile": "Profile",
+    "order": "Order History",
+    "admin": "admin",
+    "signOut": "Sign out"
   },
   "src": {
     "allCategories": "All categories",
     "allPrices": "All prices",
     "allRatings": "All ratings",
-    "allProducts":"All products",
+    "allProducts": "All products",
     "categories": "Categories",
-    "clearBtn":"clear filter",
+    "clearBtn": "clear filter",
     "customerRatings": "Customer ratings",
-    "filtered":"Filtered products",
+    "filtered": "Filtered products",
     "higher": "Higher",
     "lower": "Lower",
     "newest": "Newest",
@@ -54,5 +82,121 @@
     "price": "Price",
     "rating": "Rating",
     "sort": "Sort"
+  },
+  "review": {
+    "custReview": "Customer Reviews",
+    "noReview": "No reviews yet. Be the first to review this product!",
+    "addReview": "Add a Review",
+    "reviewDesc": "Share your thoughts about this product with other customers.",
+    "titleLabel": "Title",
+    "titlePlaceholder": "Enter the title",
+    "descriptionLabel": "Description",
+    "descriptionPlaceholder": "Enter the description",
+    "ratingLabel": "Rating",
+    "submit": "Submit review",
+    "submitting": "Submitting..."
+  },
+  "addCart": {
+    "addToCart": "Add to cart",
+    "messageToastAdd": "Go to cart",
+    "messageToastRemoved": "was removed from cart"
+  },
+  "cart": {
+    "shoppingCart": "Shopping cart",
+    "zeroItems": " No items in your cart",
+    "itemsCart": "items in your cart",
+    "orderSummary": "Order Summary",
+    "orderDesc": "Review your order details and shipping information",
+    "subtotal": "Subtotal",
+    "total": "Total",
+    "shipping": "Shipping",
+    "tax": "Tax",
+    "freeRet": "Free returns within 30 days",
+    "secure": "Secure payment",
+    "fastDelivery": "Fast delivery",
+    "procedToCheckout": "Proceed to Checkout"
+  },
+  "shipping": {
+    "shippingAddress": "Shipping address",
+    "fullname": "Full name",
+    "address": "Address",
+    "city": "City",
+    "postalCode": "Postal code",
+    "country": "Country",
+    "placeName": "Enter your name",
+    "placeAddress": "Enter your address",
+    "placecity": "Enter your city",
+    "placeCode": "Enter your postal code",
+    "placeCountry": "Enter your postal country",
+    "updateButton": "Update Shipping Information",
+    "updating": "Updating..."
+  },
+  "payment": {
+    "paymentTitle": "Payment method",
+    "selectMethod": "Select Payment Method",
+    "cashOnDelivery": "Cash on Delivery",
+    "stripe": "Credit/Debit Card (Stripe)",
+    "paypal": "PayPal",
+    "processing": "Processing...",
+    "continue": "Continue to Checkout"
+  },
+  "order": {
+    "myOrder": "My orders",
+    "noOrder": "No orders found",
+    "edit": "Edit",
+    "payment": "Payment",
+    "date": "Date",
+    "orderStatus": "Status",
+    "id": "ID",
+    "detail": "Detail",
+    "delete": "Delete",
+    "action": "Action",
+    "title": "Place Order",
+    "yourOrderTitle": "Your Order",
+    "subtitle": "Review your order and confirm",
+    "shippingTitle": "Shipping Address",
+    "name": "Name",
+    "address": "Address",
+    "city": "City",
+    "postal": "Postal",
+    "country": "Country",
+    "noShipping": "No shipping address found.",
+    "paymentTitle": "Payment Method",
+    "noPayment": "No Payment Method found.",
+    "table": {
+      "product": "Product",
+      "quantity": "Quantity",
+      "price": "Price"
+    },
+    "summaryTitle": "Total",
+    "items": "Items",
+    "tax": "Tax price",
+    "shipping": "Shipping",
+    "total": "Total price",
+    "emptyCart": "Cart empty.",
+    "deliveryStatus": "Delivery Status",
+    "pending": "Pendig",
+    "delivered": "Delivered",
+    "notDelivered": "Not Delivered",
+    "infoDelivery": "No delivery information available",
+    "paymentMethod": "Payment Method",
+    "paymentStatus": "paymentStatus",
+    "paid": "Paid",
+    "notPaid": "Not Paid",
+    "mycart": "My cart",
+    "markPaid": "Mark as Paid",
+    "markDelivered": "Mark as Delivered",
+    "processing": "Processing..."
+  },
+  "orderBtn": {
+    "creating": "Creating order...",
+    "place": "Place order"
+  },
+  "profile": {
+    "title": "Profile",
+    "name": "Name",
+    "email": "Email",
+    "update": "update",
+    "updating": "Updating..."
   }
 }

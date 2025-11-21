@@ -23,8 +23,10 @@ import {
 import Image from "next/image";
 import PlaceOrderButton from "@/components/share/placeOrderButton";
 import { formatCurrency } from "@/lib/utils";
+import { getTranslations } from "next-intl/server";
 
 export default async function placeOrderpage() {
+  const t = await getTranslations('order')
   const address = await getAddress();
   const PaymentMethod = await getPaymentMethod();
   const mycart = await getMyCart();
@@ -36,43 +38,43 @@ export default async function placeOrderpage() {
         <div className="flex-grow">
           <div className="flex flex-col">
             <div className="w-full max-w-max mx-auto p-6s min-h-screen p-4">
-              <h1 className="text-3xl font-bold mb-3">Place Order</h1>
+              <h1 className="text-3xl font-bold mb-3">{t("title")}</h1>
               <p className="text-sm text-muted-foreground mb-2">
-                Review your order and confirm
+                {t("subtitle")}
               </p>
               <div className="grid grid-1 md:grid-cols-3 gap-4 ">
                 <div className="col-span-1 md:col-span-2 overflow-x-auto space-y-6">
                   <Card className="p-6 mt-3">
                     <h2 className="text-2xl font-semibold mb-4">
-                      Shipping Address
+                      {t("shippingTitle")}
                     </h2>
                     <CardContent className="space-y-3 grid grid-cols-2 gap-x-4 ">
                       {address ? (
                         <>
-                          <CardTitle>Name:</CardTitle>
+                          <CardTitle>{t("name")}:</CardTitle>
                           <CardDescription> {address.fullName}</CardDescription>
-                          <CardTitle>Address: </CardTitle>
+                          <CardTitle>{t("address")}: </CardTitle>
                           <CardDescription>{address.address}</CardDescription>
-                          <CardTitle>City: </CardTitle>
+                          <CardTitle>{t("city")}:</CardTitle>
                           <CardDescription>{address.city}</CardDescription>
-                          <CardTitle>Postal:</CardTitle>
+                          <CardTitle>{t("postal")}:</CardTitle>
                           <CardDescription>
                             {address.postalCode}
                           </CardDescription>
-                          <CardTitle>Country:</CardTitle>
+                          <CardTitle>{t("country")}:</CardTitle>
                           <CardDescription>{address.country}</CardDescription>
                         </>
                       ) : (
-                        <p>No shipping address found.</p>
+                        <p>{t("noShipping")}</p>
                       )}
                       <Link href="/shipping-address">
-                        <Button variant="secondary">Edit</Button>
+                        <Button variant="secondary">{t("edit")}</Button>
                       </Link>
                     </CardContent>
                   </Card>
                   <Card className="p-6 mt-4">
                     <h2 className="text-2xl font-semibold mb-4">
-                      Payment method
+                      {t("paymentTitle")}
                     </h2>
                     <CardContent className="space-y-4 grid grid-cols-2 gap-x-4">
                       {PaymentMethod ? (
@@ -83,10 +85,10 @@ export default async function placeOrderpage() {
                           </CardDescription>
                         </>
                       ) : (
-                        <p> No Payment Method found.</p>
+                        <p>{t("noPayment")}</p>
                       )}
                       <Link href="/payment-method">
-                        <Button variant="secondary">Edit</Button>
+                        <Button variant="secondary">{t("edit")}</Button>
                       </Link>
                     </CardContent>
                   </Card>
@@ -94,12 +96,12 @@ export default async function placeOrderpage() {
                     <Table className="col-span-1 md:col-span-2 text-center">
                       <TableHeader>
                         <TableRow>
-                          <TableHead>Product</TableHead>
+                          <TableHead>{t("table.product")}</TableHead>
                           <TableHead></TableHead>
                           <TableHead className="text-center">
-                            Quantity
+                            {t("table.quantity")}
                           </TableHead>
-                          <TableHead className="text-center">Price</TableHead>
+                          <TableHead className="text-center">{t("table.price")}</TableHead>
                         </TableRow>
                       </TableHeader>
                       <TableBody>
@@ -129,29 +131,29 @@ export default async function placeOrderpage() {
                 </div>
                 <div>
                   <Card className="p-6 mt-4 h-auto">
-                    <h2 className="text-2xl font-semibold mb-4">Total</h2>
+                    <h2 className="text-2xl font-semibold mb-4">{t("summaryTitle")}</h2>
                     <CardContent className="space-y-4 grid grid-cols-2 gap-x-4">
                       {mycart ? (
                         <>
-                          <CardTitle>Items:</CardTitle>
+                          <CardTitle>{t("items")}:</CardTitle>
                           <CardDescription>
                             {formatCurrency(mycart.itemsPrice)}
                           </CardDescription>
-                          <CardTitle>Tax price: </CardTitle>
+                          <CardTitle>{t("tax")}: </CardTitle>
                           <CardDescription>
                             {formatCurrency(mycart.taxPrice)}
                           </CardDescription>
-                          <CardTitle>Shipping: </CardTitle>
+                          <CardTitle>{t("shipping")}: </CardTitle>
                           <CardDescription>
                             {formatCurrency(mycart.ShippingPrice)}
                           </CardDescription>
-                          <CardTitle>Total price:</CardTitle>
+                          <CardTitle>{t("total")}:</CardTitle>
                           <CardDescription>
                             {formatCurrency(mycart.totalPrice)}
                           </CardDescription>
                         </>
                       ) : (
-                        <p>Cart empty.</p>
+                        <p>{t("emptyCart")}</p>
                       )}
                       <PlaceOrderButton />
                     </CardContent>

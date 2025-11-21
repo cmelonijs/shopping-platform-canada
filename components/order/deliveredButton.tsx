@@ -6,12 +6,14 @@ import { useRouter } from "next/navigation";
 import { useTransition } from "react";
 import { toast } from "sonner";
 import { Truck } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 export default function MarkAsDeliveredButton({
   orderId,
 }: {
   orderId: string;
 }) {
+  const t= useTranslations('order')
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
 
@@ -36,7 +38,7 @@ export default function MarkAsDeliveredButton({
       disabled={isPending}
       className="bg-green-600 w-full hover:bg-green-700 transition"
     >
-      {isPending ? "Processing..." : "Mark as Delivered"}
+      {isPending ? t("processing") : t("markDelivered")}
       <Truck className="ml-2 h-4 w-4 animate-pulse" />
     </Button>
   );

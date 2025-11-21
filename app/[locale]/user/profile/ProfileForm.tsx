@@ -17,12 +17,14 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
+import { useTranslations } from "next-intl";
 
 export default function ProfileForm({
   defaultValues,
 }: {
   defaultValues?: Profile;
 }) {
+  const t= useTranslations('profile')
   const router = useRouter();
 
   const form = useForm<Profile>({
@@ -56,7 +58,7 @@ export default function ProfileForm({
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Email</FormLabel>
+              <FormLabel>{t('email')}</FormLabel>
               <FormControl>
                 <Input placeholder="Email address" disabled {...field} />
               </FormControl>
@@ -70,7 +72,7 @@ export default function ProfileForm({
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Name</FormLabel>
+              <FormLabel>{t('name')}</FormLabel>
               <FormControl>
                 <Input placeholder="Enter your name" {...field} />
               </FormControl>
@@ -80,7 +82,7 @@ export default function ProfileForm({
         />
 
         <Button type="submit" disabled={form.formState.isSubmitting}>
-          {form.formState.isSubmitting ? "Updating..." : "Update Profile"}
+          {form.formState.isSubmitting ? t("updating") : t("update")}
         </Button>
       </form>
     </Form>
