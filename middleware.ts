@@ -1,34 +1,28 @@
-import NextAuth from "next-auth";
-import { authConfig } from "./auth.config";
-import createMiddleware from "next-intl/middleware";
-import { routing } from "./i18n/routing";
 import { NextRequest, NextResponse } from "next/server";
-
-export const { auth: authMiddleware } = NextAuth(authConfig);
+import createMiddleware from "next-intl/middleware";
+import { routing } from "@/i18n/routing";
+import { protectRoutes } from "@/lib/middleware/auth";
+import { ensureSessionCartId } from "@/lib/middleware/session";
 
 const intlMiddleware = createMiddleware(routing);
 
-export default function middleware(request: NextRequest) {
+export default async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // 1. Redirect / → /en
   if (pathname === "/") {
-    const locale = "en"; // imposta la lingua predefinita
-    return NextResponse.redirect(new URL(`/${locale}`, request.url));
+    return NextResponse.redirect(new URL("/en", request.url));
   }
 
-  // 2. Imposta sessionCartId se non esiste
+  // 2. Applica localizzazione
   const response = intlMiddleware(request);
-  const cartId = request.cookies.get("sessionCartId")?.value;
 
-  if (!cartId) {
-    const newCartId = crypto.randomUUID();
-    response.cookies.set("sessionCartId", newCartId, {
-      path: "/",
-      httpOnly: true,
-      sameSite: "lax",
-    });
-  }
+  // 3. Imposta sessionCartId se mancante
+  ensureSessionCartId(request, response);
+
+  // 4. Proteggi le route
+  const authRedirect = await protectRoutes(request);
+  if (authRedirect) return authRedirect;
 
   return response;
 }
