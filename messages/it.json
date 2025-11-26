@@ -60,10 +60,12 @@
     "searchProducts": "Cerca prodotti"
   },
   "sign-in": {
+    "SignTitle":"Accedi",
   "signIn": "Accedi",
   "signOut": "Esci",
   "signInSub": "Accedi al tuo account",
-  "signInDesc": "Non hai un account?"
+  "signInDesc": "Non hai un account?",
+  "Signing in": "Accesso in corso..."
 },
   "userBtn": {
   "signIn": "Accedi",

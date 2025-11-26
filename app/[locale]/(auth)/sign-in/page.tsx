@@ -13,6 +13,8 @@ import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 import SignInForm from "./SignInForm";
 import { MoveLeft } from "lucide-react";
+import { get } from "http";
+import { getTranslations } from "next-intl/server";
 
 // Sets the title for the browser tab
 export const metadata: Metadata = {
@@ -22,6 +24,7 @@ export const metadata: Metadata = {
 const SignInPage = async (props: {
   searchParams: Promise<{ callbackUrl: string }>;
 }) => {
+  const t= await getTranslations("sign-in");
   const { callbackUrl } = await props.searchParams;
 
   // Check if the user is already authenticated
@@ -49,9 +52,9 @@ const SignInPage = async (props: {
               priority={true}
             />
           </Link>
-          <CardTitle className="text-center">Sign in</CardTitle>
+          <CardTitle className="text-center">{t("SignTitle")}</CardTitle>
           <CardDescription className="text-center">
-            Sign in to your account
+            {t("signInSub")}
           </CardDescription>
         </CardHeader>
         <CardContent className="my-4">

@@ -60,10 +60,12 @@
     "searchProducts": "Search products"
   },
   "sign-in": {
-  "signIn": "Sign in",
-  "signOut": "Sign out",
+  "SignTitle": "Sign In",
+  "signIn": "Sign In",
+  "signOut": "Sign Out",
   "signInSub": "Sign in to your account",
-  "signInDesc": "Don't have an account?"
+  "signInDesc": "Don't have an account?",
+  "Signing in": "Signing in..."
 },
   "userBtn": {
     "signIn": "Sign In",
