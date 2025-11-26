@@ -5,6 +5,7 @@ import Menu from "@/components/share/menu";
 import { Button } from "@/components/ui/button";
 import LocaleSwitcher from "@/components/share/LocaleSwitcher";
 import { useTranslations } from "next-intl";
+import Logo from "@/components/share/logoUser";
 
 export default function UserHeader() {
   const t= useTranslations("userHeader");
@@ -12,15 +13,7 @@ export default function UserHeader() {
     <div className="w-full border-b">
       <div className="container mx-auto px-3 flex justify-between items-center py-3">
         <div className="flex items-center  gap-4">
-          <Link href="/" className="shirnk-0">
-            <Image
-              src={logo}
-              alt="Logo"
-              width={50}
-              height={50}
-              className="scale-110 object-contain"
-            />
-          </Link>
+          <Logo/>
           <Button asChild variant={"ghost"}>
             <Link href="/user/profile">{t('profile')}</Link>
           </Button>

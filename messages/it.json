@@ -59,12 +59,20 @@
     "category": "Tutte le categorie",
     "searchProducts": "Cerca prodotti"
   },
+  "sign-in": {
+  "signIn": "Accedi",
+  "signOut": "Esci",
+  "signInSub": "Accedi al tuo account",
+  "signInDesc": "Non hai un account?"
+},
   "userBtn": {
   "signIn": "Accedi",
   "profile": "Profilo",
   "order": "Storico ordini",
   "admin": "Amministrazione",
-  "signOut": "Esci"
+  "signOut": "Esci",
+  "signInSub": "Accedi al tuo account",
+  "signInDesc": "Non hai un account?"
 },
   "src": {
     "allCategories": "Tutte le categorie",

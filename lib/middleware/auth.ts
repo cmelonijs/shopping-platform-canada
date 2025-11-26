@@ -22,7 +22,8 @@ export async function protectRoutes(request: NextRequest): Promise<NextResponse 
   if (!session && isProtected) {
     const locale = pathname.split("/")[1] || "en";
     const signInUrl = new URL(`/${locale}/sign-in`, request.url);
-    signInUrl.searchParams.set("callbackUrl", "/");
+    signInUrl.searchParams.set("callbackUrl", request.nextUrl.href);
+
     return NextResponse.redirect(signInUrl);
   }
 
