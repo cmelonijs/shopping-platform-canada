@@ -8,6 +8,7 @@ import { prisma } from "@/db/prisma";
 import { revalidatePath } from "next/cache";
 import { Prisma } from "@prisma/client";
 import { cartItemSchema, insertCartSchema } from "../validator";
+import { getTranslations } from "next-intl/server";
 
 // calculate cart prices
 const calcPrice = (items: CartItem[]) => {
@@ -50,6 +51,7 @@ export async function addItemToCart(data: CartItem) {
     const item = cartItemSchema.parse(data);
 
     // find item in the db
+    const t= await getTranslations('message');
     const product = await prisma.product.findFirst({
       where: { id: item.productId },
     });
@@ -76,7 +78,7 @@ export async function addItemToCart(data: CartItem) {
 
       return {
         success: true,
-        message: `${product.name} added to the cart`,
+        message: t("added",{product:product.name}),
       };
     } else {
       // check if item is already in the cart
@@ -87,7 +89,7 @@ export async function addItemToCart(data: CartItem) {
       if (existsItem) {
         // check the stock
         if (product.stock < existsItem.qty + 1) {
-          throw new Error("Not enough stock");
+          throw new Error (t("noStock"));
         }
 
         // increase the quantity
@@ -96,7 +98,7 @@ export async function addItemToCart(data: CartItem) {
         )!.qty = existsItem.qty + 1;
       } else {
         // check stock
-        if (product.stock < 1) throw new Error("Not enough stock");
+        if (product.stock < 1) throw new Error(t("noStock"));
 
         // add item to cart items
         cart.items.push(item);
@@ -115,9 +117,7 @@ export async function addItemToCart(data: CartItem) {
 
       return {
         success: true,
-        message: `${product.name} ${
-          existsItem ? "updated in" : "added to"
-        } cart`,
+       message: t(existsItem ? "updated" : "added", { product: product.name }),
       };
     }
   } catch (err) {
@@ -156,6 +156,7 @@ export async function getMyCart() {
 }
 
 export async function removeItemFormCart(productId: string) {
+  const t= await  getTranslations('message');
   try {
     // get the cart cookie
     const sessionCartId = (await cookies()).get("sessionCartId")?.value;
@@ -166,7 +167,7 @@ export async function removeItemFormCart(productId: string) {
       where: { id: productId },
     });
 
-    if (!product) throw new Error("Product not found");
+    if (!product) throw new Error(t("noProduct"));
 
     // get user cart
     const cart = await getMyCart();
@@ -206,7 +207,8 @@ export async function removeItemFormCart(productId: string) {
 
     return {
       success: true,
-      message: `${product.name} was removed from cart`,
+      // message: `${product.name} was removed from cart`,
+      message: t("removed",{product:product.name}),
     };
   } catch (err) {
     return {

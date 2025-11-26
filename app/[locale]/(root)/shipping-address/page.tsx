@@ -4,9 +4,11 @@ import ShippingForm from "./ShippingForm";
 import BreadcrumbBoard from "@/components/share/breadcrumbBoard";
 import { ShippingAddress } from "@/types";
 import { getAddress } from "@/lib/actions/address.actions";
+import { getTranslations } from "next-intl/server";
 
 const ShippingAddressPage = async () => {
   const session = await auth();
+  const t =await getTranslations('shipping')
 
   // If user is NOT authenticated, redirect to login
   if (!session) {
@@ -19,7 +21,7 @@ const ShippingAddressPage = async () => {
     <>
       <BreadcrumbBoard step="shipping" />
       <div className="max-w-2xl mx-auto p-6 h-screen">
-        <h1 className="text-3xl font-bold mb-6 ">Shipping Address</h1>
+        <h1 className="text-3xl font-bold mb-6 ">{t("shippingAddress")}</h1>
         <ShippingForm
           defaultValues={existingAddress as ShippingAddress}
           context="checkout"

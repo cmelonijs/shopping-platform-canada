@@ -14,12 +14,14 @@ import AddToCart from "@/components/cart/addToCart";
 import { RenderStars } from "@/components/share/stars";
 import { formatCurrency } from "@/lib/utils";
 import ReviewForm from "./ReviewForm";
+import { getTranslations } from "next-intl/server";
 
 const DetailsPage = async ({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }) => {
+  const t = await getTranslations('review')
   const { slug } = await params;
   const product: Product = await getProductBySlug(slug);
 
@@ -92,7 +94,7 @@ const DetailsPage = async ({
       </div>
 
       <div className="border-t pt-6">
-        <h2 className="text-2xl font-semibold">Customer Reviews</h2>
+        <h2 className="text-2xl font-semibold">{t("custReview")}</h2>
       </div>
 
       <div>
@@ -102,7 +104,7 @@ const DetailsPage = async ({
       {/* Display all reviews */}
       <div className="space-y-4">
         {allReviews.length === 0 ? (
-          <p className="text-gray-500">No reviews yet. Be the first to review this product!</p>
+          <p className="text-gray-500">{t("noReview")}</p>
         ) : (
           allReviews.map((review) => (
             <div key={review.id} className="border rounded-lg p-4 space-y-2">

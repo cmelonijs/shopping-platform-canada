@@ -12,8 +12,10 @@ import Link from "next/link";
 import { getMyCart } from "@/lib/actions/cart.actions";
 import CartItemControls from "@/components/cart/cartItemControls";
 import { formatCurrency } from "@/lib/utils";
+import { getTranslations } from "next-intl/server";
 
 export default async function CartPage() {
+  const t = await getTranslations('cart')
   const cart = await getMyCart();
 
   if (!cart) {
@@ -21,8 +23,8 @@ export default async function CartPage() {
     return (
       <div className="mx-auto w-full max-w-7xl p-6">
         <div>
-          <h1 className="text-2xl font-semibold">Shopping Cart</h1>
-          <p className="text-muted-foreground">0 items in your cart</p>
+          <h1 className="text-2xl font-semibold">{t("shoppingCart")}</h1>
+          <p className="text-muted-foreground">{t("zeroItems")}</p>
         </div>
       </div>
     );
@@ -34,10 +36,9 @@ export default async function CartPage() {
         {/* Main Cart Section */}
         <div className="space-y-6 lg:col-span-2">
           <div>
-            <h1 className="text-2xl font-semibold">Shopping Cart</h1>
+            <h1 className="text-2xl font-semibold">{t("shoppingCart")}</h1>
             <p className="text-muted-foreground">
-              {cart.items.reduce((total, item) => total + item.qty, 0)} items in
-              your cart
+              {cart.items.reduce((total, item) => total + item.qty, 0)} {t('itemsCart')}
             </p>
           </div>
 
@@ -90,29 +91,29 @@ export default async function CartPage() {
           <div className=" space-y-6">
             <Card className="flex flex-col flex-1">
               <CardHeader>
-                <CardTitle>Order Summary</CardTitle>
+                <CardTitle>{t('orderSummary')}</CardTitle>
                 <CardDescription>
-                  Review your order details and shipping information
+                  {t("orderDesc")}
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
                 {/* Order Totals */}
                 <div className="space-y-2">
                   <div className="flex justify-between text-sm">
-                    <span>Subtotal</span>{" "}
+                    <span>{t("subtotal")}</span>{" "}
                     {/*changed shipping/items from Paolo*/}
                     <span>{formatCurrency(cart.itemsPrice)}</span>
                   </div>
                   <div className="flex justify-between text-sm">
-                    <span>Shipping</span>
+                    <span>{t("shipping")}</span>
                     <span>{formatCurrency(cart.ShippingPrice)}</span>
                   </div>
                   <div className="flex justify-between text-sm">
-                    <span>Tax</span>
+                    <span>{t("tax")}</span>
                     <span>{formatCurrency(cart.taxPrice)}</span>
                   </div>
                   <div className="flex justify-between font-medium">
-                    <span>Total</span>
+                    <span>{t("total")}</span>
                     <span>{formatCurrency(cart.totalPrice)}</span>
                   </div>
                 </div>
@@ -121,15 +122,15 @@ export default async function CartPage() {
                 <div className="space-y-4 border-t pt-4">
                   <div className="flex items-center gap-2 text-sm">
                     <Package className="text-primary h-4 w-4" />
-                    <span>Free returns within 30 days</span>
+                    <span>{t("freeRet")}</span>
                   </div>
                   <div className="flex items-center gap-2 text-sm">
                     <Shield className="text-primary h-4 w-4" />
-                    <span>Secure payment</span>
+                    <span>{t("secure")}</span>
                   </div>
                   <div className="flex items-center gap-2 text-sm">
                     <Truck className="text-primary h-4 w-4" />
-                    <span>Fast delivery</span>
+                    <span>{t("fastDelivery")}</span>
                   </div>
                 </div>
 
@@ -137,7 +138,7 @@ export default async function CartPage() {
                 <Link href="/shipping-address">
                   <Button className="w-full">
                     <CreditCard className="mr-2 h-4 w-4" />
-                    Proceed to Checkout
+                    {t("procedToCheckout")}
                   </Button>
                 </Link>
               </CardContent>

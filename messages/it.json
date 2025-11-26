@@ -21,12 +21,36 @@
   "footer": {
     "rights": "Tutti i diritti riservati."
   },
+ "message": {
+  "added": "{product} aggiunto al carrello",
+  "removed": "{product} è stato rimosso dal carrello",
+  "noStock": "Stock insufficiente",
+  "updated": "{product} aggiornato nel carrello",
+  "noProduct": "Prodotto non trovato",
+  "paymentUpdated": "Metodo di pagamento aggiornato con successo",
+  "orderCreated": "Ordine creato",
+  "orderMarkPaid": "Ordine segnato come pagato",
+  "orderFailMarkPaid": "Impossibile segnare come pagato",
+  "orderFailmarkDelivered": "Impossibile segnare come consegnato",
+  "orderMarkDelivered": "Ordine segnato come consegnato",
+  "orderNoFound": "Ordine non trovato"
+},
+  "breadcrumb": {
+  "login": "Accesso",
+  "shipping": "Indirizzo di spedizione",
+  "payment": "Metodo di pagamento",
+  "place": "Conferma ordine"
+},
   "hamb": {
     "articles": "Articoli",
     "category": "Categoria"
   },
   "menu": {
     "cart": "carrello"
+  },
+  "userHeader": {
+    "profile": "Profilo",
+    "order": "Ordine"
   },
   "productList": {
     "newest": "Nuovi Arrivi"
@@ -35,18 +59,22 @@
     "category": "Tutte le categorie",
     "searchProducts": "Cerca prodotti"
   },
-  "signInbtn": {
-    "signIn": "Accedi"
-  },
+  "userBtn": {
+  "signIn": "Accedi",
+  "profile": "Profilo",
+  "order": "Storico ordini",
+  "admin": "Amministrazione",
+  "signOut": "Esci"
+},
   "src": {
     "allCategories": "Tutte le categorie",
     "allPrices": "Tutti i prezzi",
     "allRatings": "Tutte le valutazioni",
-    "allProducts":"Tutti i prodotti",
+    "allProducts": "Tutti i prodotti",
     "categories": "Categorie",
-    "clearBtn":"Pulisci filtro",
+    "clearBtn": "Pulisci filtro",
     "customerRatings": "Valutazioni dei clienti",
-    "filtered":"Prodotti filtrati",
+    "filtered": "Prodotti filtrati",
     "higher": "Più alto",
     "lower": "Più basso",
     "newest": "Più recente",
@@ -54,5 +82,121 @@
     "price": "Prezzo",
     "rating": "Più votati",
     "sort": "Ordina"
+  },
+  "review": {
+    "custReview": "Recensioni dei clienti",
+    "noReview": "Nessuna recensione al momento. Scrivi tu la prima recensione su questo prodotto!",
+    "addReview": "Aggiungi una recensione",
+    "reviewDesc": "Condividi la tua opinione su questo prodotto con altri clienti.",
+    "titleLabel": "Titolo",
+    "titlePlaceholder": "Inserisci il titolo",
+    "descriptionLabel": "Descrizione",
+    "descriptionPlaceholder": "Inserisci la descrizione",
+    "ratingLabel": "Valutazione",
+    "submit": "Invia recensione",
+    "submitting": "Invio in corso..."
+  },
+  "addCart": {
+    "addToCart": "Aggiungi al carrello",
+    "messageToastAdd": "vai al carrello",
+    "messageToastRemoved": "è stato rimosso dal carrello"
+  },
+  "cart": {
+    "shoppingCart": "Carrello",
+    "zeroItems": "Nessun articolo nel carrello",
+    "itemsCart": "articoli nel carrello",
+    "orderSummary": "Riepilogo ordine",
+    "orderDesc": "Controlla i dettagli dell’ordine e le informazioni di spedizione",
+    "subtotal": "Subtotale",
+    "total": "Totale",
+    "shipping": "Spedizione",
+    "tax": "Tasse",
+    "freeRet": "Resi gratuiti entro 30 giorni",
+    "secure": "Pagamento sicuro",
+    "fastDelivery": "Consegna rapida",
+    "procedToCheckout": "Procedi al pagamento"
+  },
+  "shipping": {
+    "shippingAddress": "Indirizzo di spedizione",
+    "fullname": "Nome completo",
+    "address": "Indirizzo",
+    "city": "Città",
+    "postalCode": "Codice postale",
+    "country": "Paese",
+    "placeName": "Inserisci il tuo nome",
+    "placeAddress": "Inserisci il tuo indirizzo",
+    "placecity": "Inserisci la tua città",
+    "placeCode": "Inserisci il tuo codice postale",
+    "placeCountry": "Inserisci il tuo paese",
+    "updateButton": "Aggiorna indirizzo di spedizione",
+    "updating": "Aggiornamento in corso..."
+  },
+  "payment": {
+    "paymentTitle": "Metodo di pagamento",
+    "selectMethod": "Seleziona il metodo di pagamento",
+    "cashOnDelivery": "Pagamento alla consegna",
+    "stripe": "Carta di credito/debito (Stripe)",
+    "paypal": "PayPal",
+    "processing": "Elaborazione in corso...",
+    "continue": "Continua al pagamento"
+  },
+  "order": {
+  "myOrder": "I miei ordini",
+  "noOrder": "Nessun ordine trovato",
+  "edit": "Modifica",
+  "payment": "Pagamento",
+  "date": "Data",
+  "orderStatus": "Stato",
+  "id": "ID",
+  "detail": "Dettaglio",
+  "delete": "Elimina",
+  "action": "Azione",
+  "title": "Conferma ordine",
+  "yourOrderTitle": "Il tuo ordine",
+  "subtitle": "Rivedi e conferma il tuo ordine",
+  "shippingTitle": "Indirizzo di spedizione",
+  "name": "Nome",
+  "address": "Indirizzo",
+  "city": "Città",
+  "postal": "CAP",
+  "country": "Paese",
+  "noShipping": "Nessun indirizzo di spedizione trovato.",
+  "paymentTitle": "Metodo di pagamento",
+  "noPayment": "Nessun metodo di pagamento trovato.",
+  "table": {
+    "product": "Prodotto",
+    "quantity": "Quantità",
+    "price": "Prezzo"
+  },
+  "summaryTitle": "Totale",
+  "items": "Articoli",
+  "tax": "Imposta",
+  "shipping": "Spedizione",
+  "total": "Prezzo totale",
+  "emptyCart": "Carrello vuoto.",
+  "deliveryStatus": "Stato della consegna",
+  "pending": "In attesa",
+  "delivered": "Consegnato",
+  "notDelivered": "Non consegnato",
+  "infoDelivery": "Nessuna informazione sulla consegna disponibile",
+  "paymentMethod": "Metodo di pagamento",
+  "paymentStatus": "Stato del pagamento",
+  "paid": "Pagato",
+  "notPaid": "Non pagato",
+  "mycart": "Il mio carrello",
+  "markPaid": "Segna come pagato",
+  "markDelivered": "Segna come consegnato",
+  "processing": "Elaborazione in corso..."
+},
+  "orderBtn": {
+    "creating": "Creazione dell'ordine...",
+    "place": "Conferma ordine"
+  },
+  "profile": {
+    "title": "Profilo",
+    "name": "Nome",
+    "email": "Email",
+    "update": "Aggiorna profilo",
+    "updating": "Aggiornamento in corso..."
   }
 }

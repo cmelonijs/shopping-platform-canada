@@ -6,14 +6,16 @@ import { getName } from "@/lib/actions/profile.actions";
 import ProfileForm from "./ProfileForm";
 import { getAddress } from "@/lib/actions/address.actions";
 import ShippingForm from "../../(root)/shipping-address/ShippingForm";
+import { getTranslations } from "next-intl/server";
 
 const UserProfilePage = async () => {
+  const t= await getTranslations('profile')
   const existingName = await getName();
   const existingAddress = await getAddress();
   return (
     <>
       <div className="mx-auto p-6 h-screen ">
-        <h1 className="text-2xl font-bold mb-4"> Profile </h1>
+        <h1 className="text-2xl font-bold mb-4"> {t("title")} </h1>
         <div className="flex gap-4 items-stretch">
           <Card className=" bg-grey-100 p-4 border border-gray-300 rounded-lg shadow-sm">
             <ProfileForm defaultValues={existingName || undefined} />

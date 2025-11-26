@@ -1,5 +1,5 @@
 "use client";
-
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { Plus, Loader } from "lucide-react";
@@ -10,6 +10,7 @@ import { useTransition } from "react";
 import CartItemControls from "./cartItemControls";
 
 const AddToCart = ({ cart, item }: { cart?: Cart; item: CartItem }) => {
+  const t = useTranslations("addCart")
   const router = useRouter();
 
   const [isPending, startTransition] = useTransition();
@@ -25,7 +26,7 @@ const AddToCart = ({ cart, item }: { cart?: Cart; item: CartItem }) => {
 
       toast.success(res.message, {
         action: {
-          label: "Go to Cart",
+          label: t("messageToastAdd"),
           onClick: () => router.push("/cart"),
         },
       });
@@ -44,7 +45,7 @@ const AddToCart = ({ cart, item }: { cart?: Cart; item: CartItem }) => {
       ) : (
         <Plus className="h-4 w-4" />
       )}{" "}
-      Add to Cart
+      {t("addToCart")}
     </Button>
   );
 };

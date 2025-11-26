@@ -18,8 +18,10 @@ import Image from "next/image";
 import { formatCurrency, formatDate } from "@/lib/utils";
 import MarkAsPaidButton from "@/components/order/paidButton";
 import MarkAsDeliveredButton from "@/components/order/deliveredButton";
+import { getTranslations } from "next-intl/server";
 
 const OrderPage = async ({ params }: { params: Promise<{ id: string }> }) => {
+  const t= await getTranslations('order')
   const { id } = await params;
 
   const orderData = await getOrderById(id);
@@ -40,33 +42,33 @@ const OrderPage = async ({ params }: { params: Promise<{ id: string }> }) => {
       <div className="flex-grow">
         <div className="flex flex-col">
           <div className="w-full max-w-max mx-auto p-6 min-h-screen">
-            <h1 className="text-3xl font-bold mb-6">Your Order</h1>
+            <h1 className="text-3xl font-bold mb-6">{t("yourOrderTitle")}</h1>
             <div className="grid grid-1 md:grid-cols-3 gap-5 ">
               <div className="col-span-1 md:col-span-2 overflow-x-auto space-y-4">
                 <Card className="p-6 mt-3">
                   <h2 className="text-2xl font-semibold mb-4">
-                    Shipping Address
+                    {t("shippingTitle")}
                   </h2>
                   <CardContent className="space-y-4 grid grid-cols-2 gap-x-4 ">
                     {userAddress ? (
                       <div className="col-span-2 md:col-span-1 space-y-2">
-                        <CardTitle>Name:</CardTitle>
+                        <CardTitle>{t("name")}:</CardTitle>
                         <CardDescription>
                           {" "}
                           {userAddress.fullName}
                         </CardDescription>
-                        <CardTitle>Address: </CardTitle>
+                        <CardTitle>{t("address")}: </CardTitle>
                         <CardDescription>{userAddress.address}</CardDescription>
-                        <CardTitle>City: </CardTitle>
+                        <CardTitle>{t("city")}: </CardTitle>
                         <CardDescription>{userAddress.city}</CardDescription>
-                        <CardTitle>Postal:</CardTitle>
+                        <CardTitle>{t("postal")}:</CardTitle>
                         <CardDescription>
                           {userAddress.postalCode}
                         </CardDescription>
-                        <CardTitle>Country:</CardTitle>
+                        <CardTitle>{t("country")}:</CardTitle>
                         <CardDescription>{userAddress.country}</CardDescription>
 
-                        <CardTitle>Delivery Status:</CardTitle>
+                        <CardTitle>{t("deliveryStatus")}:</CardTitle>
                         <CardDescription>
                           <div className="space-y-1">
                             <span
@@ -77,8 +79,8 @@ const OrderPage = async ({ params }: { params: Promise<{ id: string }> }) => {
                               }`}
                             >
                               {order.isDelivered
-                                ? "Delivered"
-                                : "Not Delivered"}
+                                ? t("delivered")
+                                : t("notDelivered")}
                             </span>
 
                             {order.deliveredAt && (
@@ -89,19 +91,19 @@ const OrderPage = async ({ params }: { params: Promise<{ id: string }> }) => {
                       </div>
                     ) : (
                       <CardDescription>
-                        No delivery information available
+                        {t("infoDelivery")}
                       </CardDescription>
                     )}
                   </CardContent>
                 </Card>
                 <Card className="p-6 mt-4">
                   <h2 className="text-2xl font-semibold mb-4">
-                    Payment method
+                    {t("paymentMethod")}
                   </h2>
                   <CardContent className="space-y-4 grid grid-cols-2 gap-x-4">
-                    <CardTitle>Payment Method:</CardTitle>
+                    <CardTitle>{t("paymentMethod")}:</CardTitle>
                     <CardDescription>{order.paymentMethod}</CardDescription>
-                    <CardTitle>Payment Status:</CardTitle>
+                    <CardTitle>{t("paymentStatus")}:</CardTitle>
                     <CardDescription>
                       <span
                         className={`px-3 py-1 rounded-full text-sm font-medium ${
@@ -110,7 +112,7 @@ const OrderPage = async ({ params }: { params: Promise<{ id: string }> }) => {
                             : "bg-red-100 text-red-800"
                         }`}
                       >
-                        {order.isPaid ? "Paid" : "Not Paid"}
+                        {order.isPaid ? t("paid") : t("notPaid")}
                       </span>
                       {order.paidAt && <span>{formatDate(order.paidAt)}</span>}
                     </CardDescription>
@@ -119,9 +121,9 @@ const OrderPage = async ({ params }: { params: Promise<{ id: string }> }) => {
                 <Table className="col-span-1 md:col-span-2 overflows-x-auto p-4 ">
                   <TableHeader>
                     <TableRow>
-                      <TableHead>Product</TableHead>
-                      <TableHead>Quantity</TableHead>
-                      <TableHead>Price</TableHead>
+                      <TableHead>{t("table.product")}</TableHead>
+                      <TableHead>{t("table.quantity")}</TableHead>
+                      <TableHead>{t("table.price")}</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
@@ -148,22 +150,22 @@ const OrderPage = async ({ params }: { params: Promise<{ id: string }> }) => {
               </div>
               <div>
                 <Card className="p-6 mt-4 h-auto">
-                  <h2 className="text-2xl font-semibold mb-4">My cart</h2>
+                  <h2 className="text-2xl font-semibold mb-4">{t("mycart")}</h2>
                   <CardContent className="space-y-4 grid grid-cols-2 gap-x-4">
-                    <CardTitle>Items:</CardTitle>
+                    <CardTitle>{t("items")}:</CardTitle>
                     <CardDescription>
                       {" "}
                       {formatCurrency(order.itemsPrice)}
                     </CardDescription>
-                    <CardTitle>Tax price: </CardTitle>
+                    <CardTitle>{t("tax")}: </CardTitle>
                     <CardDescription>
                       {formatCurrency(order.taxPrice)}
                     </CardDescription>
-                    <CardTitle>Shipping: </CardTitle>
+                    <CardTitle>{t("shipping")}: </CardTitle>
                     <CardDescription>
                       {formatCurrency(order.shippingPrice)}
                     </CardDescription>
-                    <CardTitle>Total price:</CardTitle>
+                    <CardTitle>{t("total")}:</CardTitle>
                     <CardDescription>
                       {formatCurrency(order.totalPrice)}
                     </CardDescription>

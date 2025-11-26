@@ -17,12 +17,14 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { useTranslations } from "next-intl";
 
 export default function PaymentForm({
   defaultValues,
 }: {
   defaultValues?: PaymentMethod;
 }) {
+  const t =useTranslations('payment')
   const router = useRouter();
 
   const form = useForm<PaymentMethod>({
@@ -57,7 +59,7 @@ export default function PaymentForm({
           render={({ field }) => (
             <FormItem className="space-y-3">
               <FormLabel className="text-lg font-semibold">
-                Select Payment Method
+               {t("selectMethod")}
               </FormLabel>
               <FormControl>
                 <RadioGroup
@@ -71,19 +73,19 @@ export default function PaymentForm({
                       id="cashOnDelivery"
                     />
                     <FormLabel htmlFor="cashOnDelivery" className="font-normal">
-                      Cash on Delivery
+                       {t("cashOnDelivery")}
                     </FormLabel>
                   </div>
                   <div className="flex items-center space-x-2">
                     <RadioGroupItem value="Stripe" id="Stripe" />
                     <FormLabel htmlFor="Stripe" className="font-normal">
-                      Credit/Debit Card (Stripe)
+                      {t("stripe")}
                     </FormLabel>
                   </div>
                   <div className="flex items-center space-x-2">
                     <RadioGroupItem value="payPal" id="payPal" />
                     <FormLabel htmlFor="payPal" className="font-normal">
-                      PayPal
+                  {t("paypal")}
                     </FormLabel>
                   </div>
                 </RadioGroup>
@@ -95,8 +97,8 @@ export default function PaymentForm({
 
         <Button type="submit" disabled={form.formState.isSubmitting}>
           {form.formState.isSubmitting
-            ? "Processing..."
-            : "Continue to Checkout"}
+            ?  t("processing") 
+            : t("continue")}
         </Button>
       </form>
     </Form>
