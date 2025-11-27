@@ -62,5 +62,5 @@ export const reviewFormDefaultValues = {
 
 export const SENDER_EMAIL = process.env.SENDER_EMAIL || "noreply@carlomjs.com";
 
-export const EXPIRATION_DEAL_DATE = new Date("2025-10-31T23:59:59.000Z");
+export const EXPIRATION_DEAL_DATE = new Date("2025-12-19T13:59:59.000Z");
 

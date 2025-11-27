@@ -40,7 +40,7 @@ export default function DealOfTheMonth({
             if (diff <= 0) {
                 setEndOfDeal(true);
                 setCount({ days: 0, hours: 0, minutes: 0, seconds: 0 });
-                return false; // segnala che è finito
+                return false; 
             }
 
             setCount({
@@ -52,7 +52,7 @@ export default function DealOfTheMonth({
             return true;
         };
 
-        // aggiorna subito al mount
+      // update immediately on Mount
         const stillRunning = updateCountdown();
 
         if (!stillRunning) return;
