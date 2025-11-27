@@ -13,7 +13,6 @@ import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 import SignInForm from "./SignInForm";
 import { MoveLeft } from "lucide-react";
-import { get } from "http";
 import { getTranslations } from "next-intl/server";
 
 // Sets the title for the browser tab
