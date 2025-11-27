@@ -7,14 +7,14 @@ export default function UserLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  
+
   return (
     <div className="flex flex-col min-h-screen">
       <SessionProvider>
-      <NextIntlClientProvider>
-        <UserHeader />
-        {children}
-      </NextIntlClientProvider>
+        <NextIntlClientProvider>
+          <UserHeader />
+          {children}
+        </NextIntlClientProvider>
       </SessionProvider>
     </div>
   );

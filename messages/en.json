@@ -30,10 +30,10 @@
     "paymentUpdated": "Payment method updated successfully",
     "orderCreated": "Order created",
     "orderMarkPaid": "order marked as paid",
-    "orderFailMarkPaid":"Failed to mark as paid",
-    "orderFailmarkDelivered":"Failed to mark as delivered",
-    "orderMarkDelivered":"Order marked as delivered",
-    "orderNoFound":"Order not found"
+    "orderFailMarkPaid": "Failed to mark as paid",
+    "orderFailmarkDelivered": "Failed to mark as delivered",
+    "orderMarkDelivered": "Order marked as delivered",
+    "orderNoFound": "Order not found"
   },
   "breadcrumb": {
     "login": "Login",
@@ -59,12 +59,22 @@
     "category": "All categories",
     "searchProducts": "Search products"
   },
+  "sign-in": {
+  "SignTitle": "Sign In",
+  "signIn": "Sign In",
+  "signOut": "Sign Out",
+  "signInSub": "Sign in to your account",
+  "signInDesc": "Don't have an account?",
+  "Signing in": "Signing in..."
+},
   "userBtn": {
     "signIn": "Sign In",
     "profile": "Profile",
     "order": "Order History",
     "admin": "admin",
-    "signOut": "Sign out"
+    "signOut": "Sign out",
+    "signInSub": "Sign in to your account",
+    "signInDesc": "Dont have an account? "
   },
   "src": {
     "allCategories": "All categories",

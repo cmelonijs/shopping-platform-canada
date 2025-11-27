@@ -22,19 +22,19 @@
     "rights": "Tất cả quyền được bảo lưu."
   },
   "message": {
-  "added": "{product} đã được thêm vào giỏ hàng",
-  "removed": "{product} đã được xóa khỏi giỏ hàng",
-  "noStock": "Không đủ hàng trong kho",
-  "updated": "{product} đã được cập nhật trong giỏ hàng",
-  "noProduct": "Không tìm thấy sản phẩm",
-  "paymentUpdated": "Phương thức thanh toán đã được cập nhật thành công",
-  "orderCreated": "Đơn hàng đã được tạo",
-  "orderMarkPaid": "Đơn hàng đã được đánh dấu là đã thanh toán",
-  "orderFailMarkPaid": "Không thể đánh dấu là đã thanh toán",
-  "orderFailmarkDelivered": "Không thể đánh dấu là đã giao hàng",
-  "orderMarkDelivered": "Đơn hàng đã được đánh dấu là đã giao",
-  "orderNoFound": "Không tìm thấy đơn hàng"
-},
+    "added": "{product} đã được thêm vào giỏ hàng",
+    "removed": "{product} đã được xóa khỏi giỏ hàng",
+    "noStock": "Không đủ hàng trong kho",
+    "updated": "{product} đã được cập nhật trong giỏ hàng",
+    "noProduct": "Không tìm thấy sản phẩm",
+    "paymentUpdated": "Phương thức thanh toán đã được cập nhật thành công",
+    "orderCreated": "Đơn hàng đã được tạo",
+    "orderMarkPaid": "Đơn hàng đã được đánh dấu là đã thanh toán",
+    "orderFailMarkPaid": "Không thể đánh dấu là đã thanh toán",
+    "orderFailmarkDelivered": "Không thể đánh dấu là đã giao hàng",
+    "orderMarkDelivered": "Đơn hàng đã được đánh dấu là đã giao",
+    "orderNoFound": "Không tìm thấy đơn hàng"
+  },
   "breadcrumb": {
     "login": "Đăng nhập",
     "shipping": "Địa chỉ giao hàng",
@@ -59,12 +59,22 @@
     "category": "Tất cả các danh mục",
     "searchProducts": "Tìm kiếm sản phẩm"
   },
+  "sign-in": {
+    "SignTitle": "Đăng nhập",
+    "signIn": "Đăng nhập",
+    "signOut": "Đăng xuất",
+    "signInSub": "Đăng nhập vào tài khoản của bạn",
+    "signInDesc": "Bạn chưa có tài khoản?",
+    "Signing in": "Đang đăng nhập..."
+  },
   "userBtn": {
     "signIn": "Đăng nhập",
     "profile": "Hồ sơ",
     "order": "Lịch sử đơn hàng",
     "admin": "Quản trị",
-    "signOut": "Đăng xuất"
+    "signOut": "Đăng xuất",
+    "signInSub": "Đăng nhập vào tài khoản của bạn",
+    "signInDesc": "Bạn chưa có tài khoản?"
   },
   "src": {
     "allCategories": "Tất cả các danh mục",

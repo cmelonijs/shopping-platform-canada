@@ -7,57 +7,78 @@ import Link from "next/link";
 import { EXPIRATION_DEAL_DATE } from "@/lib/constants";
 import { useTranslations } from "next-intl";
 
-
-export default function DealOfTheMonth({ images, product
+export default function DealOfTheMonth({
+    images,
+    product,
 }: {
-    images: string; product: { slug: string };
+    images: string;
+    product: { slug: string };
 }) {
-    const t= useTranslations("deal")
+    const t = useTranslations("deal");
     const [endOfDeal, setEndOfDeal] = useState(false);
-    const now = new Date();
-    const diff = EXPIRATION_DEAL_DATE.getTime() - now.getTime();
 
     const setDays = (diff: number) => Math.floor(diff / (1000 * 60 * 60 * 24));
     const setHours = (diff: number) => Math.floor((diff / (1000 * 60 * 60)) % 24);
     const setMinutes = (diff: number) => Math.floor((diff / (1000 * 60)) % 60);
     const setSeconds = (diff: number) => Math.floor((diff / 1000) % 60);
-        
+
     const [hasMounted, setHasMounted] = useState(false);
     const [count, setCount] = useState({
-        days: setDays(diff),
-        hours: setHours(diff),
-        minutes: setMinutes(diff),
-        seconds: setSeconds(diff),
+        days: 0,
+        hours: 0,
+        minutes: 0,
+        seconds: 0,
     });
 
     useEffect(() => {
-         setHasMounted(true);
-        const interval = setInterval(() => {
+        setHasMounted(true);
+
+        const updateCountdown = () => {
             const now = new Date();
             const diff = EXPIRATION_DEAL_DATE.getTime() - now.getTime();
 
             if (diff <= 0) {
                 setEndOfDeal(true);
-                clearInterval(interval);
-                return;
+                setCount({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+                return false; 
             }
 
-            const days = setDays(diff);
-            const hours = setHours(diff);
-            const minutes = setMinutes(diff);
-            const seconds = setSeconds(diff);
+            setCount({
+                days: setDays(diff),
+                hours: setHours(diff),
+                minutes: setMinutes(diff),
+                seconds: setSeconds(diff),
+            });
+            return true;
+        };
 
-            setCount({ days, hours, minutes, seconds });
+      // update immediately on Mount
+        const stillRunning = updateCountdown();
+
+        if (!stillRunning) return;
+
+        const interval = setInterval(() => {
+            const running = updateCountdown();
+            if (!running) clearInterval(interval);
         }, 1000);
 
         return () => clearInterval(interval);
     }, []);
-      if (!hasMounted) return null;
+
+    if (!hasMounted) return null;
+
     return (
         <div className="font-bold">
             {endOfDeal ? (
                 <div className="flex flex-row gap-5">
                     <h1 className="text-2xl mb-2">{t("dealEnded")}</h1>
+                        <Image
+                            src={images}
+                            alt="product image"
+                            width={240}
+                            height={240}
+                            className="rounded-lg"
+                        />
                     <Button asChild variant="secondary">
                         <Link href={`/search`}>{t("viewProducts")}</Link>
                     </Button>
@@ -65,8 +86,8 @@ export default function DealOfTheMonth({ images, product
             ) : (
                 <div className="flex items-center justify-center">
                     <div className="flex flex-col md:flex-row items-center gap-8 p-6">
-                        <div className="flex flex-col text-sm  max-w-xl">
-                            <h1 className="text-2xl  mb-2">{t("DealMonth")}</h1>
+                        <div className="flex flex-col text-sm max-w-xl">
+                            <h1 className="text-2xl mb-2">{t("DealMonth")}</h1>
                             <h2 className="mb-4 font-normal">
                                 Lorem ipsum dolor sit, amet consectetur adipisicing elit.
                                 Exercitationem quidem laborum sequi ullam maxime expedita doloremque
@@ -100,7 +121,7 @@ export default function DealOfTheMonth({ images, product
                                 alt="product image"
                                 width={240}
                                 height={240}
-                                className="rounded-lg "
+                                className="rounded-lg"
                             />
                         </div>
                         <Button asChild variant="secondary">

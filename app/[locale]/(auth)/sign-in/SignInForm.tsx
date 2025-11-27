@@ -9,9 +9,11 @@ import { useActionState } from "react";
 import { useFormStatus } from "react-dom";
 import { useSearchParams } from "next/navigation";
 import { signInWithCredentials } from "@/lib/actions/auth.actions";
+import { useTranslations } from "next-intl";
 
 // SignInForm component for user authentication (we are doing client-side rendering)
 const SignInForm = () => {
+  const t = useTranslations("sign-in");
   // Using useActionState to handle the sign-in action
   // It manages the state of the action, including success and error messages
   const [data, action] = useActionState(signInWithCredentials, {
@@ -26,6 +28,7 @@ const SignInForm = () => {
   const callbackUrl = searchParams.get("callbackUrl") || "/";
 
   const SignInButton = () => {
+    const t= useTranslations("sign-in");
     // We are providing a pending state to indicate if the form is currently being submitted
     // We will use this to disable the button while the sign-in process is ongoing
     const { pending } = useFormStatus();
@@ -33,7 +36,7 @@ const SignInForm = () => {
     return (
       // As you can see here, we are disabling the button while the sign-in process is ongoing
       <Button disabled={pending} className="w-full" variant="default">
-        {pending ? "Signing in..." : "sign In"}
+        {pending ? t("Signing in") : t("signIn")}
       </Button>
     );
   };
@@ -78,9 +81,10 @@ const SignInForm = () => {
           <div className="text-center text-destructive">{data.message}</div>
         )}
         <div className="text-sm text-center text-muted-foreground">
-          Dont have an account?{" "}
+          {t("signInDesc")}{" "}
           <Link href="/sign-up" target="_self" className="link font-bold">
-            Sign Up
+              {t("signOut")}
+
           </Link>
         </div>
       </div>
