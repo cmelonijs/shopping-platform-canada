@@ -60,13 +60,13 @@
     "searchProducts": "Search products"
   },
   "sign-in": {
-  "SignTitle": "Sign In",
-  "signIn": "Sign In",
-  "signOut": "Sign Out",
-  "signInSub": "Sign in to your account",
-  "signInDesc": "Don't have an account?",
-  "Signing in": "Signing in..."
-},
+    "SignTitle": "Sign In",
+    "signIn": "Sign In",
+    "signOut": "Sign Out",
+    "signInSub": "Sign in to your account",
+    "signInDesc": "Don't have an account?",
+    "Signing in": "Signing in..."
+  },
   "userBtn": {
     "signIn": "Sign In",
     "profile": "Profile",
@@ -196,7 +196,9 @@
     "mycart": "My cart",
     "markPaid": "Mark as Paid",
     "markDelivered": "Mark as Delivered",
-    "processing": "Processing..."
+    "processing": "Processing...",
+    "paidStatus": "It has been paid",
+    "deliveredStatus": "It has been delivered"
   },
   "orderBtn": {
     "creating": "Creating order...",

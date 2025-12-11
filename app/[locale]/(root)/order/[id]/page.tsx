@@ -19,6 +19,8 @@ import { formatCurrency, formatDate } from "@/lib/utils";
 import MarkAsPaidButton from "@/components/order/paidButton";
 import MarkAsDeliveredButton from "@/components/order/deliveredButton";
 import { getTranslations } from "next-intl/server";
+import Checkout from "@/components/share/checkout";
+import { auth } from "@/auth";
 
 const OrderPage = async ({ params }: { params: Promise<{ id: string }> }) => {
   const t= await getTranslations('order')
@@ -36,13 +38,26 @@ const OrderPage = async ({ params }: { params: Promise<{ id: string }> }) => {
   }
 
   const { order, userAddress } = orderData;
+  const session = await auth();
 
   return (
     <div className="flex flex-col min-h-screen">
       <div className="flex-grow">
         <div className="flex flex-col">
           <div className="w-full max-w-max mx-auto p-6 min-h-screen">
-            <h1 className="text-3xl font-bold mb-6">{t("yourOrderTitle")}</h1>
+            <h1 className="text-3xl font-bold mb-6">
+              {t("yourOrderTitle")}
+              {order.isPaid && (
+                <span className="ml-4 px-3 py-1 rounded-full bg-green-100 text-green-800 text-sm font-medium">
+                  {t("paidStatus")}
+                </span>
+              )}
+              {order.isDelivered && (
+                <span className="ml-2 px-3 py-1 rounded-full bg-blue-100 text-blue-800 text-sm font-medium">
+                  {t("deliveredStatus")}
+                </span>
+              )}
+            </h1>
             <div className="grid grid-1 md:grid-cols-3 gap-5 ">
               <div className="col-span-1 md:col-span-2 overflow-x-auto space-y-4">
                 <Card className="p-6 mt-3">
@@ -72,11 +87,10 @@ const OrderPage = async ({ params }: { params: Promise<{ id: string }> }) => {
                         <CardDescription>
                           <div className="space-y-1">
                             <span
-                              className={`px-3 py-1 rounded-full text-sm font-medium ${
-                                order.isDelivered
-                                  ? "bg-green-100 text-green-800"
-                                  : "bg-red-100 text-red-800"
-                              }`}
+                              className={`px-3 py-1 rounded-full text-sm font-medium ${order.isDelivered
+                                ? "bg-green-100 text-green-800"
+                                : "bg-red-100 text-red-800"
+                                }`}
                             >
                               {order.isDelivered
                                 ? t("delivered")
@@ -106,11 +120,10 @@ const OrderPage = async ({ params }: { params: Promise<{ id: string }> }) => {
                     <CardTitle>{t("paymentStatus")}:</CardTitle>
                     <CardDescription>
                       <span
-                        className={`px-3 py-1 rounded-full text-sm font-medium ${
-                          order.isPaid
-                            ? "bg-green-100 text-green-800"
-                            : "bg-red-100 text-red-800"
-                        }`}
+                        className={`px-3 py-1 rounded-full text-sm font-medium ${order.isPaid
+                          ? "bg-green-100 text-green-800"
+                          : "bg-red-100 text-red-800"
+                          }`}
                       >
                         {order.isPaid ? t("paid") : t("notPaid")}
                       </span>
@@ -151,7 +164,7 @@ const OrderPage = async ({ params }: { params: Promise<{ id: string }> }) => {
               <div>
                 <Card className="p-6 mt-4 h-auto">
                   <h2 className="text-2xl font-semibold mb-4">{t("mycart")}</h2>
-                  <CardContent className="space-y-4 grid grid-cols-2 gap-x-4">
+                  <CardContent className="p-0 space-y-4 grid grid-cols-2 gap-x-4">
                     <CardTitle>{t("items")}:</CardTitle>
                     <CardDescription>
                       {" "}
@@ -169,10 +182,19 @@ const OrderPage = async ({ params }: { params: Promise<{ id: string }> }) => {
                     <CardDescription>
                       {formatCurrency(order.totalPrice)}
                     </CardDescription>
+                    <div id="checkout" className="col-span-2 w-full">
+                      {order.paymentMethod === "Stripe" && !order.isPaid && (
+                        <Checkout orderId={order.id} />
+                      )}
+                    </div>
                     <div className="col-span-2 pt-2">
-                      {!order.isPaid && <MarkAsPaidButton orderId={order.id} />}
-                      {!order.isDelivered && order.isPaid && (
-                        <MarkAsDeliveredButton orderId={order.id} />
+                      {session?.user && "role" in session.user && session.user.role === "admin" && (
+                        <>
+                          {!order.isPaid && <MarkAsPaidButton orderId={order.id} />}
+                          {!order.isDelivered && order.isPaid && (
+                            <MarkAsDeliveredButton orderId={order.id} />
+                          )}
+                        </>
                       )}
                     </div>
                   </CardContent>
