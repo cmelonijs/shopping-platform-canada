@@ -104,7 +104,7 @@ export default async function SearchPage({
               }}
               className={params.price === "1-50" ? "font-bold" : ""}
             >
-              1 € to 50 €
+              1 $ to 50 $
             </Link>
             <Link
               href={{
@@ -113,7 +113,7 @@ export default async function SearchPage({
               }}
               className={params.price === "51-100" ? "font-bold" : ""}
             >
-              51 € to 100 €
+              51 $ to 100 $
             </Link>
             <Link
               href={{
@@ -122,7 +122,7 @@ export default async function SearchPage({
               }}
               className={params.price === "101-200" ? "font-bold" : ""}
             >
-              101 € to 200 €
+              101 $ to 200 $
             </Link>
             <Link
               href={{
@@ -131,7 +131,7 @@ export default async function SearchPage({
               }}
               className={params.price === "501-1000" ? "font-bold" : ""}
             >
-              501 € to 1000 €
+              501 $ to 1000 $
             </Link>
             <Link
               href={{

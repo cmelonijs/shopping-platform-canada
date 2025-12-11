@@ -196,7 +196,9 @@
     "mycart": "Giỏ hàng của tôi",
     "markPaid": "Đánh dấu là đã thanh toán",
     "markDelivered": "Đánh dấu là đã giao",
-    "processing": "Đang xử lý..."
+    "processing": "Đang xử lý...",
+    "paidStatus": "Đã được thanh toán",
+    "deliveredStatus": "Đã được giao"
   },
   "orderBtn": {
     "creating": "Đang tạo đơn hàng...",
