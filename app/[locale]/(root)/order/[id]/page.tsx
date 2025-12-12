@@ -53,7 +53,7 @@ const OrderPage = async ({ params }: { params: Promise<{ id: string }> }) => {
                 </span>
               )}
               {order.isDelivered && (
-                <span className="ml-2 px-3 py-1 rounded-full bg-blue-100 text-blue-800 text-sm font-medium">
+                <span className="ml-2 px-3 py-1 rounded-full bg-green-100 text-green-800 text-sm font-medium">
                   {t("deliveredStatus")}
                 </span>
               )}
